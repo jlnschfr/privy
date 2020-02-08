@@ -13,8 +13,8 @@
 export default {
   computed: {
     items: function() {
-      return this.$store.state.items;
+      return this.$store.state.items
     }
   }
-};
+}
 </script>

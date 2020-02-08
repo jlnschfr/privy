@@ -5,8 +5,8 @@
       <nav v-if="user" class="flex items-center">
         <p class="text-gray-500 mr-3">logged in as {{ user.email }}</p>
         <button
-          @click.prevent="logout"
           class="bg-blue-500 text-white px-8 py-2"
+          @click.prevent="logout"
         >
           Logout
         </button>
@@ -17,45 +17,43 @@
 </template>
 
 <script>
-import { auth } from "@/plugins/firebase.js";
+import { auth } from '@/plugins/firebase.js'
 export default {
   computed: {
     user() {
-      return this.$store.state.user;
+      return this.$store.state.user
     }
+  },
+  created() {
+    this.bindAuthChanged()
   },
   methods: {
     logout() {
       this.$store
-        .dispatch("logout")
+        .dispatch('logout')
         .then(() => {})
-        .catch(e => {
-          console.log(e.message);
-        });
+        .catch((e) => {})
     },
 
     bindAuthChanged() {
-      auth.onAuthStateChanged(user => {
-        this.$store.dispatch("handleAuthChanged", user);
+      auth.onAuthStateChanged((user) => {
+        this.$store.dispatch('handleAuthChanged', user)
 
         if (this.$store.state.user) {
-          this.$router.push("/notes");
+          this.$router.push('/notes')
         } else {
-          this.$router.push("/");
+          this.$router.push('/')
         }
-      });
+      })
     }
-  },
-  created() {
-    this.bindAuthChanged();
   }
-};
+}
 </script>
 
 <style>
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

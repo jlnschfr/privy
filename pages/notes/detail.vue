@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="item" />
+    <input v-model="item" type="text" />
     <button @click="addItem">save</button>
   </div>
 </template>
@@ -9,16 +9,16 @@
 export default {
   data() {
     return {
-      item: ""
-    };
+      item: ''
+    }
   },
 
   methods: {
     addItem() {
-      this.$store.dispatch("addItem", { name: this.item }).then(() => {
-        this.$router.push("/notes");
-      });
+      this.$store.dispatch('addItem', { name: this.item }).then(() => {
+        this.$router.push('/notes')
+      })
     }
   }
-};
+}
 </script>

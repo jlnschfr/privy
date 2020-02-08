@@ -1,0 +1,4 @@
+.gitignore
+.nuxt
+dist
+nuxt.config.js
