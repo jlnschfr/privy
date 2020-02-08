@@ -1,7 +1,7 @@
 <template>
   <form
     ref="form"
-    class="max-w-sm mx-auto mt-20 bg-gray-100 p-8 shadow-xl"
+    class="max-w-sm mx-auto mt-10 bg-pgray-light p-4 shadow-xl"
     @submit.prevent="authenticate"
   >
     <header>
@@ -30,9 +30,13 @@
       @input="repeatedPassword = $event.value"
     />
 
-    <Button :text="!isLogin ? 'Register' : 'Login'" />
+    <Button
+      class="mt-4"
+      :text="!isLogin ? 'Register' : 'Login'"
+      classes="w-full"
+    />
 
-    <p class="mt-8 text-gray-500 text-center">
+    <p class="mt-4 text-pgray-dark text-center">
       <span
         v-text="
           !isLogin ? 'Already got an account?' : 'Doesnt have an account?'
@@ -44,7 +48,7 @@
         v-text="!isLogin ? 'Login' : 'Register'"
       ></span>
     </p>
-    <p class="mt-8 text-sm text-red-500 text-center">{{ error }}</p>
+    <p class="mt-4 text-sm text-red-500 text-center">{{ error }}</p>
   </form>
 </template>
 

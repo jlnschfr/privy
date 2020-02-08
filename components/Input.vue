@@ -1,6 +1,6 @@
 <template>
   <input
-    class="mt-8 bg-transparent focus:outline-none focus:border-gray-500 border-b border-gray-300 py-2 block w-full appearance-none leading-normal"
+    class="bg-transparent placeholder-pgray-dark focus:outline-none focus:border-pgray-dark border-b border-pgray-medium block w-full appearance-none leading-normal py-1 mt-4"
     :type="type"
     :placeholder="placeholder"
     autocomplete="off"
@@ -18,12 +18,6 @@ export default {
     placeholder: {
       type: String,
       required: true
-    }
-  },
-
-  data() {
-    return {
-      input: ''
     }
   }
 }
