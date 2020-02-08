@@ -1,7 +1,4 @@
-# nuxt-firebase-auth
-
-> Manage users in your nuxt application with firebase
-> This project demos the integration of firebase into a nuxt application
+# PRIVY
 
 ## Build Setup
 
