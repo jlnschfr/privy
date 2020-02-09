@@ -48,14 +48,33 @@ export default {
     }
   },
 
-  addItem({ state, dispatch }, payload) {
+  addItem({ state, commit }, payload) {
     return new Promise((resolve, reject) => {
       state.store
         .collection('items')
         .add(payload)
+        .then((doc) => {
+          commit('addItem', { id: doc.id, ...payload })
+          resolve(doc.id)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+
+  updateItem({ state, commit }, payload) {
+    return new Promise((resolve, reject) => {
+      state.store
+        .collection('items')
+        .doc(payload.id)
+        .set(payload)
         .then(() => {
-          state.items.push(payload)
+          commit('updateItem', payload)
           resolve()
+        })
+        .catch((error) => {
+          reject(error)
         })
     })
   },
@@ -67,7 +86,7 @@ export default {
       .then((querySnapshot) => {
         const items = []
         querySnapshot.forEach((doc) => {
-          items.push(doc.data())
+          items.push({ id: doc.id, ...doc.data() })
         })
         commit('setItems', items)
       })

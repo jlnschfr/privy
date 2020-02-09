@@ -1,9 +1,9 @@
 <template>
   <section class="Notes">
-    <nuxt-link to="/notes/detail">Create Note</nuxt-link>
+    <nuxt-link to="/notes/new">Create Note</nuxt-link>
     <ul>
-      <li v-for="(item, key) in items" :key="key">
-        {{ item.name }}
+      <li v-for="(item, key) in items" :key="key" @click="openDetail(item.id)">
+        {{ item.title }}
       </li>
     </ul>
   </section>
@@ -14,6 +14,11 @@ export default {
   computed: {
     items: function() {
       return this.$store.state.items
+    }
+  },
+  methods: {
+    openDetail(id) {
+      this.$router.push(`/notes/${id}`)
     }
   }
 }

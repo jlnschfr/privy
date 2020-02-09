@@ -1,5 +1,10 @@
 export default {
   mode: 'spa',
+  vue: {
+    config: {
+      runtimeCompiler: true
+    }
+  },
 
   /*
    ** Headers of the page
