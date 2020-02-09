@@ -1,13 +1,18 @@
 <template>
-  <div class="bg-pgray-light max-w-sm mx-auto">
-    <input v-model="title" />
+  <div class="max-w-3xl mx-auto mt-10 bg-pgray-light p-4 shadow-xl">
+    <input v-model="title" class="text-2xl bg-pgray-light" />
 
-    <Draggable v-model="items">
+    <Draggable
+      v-model="items"
+      @start="isDragging = true"
+      @end="isDragging = false"
+    >
       <div v-for="(item, key) in items" :key="key">
         <component
           :is="item.type"
           :data="item.data"
           :uuid="item.uuid"
+          :editable="!isDragging"
           @update="handleRichTextUpdate"
         ></component>
       </div>
@@ -47,6 +52,7 @@ export default {
 
   data() {
     return {
+      isDragging: false,
       isUpdating: false,
       title: this.data.title || '',
       items: this.data.items || []
