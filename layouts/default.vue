@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Header from '@/components/header'
+import Header from '@/components/Header'
 import { auth } from '@/plugins/firebase.js'
 
 export default {
