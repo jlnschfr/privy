@@ -12,14 +12,14 @@
       placeholder="user"
       type="email"
       @focus="error = ''"
-      @input="email = $event.value"
+      @input="email = $event"
     />
 
     <Input
       placeholder="password"
       type="password"
       @focus="error = ''"
-      @input="password = $event.value"
+      @input="password = $event"
     />
 
     <Input
@@ -27,7 +27,7 @@
       placeholder="repeat password"
       type="password"
       @focus="error = ''"
-      @input="repeatedPassword = $event.value"
+      @input="repeatedPassword = $event"
     />
 
     <Button

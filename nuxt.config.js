@@ -44,7 +44,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ['nuxt-svg-loader'],
 
   buildModules: [
     '@nuxtjs/eslint-module',

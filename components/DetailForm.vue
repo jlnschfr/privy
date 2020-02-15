@@ -7,14 +7,20 @@
       @start="isDragging = true"
       @end="isDragging = false"
     >
-      <div v-for="(item, key) in items" :key="key">
+      <div v-for="(item, key) in items" :key="key" class="relative">
         <component
           :is="item.type"
           :data="item.data"
           :uuid="item.uuid"
           :editable="!isDragging"
-          @update="handleRichTextUpdate"
+          @update="handleUpdate"
         ></component>
+        <button
+          class="absolute inset-y-0 right-0"
+          @click="handleDelete(item.uuid)"
+        >
+          &times;
+        </button>
       </div>
     </Draggable>
     <button :disabled="isUpdating" @click="createRte">Create Text</button>
@@ -72,7 +78,6 @@ export default {
     createRte() {
       const rte = {
         type: 'Rte',
-        data: '',
         uuid: uuid()
       }
 
@@ -82,18 +87,22 @@ export default {
     createTasks() {
       const tasks = {
         type: 'Tasks',
-        data: {},
         uuid: uuid()
       }
 
       this.items.push(tasks)
     },
 
-    handleRichTextUpdate(payload) {
+    handleUpdate(payload) {
       const index = this.items.findIndex((item) => item.uuid === payload.uuid)
       const items = this.items.slice()
       items[index].data = payload.data
       this.items = items
+    },
+
+    handleDelete(uuid) {
+      const index = this.items.findIndex((item) => item.uuid === uuid)
+      this.items.splice(index, 1)
     },
 
     handleChange() {

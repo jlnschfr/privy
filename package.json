@@ -20,6 +20,7 @@
     "firebase": "^7.8.1",
     "lodash.debounce": "^4.0.8",
     "nuxt": "^2.0.0",
+    "nuxt-svg-loader": "^1.2.0",
     "tiptap": "^1.26.6",
     "tiptap-extensions": "^1.28.6",
     "uuid": "^3.4.0",

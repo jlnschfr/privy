@@ -60,8 +60,6 @@ export default {
 
   watch: {
     editable: function(val) {
-      // eslint-disable-next-line no-console
-      console.log(this.editor)
       this.editor.setOptions({
         editable: val
       })
