@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-10">
     <Header :user="user" @logout="logout" />
     <nuxt />
   </div>

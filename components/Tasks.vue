@@ -1,21 +1,21 @@
 <template>
   <div class="flex mt-4 items-center">
-    <input
+    <Input
       :id="uuid"
       type="checkbox"
       :checked="state"
       class="hidden"
-      @input="handleChange('checkbox')"
+      @input="onChange('checkbox')"
     />
     <label :for="uuid" class="pr-2">
-      <CheckboxFilled v-if="!state" class="w-3 h-3 fill-current" />
+      <CheckboxFilled v-if="state" class="w-3 h-3 fill-current" />
       <Checkbox v-else class="w-3 h-3 fill-current" />
     </label>
     <Input
       v-model="text"
-      :class="{ 'line-through text-pgray-medium': !state }"
+      :class="{ 'line-through text-pgray-medium': state }"
       type="text"
-      @input="handleChange()"
+      @input="onChange('text')"
     />
   </div>
 </template>
@@ -47,16 +47,12 @@ export default {
   },
   data() {
     return {
-      text: '',
-      state: false
+      text: this.data.text,
+      state: this.data.state
     }
   },
-  created() {
-    this.text = this.data.text
-    this.state = this.data.state
-  },
   methods: {
-    handleChange: function(type) {
+    onChange: function(type) {
       if (type === 'checkbox') {
         this.state = !this.state
       }

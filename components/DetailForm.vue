@@ -13,18 +13,24 @@
           :data="item.data"
           :uuid="item.uuid"
           :editable="!isDragging"
-          @update="handleUpdate"
+          @update="onItemUpdate"
         ></component>
         <button
           class="absolute inset-y-0 right-0"
-          @click="handleDelete(item.uuid)"
+          @click="onItemDelete(item.uuid)"
         >
-          &times;
+          <Close class="w-1 h-1 fill-current" />
         </button>
       </div>
     </Draggable>
-    <button :disabled="isUpdating" @click="createRte">Create Text</button>
-    <button :disabled="isUpdating" @click="createTasks">Create Tasks</button>
+    <nav class="mt-4 ">
+      <button :disabled="isUpdating" @click="createRte">
+        <ClipboardWithText class="w-3 h-3 fill-current mr-2" />
+      </button>
+      <button :disabled="isUpdating" @click="createTasks">
+        <ClipboardWithCheckbox class="w-3 h-3 fill-current" />
+      </button>
+    </nav>
   </div>
 </template>
 
@@ -34,12 +40,18 @@ import Tasks from '@/components/Tasks'
 import Draggable from 'vuedraggable'
 import debounce from 'lodash.debounce'
 import uuid from 'uuid'
+import Close from '@/assets/svg/close.svg'
+import ClipboardWithCheckbox from '@/assets/svg/clipboard-with-checkbox.svg'
+import ClipboardWithText from '@/assets/svg/clipboard-with-text.svg'
 
 export default {
   components: {
     Rte,
     Tasks,
-    Draggable
+    Draggable,
+    Close,
+    ClipboardWithCheckbox,
+    ClipboardWithText
   },
 
   props: {
@@ -67,10 +79,10 @@ export default {
 
   watch: {
     title: debounce(function() {
-      this.handleChange()
+      this.onChange()
     }, 500),
     items: debounce(function() {
-      this.handleChange()
+      this.onChange()
     }, 500)
   },
 
@@ -93,19 +105,19 @@ export default {
       this.items.push(tasks)
     },
 
-    handleUpdate(payload) {
+    onItemUpdate(payload) {
       const index = this.items.findIndex((item) => item.uuid === payload.uuid)
       const items = this.items.slice()
       items[index].data = payload.data
       this.items = items
     },
 
-    handleDelete(uuid) {
+    onItemDelete(uuid) {
       const index = this.items.findIndex((item) => item.uuid === uuid)
       this.items.splice(index, 1)
     },
 
-    handleChange() {
+    onChange() {
       if (!this.isUpdating) {
         this.isUpdating = true
 

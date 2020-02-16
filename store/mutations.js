@@ -10,6 +10,10 @@ export default {
   addItem(state, payload) {
     state.items.push(payload)
   },
+  deleteItem(state, payload) {
+    const index = state.items.findIndex((el) => el.id === payload.id)
+    state.items.splice(index, 1)
+  },
   updateItem(state, payload) {
     const index = state.items.findIndex((el) => el.id === payload.id)
     state.items[index] = payload

@@ -79,6 +79,22 @@ export default {
     })
   },
 
+  deleteItem({ state, commit }, payload) {
+    return new Promise((resolve, reject) => {
+      state.store
+        .collection('items')
+        .doc(payload.id)
+        .delete()
+        .then(() => {
+          commit('deleteItem', payload)
+          resolve()
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+
   getItems({ state, commit }) {
     state.store
       .collection('items')
