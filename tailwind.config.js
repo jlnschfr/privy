@@ -7,7 +7,7 @@
 module.exports = {
   theme: {
     fontFamily: {
-      title: ['Noway', 'sans-serif']
+      body: ['Noway', 'sans-serif']
     },
     extend: {
       colors: {
@@ -17,9 +17,12 @@ module.exports = {
           dark: '#a0aec0'
         },
         pblue: {
-          light: '#90cdf4',
-          medium: '#4299e1',
-          dark: '#3182ce'
+          light: '#096FFF',
+          dark: '#0954F9'
+        },
+        porange: {
+          light: '#F9B48A',
+          dark: '#FA9083'
         }
       },
       spacing: {
@@ -38,7 +41,12 @@ module.exports = {
       },
       inset: {
         '0': 0,
-        '1/2': '50%'
+        '1/2': '50%',
+        '1': '1rem',
+        '2': '2rem'
+      },
+      minHeight: {
+        notes: '18rem'
       }
     }
   },
