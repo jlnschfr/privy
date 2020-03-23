@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-10 font-body">
+  <div class="ont-body">
     <Header :user="user" @logout="logout" />
     <nuxt />
   </div>

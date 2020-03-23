@@ -54,7 +54,12 @@ export default {
         .collection('items')
         .add(payload)
         .then((doc) => {
-          commit('addItem', { id: doc.id, ...payload })
+          commit('addItem', {
+            id: doc.id,
+            createdDate: new Date().toISOString(),
+            ...payload
+          })
+          commit('sortItems')
           resolve(doc.id)
         })
         .catch((error) => {
@@ -71,6 +76,7 @@ export default {
         .set(payload)
         .then(() => {
           commit('updateItem', payload)
+          commit('sortItems')
           resolve()
         })
         .catch((error) => {
@@ -105,6 +111,7 @@ export default {
           items.push({ id: doc.id, ...doc.data() })
         })
         commit('setItems', items)
+        commit('sortItems')
       })
   }
 }

@@ -143,6 +143,7 @@ export default {
     update() {
       const data = {
         id: this.id,
+        createdDate: new Date().toISOString(),
         title: this.title,
         items: this.items
       }
