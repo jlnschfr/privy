@@ -11,9 +11,7 @@
       }"
     >
       <h2 class="text-5xl leading-none">{{ item.title }}</h2>
-      <button class="absolute bottom-1 left-2">
-        {{ createdDateString }}
-      </button>
+      <p class="absolute bottom-1 left-2">{{ createdDateString }}</p>
     </div>
     <div
       class="p-4 col-start-5 col-end-8 flex items-center text-white bg-pblue-light relative"
@@ -116,7 +114,6 @@ export default {
       }
 
       data.createdDate = new Date().toISOString()
-
       this.$store.dispatch('updateItem', data)
     }
   }
