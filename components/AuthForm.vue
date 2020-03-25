@@ -1,16 +1,17 @@
 <template>
   <form
     ref="form"
-    class="max-w-sm mx-auto mt-10 bg-pgray-light p-4 shadow-xl"
+    class="max-w-md mx-auto mt-4r p-4r text-pblue-light shadow-xl"
     @submit.prevent="authenticate"
   >
     <header>
-      <h2 class="font-semibold text-2xl">Login</h2>
+      <h2 class="text-3xl lg:text-4xl">Login</h2>
     </header>
 
     <Input
       placeholder="user"
       type="email"
+      class="mt-4"
       @focus="error = ''"
       @input="email = $event"
     />
@@ -18,6 +19,7 @@
     <Input
       placeholder="password"
       type="password"
+      class="mt-4"
       @focus="error = ''"
       @input="password = $event"
     />
@@ -26,17 +28,18 @@
       v-if="!isLogin"
       placeholder="repeat password"
       type="password"
+      class="mt-4"
       @focus="error = ''"
       @input="repeatedPassword = $event"
     />
 
     <Button
-      class="mt-4"
+      type="button"
       :text="!isLogin ? 'Register' : 'Login'"
-      classes="w-full"
+      class="w-full mt-6"
     />
 
-    <p class="mt-4 text-pgray-dark text-center">
+    <p class="mt-4 text-pblue-light text-center">
       <span
         v-text="
           !isLogin ? 'Already got an account?' : 'Doesnt have an account?'

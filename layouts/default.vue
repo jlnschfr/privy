@@ -1,7 +1,7 @@
 <template>
   <div class="font-body">
     <Header :user="user" @logout="logout" />
-    <nuxt />
+    <nuxt class="p-4r" />
   </div>
 </template>
 

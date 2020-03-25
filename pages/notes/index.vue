@@ -1,5 +1,5 @@
 <template>
-  <section class="p-4r">
+  <section>
     <div
       class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4r xl:gap-2r items-center"
     >

@@ -1,7 +1,7 @@
 <template>
   <button
     :class="{
-      'bg-pblue-medium hover:bg-pblue-dark text-white transition-colors duration-500 px-4 py-1 block':
+      'bg-pblue-light hover:bg-pblue-dark text-white transition-colors duration-300 px-4 py-1 block':
         type === 'button',
       'border-b-2 border-solid transition-all duration-300 hover:border-porange-light border-pblue-light':
         type === 'text'
@@ -22,17 +22,6 @@ export default {
     text: {
       type: String,
       required: true
-    },
-    classes: {
-      type: String,
-      default: '',
-      required: false
-    }
-  },
-  data() {
-    return {
-      buttonClasses: '',
-      textClasses: ''
     }
   }
 }
