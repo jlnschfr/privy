@@ -37,13 +37,21 @@ module.exports = {
         '7': '3.5rem',
         '8': '4rem',
         '9': '4.5rem',
-        '10': '5rem'
+        '10': '5rem',
+        '1r': '1vw',
+        '2r': '2vw',
+        '3r': '3vw',
+        '4r': '4vw'
       },
       inset: {
         '0': 0,
         '1/2': '50%',
         '1': '1rem',
-        '2': '2rem'
+        '2': '2rem',
+        '1r': '1vw',
+        '2r': '2vw',
+        '3r': '3vw',
+        '4r': '4vw'
       },
       minHeight: {
         notes: '18rem'

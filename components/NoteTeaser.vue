@@ -1,22 +1,26 @@
 <template>
-  <div
+  <article
     class="group cursor-pointer min-h-notes grid grid-cols-7 shadow-lg"
     @click="open(item.id)"
   >
     <div
-      class="p-4 col-start-1 col-end-5 flex items-center relative"
+      data-name="left"
+      class="p-4r pb-4r xl:p-2r col-start-1 col-end-5 flex items-center relative"
       :class="{
         'bg-pblue-dark text-white': isPinned,
         'text-pblue-light': !isPinned
       }"
     >
-      <h2 class="text-5xl leading-none">{{ item.title }}</h2>
-      <p class="absolute bottom-1 left-2">{{ createdDateString }}</p>
+      <h2 class="text-3xl lg:text-4xl leading-none w-full">{{ item.title }}</h2>
+      <p class="absolute bottom-2r left-4r xl:bottom-1r xl:left-2r">
+        {{ createdDateString }}
+      </p>
     </div>
     <div
-      class="p-4 col-start-5 col-end-8 flex items-center text-white bg-pblue-light relative"
+      data-name="right"
+      class="p-4r xl:p-2r col-start-5 col-end-8 flex items-center justify-end text-white bg-pblue-light relative"
     >
-      <p class="flex flex-col text-right mr-4">
+      <p class="flex flex-col text-right mr-4r md:mr-2r">
         <strong class="text-5xl leading-none">{{ tasks.length }}</strong
         >tasks
       </p>
@@ -25,7 +29,7 @@
         >done
       </p>
       <button
-        class="absolute top-1 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         @click.stop="updatePinState(item)"
       >
         <Pin class="fill-current w-3" />
@@ -35,13 +39,13 @@
           'border-porange-light': isActiveForDelete,
           'border-pblue-light': !isActiveForDelete
         }"
-        class="absolute bottom-1 right-2 border-b-2 border-solid transition-all duration-300"
+        class="absolute bottom-2r right-4r xl:bottom-1r xl:right-2r border-b-2 border-solid transition-all duration-300"
         @click.stop="remove(item)"
       >
         Delete
       </button>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>
@@ -73,7 +77,7 @@ export default {
       const options = {
         weekday: 'long',
         year: 'numeric',
-        month: 'long',
+        month: 'numeric',
         day: 'numeric'
       }
 
