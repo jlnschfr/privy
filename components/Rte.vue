@@ -1,39 +1,16 @@
 <template>
   <div>
-    <editor-menu-bar
-      v-slot="{ commands, isActive }"
-      :editor="editor"
-      class="border-b border-pgray-medium py-2"
-    >
-      <div class="border-black">
-        <button
-          class="font-bold"
-          :class="{ 'is-active': isActive.bold() }"
-          @click="commands.bold"
-        >
-          B
-        </button>
-        <button
-          class="italic ml-3"
-          :class="{ 'is-active': isActive.italic() }"
-          @click="commands.italic()"
-        >
-          I
-        </button>
-      </div>
-    </editor-menu-bar>
-    <editor-content :editor="editor" class="py-3" />
+    <editor-content :editor="editor" />
   </div>
 </template>
 
 <script>
-import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
-import { Heading, Bold, Italic } from 'tiptap-extensions'
+import { Editor, EditorContent } from 'tiptap'
+import { History } from 'tiptap-extensions'
 
 export default {
   components: {
-    EditorContent,
-    EditorMenuBar
+    EditorContent
   },
   props: {
     uuid: {
@@ -68,7 +45,7 @@ export default {
 
   mounted() {
     this.editor = new Editor({
-      extensions: [new Heading({ levels: [2] }), new Bold(), new Italic()],
+      extensions: [new History()],
       content: this.data,
       onUpdate: (el) => {
         this.$emit('update', { uuid: this.uuid, data: el.getHTML() })
@@ -81,3 +58,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.ProseMirror {
+  outline: none;
+}
+</style>

@@ -1,57 +1,87 @@
 <template>
-  <div class="max-w-3xl mx-auto mt-10 bg-pgray-light p-4 shadow-xl">
-    <input v-model="title" class="text-2xl bg-pgray-light" />
-
-    <Draggable
-      v-model="items"
-      @start="isDragging = true"
-      @end="isDragging = false"
+  <div class="max-w-2xl mx-auto mt-4r shadow-xl text-pblue-light">
+    <header
+      class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
     >
-      <div v-for="(item, key) in items" :key="key" class="relative">
-        <component
-          :is="item.type"
-          :data="item.data"
-          :uuid="item.uuid"
-          :editable="!isDragging"
-          @update="onItemUpdate"
-        ></component>
-        <button
-          class="absolute inset-y-0 right-0"
-          @click="onItemDelete(item.uuid)"
+      <input v-model="title" class="text-3xl flex-auto" />
+      <p class="flex-initial">{{ createdDateString }}</p>
+    </header>
+
+    <article class="p-4r xl:p-2r">
+      <Draggable
+        v-model="items"
+        handle=".Dragger"
+        @start="isDragging = true"
+        @end="isDragging = false"
+      >
+        <div
+          v-for="item in items"
+          :key="item.uuid"
+          class="group relative pr-4r xl:pr-2r mt-4 first:mt-0"
         >
-          <Close class="w-1 h-1 fill-current" />
-        </button>
-      </div>
-    </Draggable>
-    <nav class="mt-4 ">
-      <button :disabled="isUpdating" @click="createRte">
-        <ClipboardWithText class="w-3 h-3 fill-current mr-2" />
-      </button>
-      <button :disabled="isUpdating" @click="createTasks">
-        <ClipboardWithCheckbox class="w-3 h-3 fill-current" />
-      </button>
-    </nav>
+          <component
+            :is="item.type"
+            :data="item.data"
+            :uuid="item.uuid"
+            :editable="!isDragging"
+            @update="onItemUpdate"
+          ></component>
+          <button
+            class="Dragger absolute inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+            <DragIcon class="DragIcon fill-current" />
+          </button>
+          <button
+            class="absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            @click="onItemDelete(item.uuid)"
+          >
+            <CloseIcon class="CloseIcon fill-current" />
+          </button>
+        </div>
+      </Draggable>
+    </article>
+
+    <footer class="flex justify-between items-center p-4r xl:p-2r">
+      <p>{{ Math.round((done.length * 100) / tasks.length) }}% done</p>
+      <nav>
+        <Button
+          :disabled="isUpdating"
+          text="Add Text"
+          type="text"
+          class="mr-4"
+          @click="createRte"
+        />
+
+        <Button
+          :disabled="isUpdating"
+          text="Add Todo"
+          type="text"
+          class="mr-4"
+          @click="createTasks"
+        />
+      </nav>
+    </footer>
   </div>
 </template>
 
 <script>
 import Rte from '@/components/Rte'
 import Tasks from '@/components/Tasks'
+import Button from '@/components/Button'
 import Draggable from 'vuedraggable'
 import debounce from 'lodash.debounce'
 import uuid from 'uuid'
-import Close from '@/assets/svg/close.svg'
-import ClipboardWithCheckbox from '@/assets/svg/clipboard-with-checkbox.svg'
-import ClipboardWithText from '@/assets/svg/clipboard-with-text.svg'
+import DragIcon from '@/assets/svg/new/drag.svg'
+import CloseIcon from '@/assets/svg/new/cross.svg'
 
 export default {
   components: {
     Rte,
     Tasks,
     Draggable,
-    Close,
-    ClipboardWithCheckbox,
-    ClipboardWithText
+    DragIcon,
+    CloseIcon,
+    Button
   },
 
   props: {
@@ -73,7 +103,30 @@ export default {
       isDragging: false,
       isUpdating: false,
       title: this.data.title || '',
-      items: this.data.items || []
+      items: this.data.items || [],
+      isPinned: this.data.isPinned || false
+    }
+  },
+
+  computed: {
+    createdDateString: function() {
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      }
+      return new Date(this.data.createdDate).toLocaleString('de-DE', options)
+    },
+    tasks: function() {
+      return this.items.filter((item) => {
+        return item.type === 'Tasks'
+      })
+    },
+    done: function() {
+      return this.tasks.filter((item) => {
+        return item.type === 'Tasks' && item.data && item.data.state
+      })
     }
   },
 
@@ -145,6 +198,7 @@ export default {
         id: this.id,
         createdDate: new Date().toISOString(),
         title: this.title,
+        isPinned: this.isPinned,
         items: this.items
       }
       this.$store.dispatch('updateItem', data).then(() => {
@@ -154,3 +208,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.Dragger {
+  left: -1.25vw;
+}
+
+.DragIcon {
+  width: 0.75rem;
+}
+
+.CloseIcon {
+  width: 0.6rem;
+}
+</style>

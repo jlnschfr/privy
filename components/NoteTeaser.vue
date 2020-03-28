@@ -29,6 +29,9 @@
         >done
       </p>
       <button
+        :class="{
+          'text-pblue-dark': !isPinned
+        }"
         class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         @click.stop="updatePinState(item)"
       >
@@ -49,7 +52,7 @@
 </template>
 
 <script>
-import Pin from '@/assets/svg/pin.svg'
+import Pin from '@/assets/svg/new/heart.svg'
 
 export default {
   components: {

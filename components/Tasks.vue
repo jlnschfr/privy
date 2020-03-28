@@ -1,5 +1,5 @@
 <template>
-  <div class="flex mt-4 items-center">
+  <div class="flex items-center">
     <Input
       :id="uuid"
       type="checkbox"
@@ -13,6 +13,7 @@
     </label>
     <Input
       v-model="text"
+      class="border-none"
       :class="{ 'line-through text-pgray-medium': state }"
       type="text"
       @input="onChange('text')"
@@ -22,8 +23,8 @@
 
 <script>
 import Input from '@/components/Input'
-import CheckboxFilled from '@/assets/svg/checkbox-filled.svg'
-import Checkbox from '@/assets/svg/checkbox.svg'
+import CheckboxFilled from '@/assets/svg/new/checkbox-checked.svg'
+import Checkbox from '@/assets/svg/new/checkbox-unchecked.svg'
 
 export default {
   components: {
