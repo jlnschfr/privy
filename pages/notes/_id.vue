@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <DetailForm :id="id" :data="data" />
-  </div>
+  <PrivyDetailForm :id="id" :data="data" />
 </template>
 
 <script>
-import DetailForm from '@/components/DetailForm'
+import PrivyDetailForm from '@/components/PrivyDetailForm'
 
 export default {
   components: {
-    DetailForm
+    PrivyDetailForm
   },
 
   computed: {

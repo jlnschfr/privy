@@ -20,10 +20,10 @@ export default {
   },
   sortItems(state) {
     state.items.sort((a, b) => {
-      if (a.isPinned || b.isPinned) {
-        if (a.isPinned && !b.isPinned) {
+      if (a.isFav || b.isFav) {
+        if (a.isFav && !b.isFav) {
           return -1
-        } else if (a.isPinned && b.isPinned) {
+        } else if (a.isFav && b.isFav) {
           return 0
         } else {
           return 1

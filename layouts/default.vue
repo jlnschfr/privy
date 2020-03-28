@@ -1,17 +1,19 @@
 <template>
-  <div class="font-body">
-    <Header :user="user" @logout="logout" />
-    <nuxt class="p-4r" />
-  </div>
+  <main class="font-body">
+    <PrivyHeader :user="user" @logout="logout" />
+    <div class="p-4r">
+      <nuxt />
+    </div>
+  </main>
 </template>
 
 <script>
-import Header from '@/components/Header'
+import PrivyHeader from '@/components/PrivyHeader'
 import { auth } from '@/plugins/firebase.js'
 
 export default {
   components: {
-    Header
+    PrivyHeader
   },
 
   computed: {

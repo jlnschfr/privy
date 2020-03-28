@@ -1,15 +1,13 @@
 <template>
-  <section>
-    <AuthForm />
-  </section>
+  <PrivyAuthForm />
 </template>
 
 <script>
-import AuthForm from '@/components/AuthForm'
+import PrivyAuthForm from '@/components/PrivyAuthForm'
 
 export default {
   components: {
-    AuthForm
+    PrivyAuthForm
   }
 }
 </script>

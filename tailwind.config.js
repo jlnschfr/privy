@@ -6,6 +6,9 @@
  */
 module.exports = {
   theme: {
+    stroke: (theme) => ({
+      white: theme('colors.white')
+    }),
     fontFamily: {
       body: ['Noway', 'sans-serif']
     },

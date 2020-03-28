@@ -4,20 +4,18 @@
     @click="open(item.id)"
   >
     <div
-      data-name="left"
-      class="p-4r pb-4r xl:p-2r col-start-1 col-end-5 flex items-center relative"
+      class="p-4r xl:p-2r col-start-1 col-end-5 flex items-center relative"
       :class="{
-        'bg-pblue-dark text-white': isPinned,
-        'text-pblue-light': !isPinned
+        'bg-pblue-dark text-white': item.isFav,
+        'text-pblue-light': !item.isFav
       }"
     >
       <h2 class="text-3xl lg:text-4xl leading-none w-full">{{ item.title }}</h2>
       <p class="absolute bottom-2r left-4r xl:bottom-1r xl:left-2r">
-        {{ createdDateString }}
+        {{ dateString }}
       </p>
     </div>
     <div
-      data-name="right"
       class="p-4r xl:p-2r col-start-5 col-end-8 flex items-center justify-end text-white bg-pblue-light relative"
     >
       <p class="flex flex-col text-right mr-4r md:mr-2r">
@@ -30,12 +28,12 @@
       </p>
       <button
         :class="{
-          'text-pblue-dark': !isPinned
+          'text-pblue-dark': !item.isFav
         }"
         class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        @click.stop="updatePinState(item)"
+        @click.stop="updateFavState(item)"
       >
-        <Pin class="fill-current w-3" />
+        <FavIcon class="fill-current w-3" />
       </button>
       <button
         :class="{
@@ -52,11 +50,12 @@
 </template>
 
 <script>
-import Pin from '@/assets/svg/new/heart.svg'
+import FavIcon from '@/assets/svg/new/heart.svg'
+import { createDateString } from '@/utils/date'
 
 export default {
   components: {
-    Pin
+    FavIcon
   },
 
   props: {
@@ -73,18 +72,8 @@ export default {
   },
 
   computed: {
-    isPinned: function() {
-      return this.item.isPinned
-    },
-    createdDateString: function() {
-      const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
-      }
-
-      return new Date(this.item.createdDate).toLocaleString('de-DE', options)
+    dateString: function() {
+      return createDateString(this.item.createdDate)
     },
     tasks: function() {
       return this.item.items.filter((item) => {
@@ -93,7 +82,7 @@ export default {
     },
     done: function() {
       return this.tasks.filter((item) => {
-        return item.type === 'Tasks' && item.data && item.data.state
+        return item.data && item.data.state
       })
     }
   },
@@ -114,10 +103,10 @@ export default {
       }
     },
 
-    updatePinState(item) {
+    updateFavState(item) {
       const data = {
         ...item,
-        isPinned: !this.isPinned
+        isFav: !this.item.isFav
       }
 
       data.createdDate = new Date().toISOString()

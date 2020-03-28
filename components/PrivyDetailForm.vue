@@ -1,15 +1,10 @@
 <template>
-  <div class="max-w-2xl mx-auto shadow-xl text-pblue-light">
+  <section class="max-w-2xl mx-auto shadow-xl text-pblue-light">
     <header
       class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
     >
-      <textarea
-        ref="title"
-        v-model="title"
-        class="text-3xl overflow-hidden flex-auto resize-none h-6"
-        @input="updateTitleHeight()"
-      />
-      <p class="flex-initial text-right">{{ createdDateString }}</p>
+      <TitleTextarea v-model="title" class="flex-auto" />
+      <p class="flex-initial text-right">{{ dateString }}</p>
     </header>
 
     <article class="p-4r xl:p-2r">
@@ -68,10 +63,11 @@
         />
       </nav>
     </footer>
-  </div>
+  </section>
 </template>
 
 <script>
+import TitleTextarea from '@/atoms/TitleTextarea'
 import Rte from '@/components/Rte'
 import Tasks from '@/components/Tasks'
 import Button from '@/components/Button'
@@ -80,6 +76,7 @@ import debounce from 'lodash.debounce'
 import uuid from 'uuid'
 import DragIcon from '@/assets/svg/new/drag.svg'
 import CloseIcon from '@/assets/svg/new/cross.svg'
+import { createDateString } from '@/utils/date'
 
 export default {
   components: {
@@ -88,7 +85,8 @@ export default {
     Draggable,
     DragIcon,
     CloseIcon,
-    Button
+    Button,
+    TitleTextarea
   },
 
   props: {
@@ -111,20 +109,14 @@ export default {
       isUpdating: false,
       title: this.data.title || '',
       items: this.data.items || [],
-      isPinned: this.data.isPinned || false,
+      isFav: this.data.isFav || false,
       titleHeight: 50
     }
   },
 
   computed: {
-    createdDateString: function() {
-      const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
-      }
-      return new Date(this.data.createdDate).toLocaleString('de-DE', options)
+    dateString: function() {
+      return createDateString(this.data.createdDate)
     },
     tasks: function() {
       return this.items.filter((item) => {
@@ -145,16 +137,6 @@ export default {
     items: debounce(function() {
       this.onChange()
     }, 500)
-  },
-
-  mounted() {
-    this.resizeHandler = debounce(this.updateTitleHeight, 500)
-    window.addEventListener('resize', this.resizeHandler)
-    this.updateTitleHeight()
-  },
-
-  destroyed() {
-    window.removeEventListener('resize', this.resizeHandler)
   },
 
   methods: {
@@ -216,21 +198,12 @@ export default {
         id: this.id,
         createdDate: new Date().toISOString(),
         title: this.title,
-        isPinned: this.isPinned,
+        isFav: this.isFav,
         items: this.items
       }
       this.$store.dispatch('updateItem', data).then(() => {
         this.isUpdating = false
       })
-    },
-
-    updateTitleHeight(event) {
-      const textField = this.$refs.title
-      textField.removeAttribute('style')
-
-      if (textField.clientHeight < textField.scrollHeight) {
-        textField.style.height = textField.scrollHeight + 'px'
-      }
     }
   }
 }

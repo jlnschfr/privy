@@ -1,7 +1,7 @@
 <template>
   <header class="flex justify-between bg-pblue-light items-center px-4r py-2">
     <h1 aria-label="Privy Notes">
-      <nuxt-link to="/notes"><Privy class="w-4"/></nuxt-link>
+      <nuxt-link to="/notes"><PrivyIcon class="w-4"/></nuxt-link>
     </h1>
     <nav v-if="user" class="flex items-center text-white">
       <p class="mr-4">
@@ -14,12 +14,12 @@
 
 <script>
 import Button from '@/components/Button'
-import Privy from '@/assets/svg/privy.svg'
+import PrivyIcon from '@/assets/svg/privy.svg'
 
 export default {
   components: {
     Button,
-    Privy
+    PrivyIcon
   },
   props: {
     user: {

@@ -1,0 +1,19 @@
+<template>
+  <nuxt-link
+    :to="to"
+    class="bg-pblue-dark hover:bg-porange-light text-white rounded-full h-16 w-16 flex items-center justify-center transition-background duration-300"
+  >
+    <slot />
+  </nuxt-link>
+</template>
+
+<script>
+export default {
+  props: {
+    to: {
+      type: String,
+      required: true
+    }
+  }
+}
+</script>
