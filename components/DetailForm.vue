@@ -16,6 +16,7 @@
       <Draggable
         v-model="items"
         handle=".Dragger"
+        ghost-class="ghost"
         @start="isDragging = true"
         @end="isDragging = false"
       >
@@ -247,6 +248,11 @@ export default {
 
 .CloseIcon {
   width: 0.6rem;
+}
+
+.ghost {
+  background-color: theme('colors.pgray.light');
+  color: theme('colors.pblue.dark');
 }
 
 @media (max-width: 640px) {
