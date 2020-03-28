@@ -1,10 +1,15 @@
 <template>
-  <div class="max-w-2xl mx-auto mt-4r shadow-xl text-pblue-light">
+  <div class="max-w-2xl mx-auto shadow-xl text-pblue-light">
     <header
       class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
     >
-      <input v-model="title" class="text-3xl flex-auto" />
-      <p class="flex-initial">{{ createdDateString }}</p>
+      <textarea
+        ref="title"
+        v-model="title"
+        class="text-3xl overflow-hidden flex-auto resize-none h-6"
+        @input="updateTitleHeight()"
+      />
+      <p class="flex-initial text-right">{{ createdDateString }}</p>
     </header>
 
     <article class="p-4r xl:p-2r">
@@ -17,7 +22,7 @@
         <div
           v-for="item in items"
           :key="item.uuid"
-          class="group relative pr-4r xl:pr-2r mt-4 first:mt-0"
+          class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
         >
           <component
             :is="item.type"
@@ -32,7 +37,7 @@
             <DragIcon class="DragIcon fill-current" />
           </button>
           <button
-            class="absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            class="Close absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             @click="onItemDelete(item.uuid)"
           >
             <CloseIcon class="CloseIcon fill-current" />
@@ -41,7 +46,9 @@
       </Draggable>
     </article>
 
-    <footer class="flex justify-between items-center p-4r xl:p-2r">
+    <footer
+      class="flex justify-between items-center p-4r xl:p-2r border-t border-pblue-light"
+    >
       <p>{{ Math.round((done.length * 100) / tasks.length) }}% done</p>
       <nav>
         <Button
@@ -56,7 +63,6 @@
           :disabled="isUpdating"
           text="Add Todo"
           type="text"
-          class="mr-4"
           @click="createTasks"
         />
       </nav>
@@ -104,7 +110,8 @@ export default {
       isUpdating: false,
       title: this.data.title || '',
       items: this.data.items || [],
-      isPinned: this.data.isPinned || false
+      isPinned: this.data.isPinned || false,
+      titleHeight: 50
     }
   },
 
@@ -137,6 +144,16 @@ export default {
     items: debounce(function() {
       this.onChange()
     }, 500)
+  },
+
+  mounted() {
+    this.resizeHandler = debounce(this.updateTitleHeight, 500)
+    window.addEventListener('resize', this.resizeHandler)
+    this.updateTitleHeight()
+  },
+
+  destroyed() {
+    window.removeEventListener('resize', this.resizeHandler)
   },
 
   methods: {
@@ -204,6 +221,15 @@ export default {
       this.$store.dispatch('updateItem', data).then(() => {
         this.isUpdating = false
       })
+    },
+
+    updateTitleHeight(event) {
+      const textField = this.$refs.title
+      textField.removeAttribute('style')
+
+      if (textField.clientHeight < textField.scrollHeight) {
+        textField.style.height = textField.scrollHeight + 'px'
+      }
     }
   }
 }
@@ -211,7 +237,8 @@ export default {
 
 <style scoped>
 .Dragger {
-  left: -1.25vw;
+  left: 0;
+  transform: translateX(-150%);
 }
 
 .DragIcon {
@@ -220,5 +247,17 @@ export default {
 
 .CloseIcon {
   width: 0.6rem;
+}
+
+@media (max-width: 640px) {
+  .Dragger,
+  .Close {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .Dragger {
+    transform: translateX(-50%);
+  }
 }
 </style>
