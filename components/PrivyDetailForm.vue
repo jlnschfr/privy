@@ -3,7 +3,7 @@
     <header
       class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
     >
-      <TitleTextarea v-model="title" class="flex-auto" />
+      <TitleTextarea ref="title" v-model="title" class="flex-auto" />
       <p class="flex-initial text-right">{{ dateString }}</p>
     </header>
 
@@ -11,7 +11,7 @@
       <Draggable
         v-model="items"
         handle=".Dragger"
-        ghost-class="ghost"
+        ghost-class="Ghost"
         @start="isDragging = true"
         @end="isDragging = false"
       >
@@ -45,7 +45,7 @@
     <footer
       class="flex justify-between items-center p-4r xl:p-2r border-t border-pblue-light"
     >
-      <p>{{ Math.round((done.length * 100) / tasks.length) }}% done</p>
+      <p>{{ donePercentage }}% done</p>
       <nav>
         <Button
           :disabled="isUpdating"
@@ -57,9 +57,9 @@
 
         <Button
           :disabled="isUpdating"
-          text="Add Todo"
+          text="Add Task"
           type="text"
-          @click="createTasks"
+          @click="createTask"
         />
       </nav>
     </footer>
@@ -67,10 +67,10 @@
 </template>
 
 <script>
-import TitleTextarea from '@/atoms/TitleTextarea'
-import Rte from '@/components/Rte'
-import Tasks from '@/components/Tasks'
-import Button from '@/components/Button'
+import TitleTextarea from '@/components/_TitleTextarea'
+import Rte from '@/components/_Rte'
+import Task from '@/components/_Task'
+import Button from '@/components/_Button'
 import Draggable from 'vuedraggable'
 import debounce from 'lodash.debounce'
 import uuid from 'uuid'
@@ -81,7 +81,7 @@ import { createDateString } from '@/utils/date'
 export default {
   components: {
     Rte,
-    Tasks,
+    Task,
     Draggable,
     DragIcon,
     CloseIcon,
@@ -109,8 +109,7 @@ export default {
       isUpdating: false,
       title: this.data.title || '',
       items: this.data.items || [],
-      isFav: this.data.isFav || false,
-      titleHeight: 50
+      isFav: this.data.isFav || false
     }
   },
 
@@ -120,13 +119,16 @@ export default {
     },
     tasks: function() {
       return this.items.filter((item) => {
-        return item.type === 'Tasks'
+        return item.type === 'Task'
       })
     },
     done: function() {
       return this.tasks.filter((item) => {
-        return item.type === 'Tasks' && item.data && item.data.state
+        return item.data && item.data.state
       })
+    },
+    donePercentage: function() {
+      return Math.round((this.done.length * 100) / this.tasks.length)
     }
   },
 
@@ -149,13 +151,13 @@ export default {
       this.items.push(rte)
     },
 
-    createTasks() {
-      const tasks = {
-        type: 'Tasks',
+    createTask() {
+      const task = {
+        type: 'Task',
         uuid: uuid()
       }
 
-      this.items.push(tasks)
+      this.items.push(task)
     },
 
     onItemUpdate(payload) {
@@ -223,7 +225,7 @@ export default {
   width: 0.6rem;
 }
 
-.ghost {
+.Ghost {
   background-color: theme('colors.pgray.light');
   color: theme('colors.pblue.dark');
 }

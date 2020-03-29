@@ -1,7 +1,9 @@
 <template>
   <header class="flex justify-between bg-pblue-light items-center px-4r py-2">
     <h1 aria-label="Privy Notes">
-      <nuxt-link to="/notes"><PrivyIcon class="w-4"/></nuxt-link>
+      <nuxt-link to="/notes">
+        <PrivyIcon ref="svg" class="PrivyIcon w-4"
+      /></nuxt-link>
     </h1>
     <nav v-if="user" class="flex items-center text-white">
       <p class="mr-4">
@@ -13,7 +15,7 @@
 </template>
 
 <script>
-import Button from '@/components/Button'
+import Button from '@/components/_Button'
 import PrivyIcon from '@/assets/svg/privy.svg'
 
 export default {
@@ -27,6 +29,53 @@ export default {
       default: null,
       required: false
     }
+  },
+  data() {
+    return {
+      paths: []
+    }
+  },
+
+  watch: {
+    $route() {
+      this.animatePaths()
+    }
+  },
+
+  mounted() {
+    this.paths = this.$refs.svg.$el.querySelectorAll('path')
+  },
+
+  methods: {
+    animatePaths() {
+      this.paths.forEach((path, index) => {
+        setTimeout(() => {
+          path.classList.add('is-animating')
+
+          setTimeout(() => {
+            path.classList.remove('is-animating')
+          }, 750)
+        }, 100 * index)
+      })
+    }
   }
 }
 </script>
+
+<style>
+.PrivyIcon path.is-animating {
+  animation: fill 0.75s ease forwards;
+}
+
+@keyframes fill {
+  0% {
+    fill: current;
+  }
+  50% {
+    fill: theme('colors.pblue.dark');
+  }
+  100% {
+    fill: current;
+  }
+}
+</style>

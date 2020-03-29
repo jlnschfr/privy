@@ -1,6 +1,7 @@
 <template>
   <article
-    class="group cursor-pointer min-h-notes grid grid-cols-7 shadow-lg"
+    class="PrivyNoteTeaser group cursor-pointer min-h-notes grid grid-cols-7 shadow-lg"
+    tabindex="0"
     @click="open(item.id)"
   >
     <div
@@ -30,7 +31,7 @@
         :class="{
           'text-pblue-dark': !item.isFav
         }"
-        class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300"
         @click.stop="updateFavState(item)"
       >
         <FavIcon class="fill-current w-3" />
@@ -95,6 +96,7 @@ export default {
     remove(item) {
       if (this.isActiveForDelete) {
         this.$store.dispatch('deleteItem', item)
+        this.isActiveForDelete = false
       } else {
         this.isActiveForDelete = true
         setTimeout(() => {
@@ -115,3 +117,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.PrivyNoteTeaser:focus {
+  outline: theme('colors.porange.dark') solid 0.5rem;
+}
+</style>

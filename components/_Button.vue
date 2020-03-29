@@ -3,7 +3,7 @@
     :class="{
       'bg-pblue-light hover:bg-pblue-dark text-white transition-colors duration-300 px-4 py-1 block':
         type === 'button',
-      'border-b-2 border-solid transition-all duration-300 hover:border-porange-light border-transparent':
+      'border-b-2 border-solid transition-all duration-300 hover:border-porange-light focus:border-porange-light border-transparent':
         type === 'text'
     }"
     @click="$emit('click')"

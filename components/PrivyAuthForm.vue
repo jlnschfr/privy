@@ -51,13 +51,13 @@
         v-text="!isLogin ? 'Login' : 'Register'"
       ></span>
     </p>
-    <p class="mt-4 text-sm text-red-500 text-center">{{ error }}</p>
+    <p class="mt-4 text-sm text-porange-dark text-center">{{ error }}</p>
   </form>
 </template>
 
 <script>
-import Input from '@/components/Input'
-import Button from '@/components/Button'
+import Input from '@/components/_Input'
+import Button from '@/components/_Button'
 
 export default {
   components: {

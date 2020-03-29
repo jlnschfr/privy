@@ -6,9 +6,6 @@
  */
 module.exports = {
   theme: {
-    stroke: (theme) => ({
-      white: theme('colors.white')
-    }),
     fontFamily: {
       body: ['Noway', 'sans-serif']
     },
@@ -37,10 +34,6 @@ module.exports = {
         '4': '2rem',
         '5': '2.5rem',
         '6': '3rem',
-        '7': '3.5rem',
-        '8': '4rem',
-        '9': '4.5rem',
-        '10': '5rem',
         '1r': '1vw',
         '2r': '2vw',
         '3r': '3vw',
@@ -48,9 +41,6 @@ module.exports = {
       },
       inset: {
         '0': 0,
-        '1/2': '50%',
-        '1': '1rem',
-        '2': '2rem',
         '1r': '1vw',
         '2r': '2vw',
         '3r': '3vw',
@@ -62,8 +52,9 @@ module.exports = {
     }
   },
   variants: {
-    opacity: ['group-hover'],
-    margin: ['first']
+    opacity: ['group-hover', 'focus'],
+    margin: ['first'],
+    border: ['focus']
   },
   plugins: []
 }
