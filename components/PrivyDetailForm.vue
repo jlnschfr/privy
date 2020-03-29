@@ -141,6 +141,10 @@ export default {
     }, 500)
   },
 
+  mounted() {
+    this.$refs.title.$el.focus()
+  },
+
   methods: {
     createRte() {
       const rte = {
