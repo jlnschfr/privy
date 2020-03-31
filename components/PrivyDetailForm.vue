@@ -45,7 +45,9 @@
     <footer
       class="flex justify-between items-center p-4r xl:p-2r border-t border-pblue-light"
     >
-      <p>{{ donePercentage }}% done</p>
+      <p>
+        <span v-if="tasks.length">{{ donePercentage }}% done</span>
+      </p>
       <nav>
         <Button
           :disabled="isUpdating"
@@ -129,7 +131,9 @@ export default {
       })
     },
     donePercentage: function() {
-      return Math.round((this.done.length * 100) / this.tasks.length)
+      return this.tasks.length
+        ? Math.round((this.done.length * 100) / this.tasks.length)
+        : ''
     }
   },
 

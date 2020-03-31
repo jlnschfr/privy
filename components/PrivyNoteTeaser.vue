@@ -78,7 +78,7 @@ export default {
     },
     tasks: function() {
       return this.item.items.filter((item) => {
-        return item.type === 'Tasks'
+        return item.type === 'Task'
       })
     },
     done: function() {

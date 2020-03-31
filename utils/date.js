@@ -6,5 +6,6 @@ export const createDateString = (date) => {
     day: 'numeric'
   }
 
-  return new Date(date).toLocaleString('de-DE', options)
+  const isValid = Date.parse(date)
+  return !isNaN(isValid) ? new Date(date).toLocaleString('de-DE', options) : ''
 }
