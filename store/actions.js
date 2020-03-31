@@ -55,10 +55,9 @@ export default {
 
       state.store
         .collection('items')
-        .add(payload)
-        .then(() => {
-          commit('updateItem', payload)
-        })
+        .doc(payload.id)
+        .set(payload)
+        .then(() => {})
         .catch(() => {})
     })
   },
