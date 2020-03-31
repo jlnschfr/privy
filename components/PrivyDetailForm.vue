@@ -92,7 +92,8 @@ export default {
   props: {
     id: {
       type: String,
-      required: true
+      required: false,
+      default: ''
     },
     data: {
       type: Object,
@@ -180,7 +181,7 @@ export default {
       if (!this.isUpdating) {
         this.isUpdating = true
 
-        if (this.id === 'new') {
+        if (this.id === '') {
           this.add()
         } else {
           this.update()
@@ -195,7 +196,7 @@ export default {
       }
 
       this.$store.dispatch('addItem', data).then((id) => {
-        this.$router.push(`/notes/${id}`)
+        this.$router.push(`/note?id=${id}`)
       })
     },
 

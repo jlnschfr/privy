@@ -90,7 +90,7 @@ export default {
 
   methods: {
     open(id) {
-      this.$router.push(`/notes/${id}`)
+      this.$router.push(`/note?id=${id}`)
     },
 
     remove(item) {

@@ -5,9 +5,7 @@
     <PrivyNoteTeaser v-for="(item, key) in items" :key="key" :item="item" />
 
     <div class="fixed bottom-2r right-2r">
-      <CircleLink to="/notes/new">
-        <PlusIcon class="fill-current w-4"
-      /></CircleLink>
+      <CircleLink to="/note"> <PlusIcon class="fill-current w-4"/></CircleLink>
     </div>
   </section>
 </template>
@@ -43,7 +41,7 @@ export default {
   methods: {
     addNote(key) {
       if (key.keyCode === 13) {
-        this.$router.push(`/notes/new`)
+        this.$router.push(`/notes`)
       }
     }
   }
