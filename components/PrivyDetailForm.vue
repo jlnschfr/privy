@@ -186,35 +186,35 @@ export default {
         this.isUpdating = true
 
         if (this.id === '') {
-          this.add()
+          this.create()
         } else {
           this.update()
         }
       }
     },
 
-    add() {
-      const data = {
-        title: this.title || 'untitled',
-        items: this.items
-      }
-
+    create() {
+      const data = this.prepareData(true)
       this.$store.dispatch('addItem', data).then((id) => {
         this.$router.push(`/note?id=${id}`)
       })
     },
 
     update() {
-      const data = {
-        id: this.id,
-        createdDate: new Date().toISOString(),
-        title: this.title,
-        isFav: this.isFav,
-        items: this.items
-      }
+      const data = this.prepareData(false)
       this.$store.dispatch('updateItem', data).then(() => {
         this.isUpdating = false
       })
+    },
+
+    prepareData(temp) {
+      return {
+        id: temp ? `${uuid()}-temp` : this.id,
+        createdDate: new Date().toISOString(),
+        title: this.title || 'untitled',
+        isFav: this.isFav,
+        items: this.items
+      }
     }
   }
 }

@@ -50,15 +50,15 @@ export default {
 
   addItem({ state, commit }, payload) {
     return new Promise((resolve, reject) => {
+      // commit addItem to Store with temp id
+      // try to add the item to firebase
+      // when firebase answers, update item
+
       state.store
         .collection('items')
         .add(payload)
         .then((doc) => {
-          commit('addItem', {
-            id: doc.id,
-            createdDate: new Date().toISOString(),
-            ...payload
-          })
+          commit('addItem', payload)
           commit('sortItems')
           resolve(doc.id)
         })
