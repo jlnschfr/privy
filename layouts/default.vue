@@ -16,6 +16,12 @@ export default {
     PrivyHeader
   },
 
+  data() {
+    return {
+      frequentUpdates: false
+    }
+  },
+
   computed: {
     user() {
       return this.$store.state.user
@@ -40,10 +46,26 @@ export default {
 
         if (this.$store.state.user) {
           this.$router.push('/notes')
+          this.bindFrequentUpdates()
         } else {
           this.$router.push('/')
+          this.unbindFrequentUpdates()
         }
       })
+    },
+
+    bindFrequentUpdates() {
+      if (!this.frequentUpdates) {
+        this.frequentUpdates = setInterval(() => {
+          this.$store.dispatch('getItems')
+        }, 15000)
+      }
+    },
+
+    unbindFrequentUpdates() {
+      if (this.frequentUpdates) {
+        clearInterval(this.frequentUpdates)
+      }
     }
   }
 }
