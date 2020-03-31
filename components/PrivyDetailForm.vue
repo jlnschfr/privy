@@ -49,20 +49,9 @@
         <span v-if="tasks.length">{{ donePercentage }}% done</span>
       </p>
       <nav>
-        <Button
-          :disabled="isUpdating"
-          text="Add Text"
-          type="text"
-          class="mr-4"
-          @click="createRte"
-        />
+        <Button text="Add Text" type="text" class="mr-4" @click="createRte" />
 
-        <Button
-          :disabled="isUpdating"
-          text="Add Task"
-          type="text"
-          @click="createTask"
-        />
+        <Button text="Add Task" type="text" @click="createTask" />
       </nav>
     </footer>
   </section>
@@ -109,7 +98,6 @@ export default {
   data() {
     return {
       isDragging: false,
-      isUpdating: false,
       title: this.data.title || '',
       items: this.data.items || [],
       isFav: this.data.isFav || false
@@ -182,14 +170,10 @@ export default {
     },
 
     onChange() {
-      if (!this.isUpdating) {
-        this.isUpdating = true
-
-        if (this.id === '') {
-          this.create()
-        } else {
-          this.update()
-        }
+      if (this.id === '') {
+        this.create()
+      } else {
+        this.update()
       }
     },
 
@@ -202,14 +186,12 @@ export default {
 
     update() {
       const data = this.prepareData(false)
-      this.$store.dispatch('updateItem', data).then(() => {
-        this.isUpdating = false
-      })
+      this.$store.dispatch('updateItem', data).then(() => {})
     },
 
-    prepareData(temp) {
+    prepareData(initial) {
       return {
-        id: temp ? `${uuid()}-temp` : this.id,
+        id: initial ? uuid() : this.id,
         createdDate: new Date().toISOString(),
         title: this.title || 'untitled',
         isFav: this.isFav,

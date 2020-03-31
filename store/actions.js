@@ -49,55 +49,46 @@ export default {
   },
 
   addItem({ state, commit }, payload) {
-    return new Promise((resolve, reject) => {
-      // commit addItem to Store with temp id
-      // try to add the item to firebase
-      // when firebase answers, update item
+    return new Promise((resolve) => {
+      commit('addItem', payload)
+      resolve(payload.id)
 
       state.store
         .collection('items')
         .add(payload)
-        .then((doc) => {
-          commit('addItem', payload)
-          commit('sortItems')
-          resolve(doc.id)
+        .then(() => {
+          commit('updateItem', payload)
         })
-        .catch((error) => {
-          reject(error)
-        })
+        .catch(() => {})
     })
   },
 
   updateItem({ state, commit }, payload) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
+      commit('updateItem', payload)
+      commit('sortItems')
+      resolve()
+
       state.store
         .collection('items')
         .doc(payload.id)
         .set(payload)
-        .then(() => {
-          commit('updateItem', payload)
-          commit('sortItems')
-          resolve()
-        })
-        .catch((error) => {
-          reject(error)
-        })
+        .then(() => {})
+        .catch(() => {})
     })
   },
 
   deleteItem({ state, commit }, payload) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
+      commit('deleteItem', payload)
+      resolve()
+
       state.store
         .collection('items')
         .doc(payload.id)
         .delete()
-        .then(() => {
-          commit('deleteItem', payload)
-          resolve()
-        })
-        .catch((error) => {
-          reject(error)
-        })
+        .then(() => {})
+        .catch(() => {})
     })
   },
 
