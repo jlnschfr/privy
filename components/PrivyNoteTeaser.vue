@@ -29,7 +29,7 @@
       </p>
       <button
         :class="{
-          'text-pblue-dark': !item.isFav
+          'text-porange-dark': item.isFav
         }"
         class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300"
         @click.stop="updateFavState(item)"

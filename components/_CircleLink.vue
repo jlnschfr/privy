@@ -2,7 +2,7 @@
   <nuxt-link
     tabindex="1"
     :to="to"
-    class="bg-pblue-dark hover:bg-porange-light focus:bg-porange-light text-white rounded-full h-16 w-16 flex items-center justify-center transition-background duration-300"
+    class="bg-pblue-dark hover:bg-porange-dark focus:bg-porange-light text-white rounded-full h-16 w-16 flex items-center justify-center transition-background duration-300"
   >
     <slot />
   </nuxt-link>

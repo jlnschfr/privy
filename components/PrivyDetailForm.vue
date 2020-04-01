@@ -149,7 +149,9 @@ export default {
   },
 
   mounted() {
-    this.$refs.title.$el.focus()
+    if (!this.title) {
+      this.$refs.title.$el.focus()
+    }
   },
 
   methods: {
