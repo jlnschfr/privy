@@ -23,9 +23,11 @@ export default {
     PrivyNoteTeaser
   },
 
-  computed: {
-    items: function() {
-      return this.$store.state.items
+  props: {
+    items: {
+      type: Array,
+      required: false,
+      default: () => []
     }
   },
 

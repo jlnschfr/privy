@@ -45,7 +45,9 @@ export default {
         this.$store.dispatch('handleAuthChanged', user)
 
         if (this.$store.state.user) {
-          this.$router.push('/notes')
+          if (this.$router.currentRoute.name === 'index') {
+            this.$router.push('/notes')
+          }
           this.bindFrequentUpdates()
         } else {
           this.$router.push('/')

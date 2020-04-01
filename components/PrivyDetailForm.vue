@@ -42,6 +42,13 @@
       </Draggable>
     </article>
 
+    <aside class="p-4r xl:p-2r">
+      <vue-tags-input
+        v-model="tag"
+        :tags="tags"
+        @tags-changed="(newTags) => (tags = newTags)"
+      />
+    </aside>
     <footer
       class="flex justify-between items-center p-4r xl:p-2r border-t border-pblue-light"
     >
@@ -58,6 +65,7 @@
 </template>
 
 <script>
+import VueTagsInput from '@johmun/vue-tags-input'
 import TitleTextarea from '@/components/_TitleTextarea'
 import Rte from '@/components/_Rte'
 import Task from '@/components/_Task'
@@ -77,7 +85,8 @@ export default {
     DragIcon,
     CloseIcon,
     Button,
-    TitleTextarea
+    TitleTextarea,
+    VueTagsInput
   },
 
   props: {
@@ -100,7 +109,9 @@ export default {
       isDragging: false,
       title: this.data.title || '',
       items: this.data.items || [],
-      isFav: this.data.isFav || false
+      isFav: this.data.isFav || false,
+      tag: '',
+      tags: this.data.tags || []
     }
   },
 
@@ -130,6 +141,9 @@ export default {
       this.onChange()
     }, 500),
     items: debounce(function() {
+      this.onChange()
+    }, 500),
+    tags: debounce(function() {
       this.onChange()
     }, 500)
   },
@@ -195,14 +209,15 @@ export default {
         createdDate: new Date().toISOString(),
         title: this.title || 'untitled',
         isFav: this.isFav,
-        items: this.items
+        items: this.items,
+        tags: this.tags
       }
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .Dragger {
   left: 0;
   transform: translateX(-150%);
@@ -219,6 +234,25 @@ export default {
 .Ghost {
   background-color: theme('colors.pgray.light');
   color: theme('colors.pblue.dark');
+}
+
+.vue-tags-input.vue-tags-input {
+  max-width: none;
+}
+
+.vue-tags-input .ti-new-tag-input-wrapper {
+  font-size: inherit;
+}
+
+.vue-tags-input .ti-input {
+  border: none;
+  padding: 0;
+}
+
+.vue-tags-input .ti-tag {
+  margin: 4px;
+  font-size: inherit;
+  background-color: theme('colors.pblue.light');
 }
 
 @media (max-width: 640px) {
