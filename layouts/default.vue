@@ -29,7 +29,9 @@ export default {
   },
 
   created() {
-    this.bindAuthChanged()
+    this.$store.dispatch('enablePersistence').then(() => {
+      this.bindAuthChanged()
+    })
   },
 
   methods: {
@@ -59,7 +61,9 @@ export default {
     bindFrequentUpdates() {
       if (!this.frequentUpdates) {
         this.frequentUpdates = setInterval(() => {
-          this.$store.dispatch('getItems')
+          if (navigator.onLine) {
+            this.$store.dispatch('getItems')
+          }
         }, 15000)
       }
     },

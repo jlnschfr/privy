@@ -1,4 +1,4 @@
-import { auth } from '@/plugins/firebase.js'
+import { auth, firestore } from '@/plugins/firebase.js'
 
 export default {
   createUserWithEmailAndPassword({ dispatch }, payload) {
@@ -103,5 +103,13 @@ export default {
         commit('setItems', items)
         commit('sortItems')
       })
+  },
+
+  enablePersistence() {
+    return new Promise((resolve) => {
+      firestore.enablePersistence().then(() => {
+        resolve()
+      })
+    })
   }
 }
