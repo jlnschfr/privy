@@ -1,65 +1,71 @@
 <template>
-  <section class="max-w-2xl mx-auto shadow-xl text-pblue-light">
-    <header
-      class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
-    >
-      <TitleTextarea ref="title" v-model="title" class="flex-auto" />
-      <p class="flex-initial text-right">{{ dateString }}</p>
-    </header>
-
-    <article class="p-4r xl:p-2r">
-      <Draggable
-        v-model="items"
-        handle=".Dragger"
-        ghost-class="Ghost"
-        @start="isDragging = true"
-        @end="isDragging = false"
+  <section
+    class="max-w-2xl mx-auto shadow-xl text-pblue-light min-h-detail flex flex-col justify-between"
+  >
+    <article>
+      <header
+        class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
       >
-        <div
-          v-for="item in items"
-          :key="item.uuid"
-          class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
+        <TitleTextarea ref="title" v-model="title" class="flex-auto" />
+        <p class="flex-initial text-right">{{ dateString }}</p>
+      </header>
+
+      <div class="p-4r xl:p-2r">
+        <Draggable
+          v-model="items"
+          handle=".Dragger"
+          ghost-class="Ghost"
+          @start="isDragging = true"
+          @end="isDragging = false"
         >
-          <component
-            :is="item.type"
-            :data="item.data"
-            :uuid="item.uuid"
-            :editable="!isDragging"
-            @update="onItemUpdate"
-          ></component>
-          <button
-            class="Dragger absolute inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          <div
+            v-for="item in items"
+            :key="item.uuid"
+            class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
           >
-            <DragIcon class="DragIcon fill-current" />
-          </button>
-          <button
-            class="Close absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            @click="onItemDelete(item.uuid)"
-          >
-            <CloseIcon class="CloseIcon fill-current" />
-          </button>
-        </div>
-      </Draggable>
+            <component
+              :is="item.type"
+              :data="item.data"
+              :uuid="item.uuid"
+              :editable="!isDragging"
+              @update="onItemUpdate"
+            ></component>
+            <button
+              class="Dragger absolute inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              <DragIcon class="DragIcon fill-current" />
+            </button>
+            <button
+              class="Close absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              @click="onItemDelete(item.uuid)"
+            >
+              <CloseIcon class="CloseIcon fill-current" />
+            </button>
+          </div>
+        </Draggable>
+      </div>
     </article>
 
-    <aside class="p-4r xl:p-2r">
-      <vue-tags-input
-        v-model="tag"
-        :tags="tags"
-        @tags-changed="(newTags) => (tags = newTags)"
-      />
-    </aside>
-    <footer
-      class="flex justify-between items-center p-4r xl:p-2r border-t border-pblue-light"
-    >
-      <p>
-        <span v-if="tasks.length">{{ donePercentage }}% done</span>
-      </p>
-      <nav>
-        <Button text="Add Text" type="text" class="mr-4" @click="createRte" />
+    <footer>
+      <aside class="p-4r xl:p-2r">
+        <vue-tags-input
+          v-model="tag"
+          :tags="tags"
+          @tags-changed="(newTags) => (tags = newTags)"
+        />
+      </aside>
+      <div
+        class="flex justify-between items-center p-4r xl:p-2r border-t border-pblue-light"
+      >
+        <p>
+          <span v-if="tasks.length">{{ donePercentage }}% done</span>
+        </p>
+        <nav>
+          <Button text="Add Text" type="text" class="mr-4" @click="createRte" />
 
-        <Button text="Add Task" type="text" @click="createTask" />
-      </nav>
+          <Button text="Add Task" type="text" @click="createTask" />
+        </nav>
+      </div>
     </footer>
   </section>
 </template>

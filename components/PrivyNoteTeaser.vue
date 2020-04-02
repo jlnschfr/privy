@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style scoped>
-.PrivyNoteTeaser:focus {
+/* .PrivyNoteTeaser:focus {
   outline: theme('colors.porange.dark') solid 0.5rem;
-}
+} */
 </style>

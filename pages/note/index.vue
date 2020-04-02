@@ -6,6 +6,7 @@
 import PrivyDetailForm from '@/components/PrivyDetailForm'
 
 export default {
+  transition: 'slide',
   components: {
     PrivyDetailForm
   },

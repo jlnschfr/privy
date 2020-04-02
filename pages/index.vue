@@ -6,6 +6,7 @@
 import PrivyAuthForm from '@/components/PrivyAuthForm'
 
 export default {
+  transition: 'slide',
   components: {
     PrivyAuthForm
   }

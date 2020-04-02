@@ -47,7 +47,8 @@ module.exports = {
         '4r': '4vw'
       },
       minHeight: {
-        notes: '18rem'
+        notes: '18rem',
+        detail: 'calc(100vh - 8vw - 2rem - 54px)'
       }
     }
   },

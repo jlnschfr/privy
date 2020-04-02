@@ -85,4 +85,24 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s;
+}
+.slide-enter {
+  transform: translateY(-1rem);
+  opacity: 0;
+}
+
+.slide-enter-to,
+.slide-leave {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-leave-to {
+  transform: translateY(1rem);
+  opacity: 0;
+}
 </style>

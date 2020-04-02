@@ -6,6 +6,7 @@
 import PrivyNoteOverview from '@/components/PrivyNoteOverview'
 
 export default {
+  transition: 'slide',
   components: {
     PrivyNoteOverview
   },
