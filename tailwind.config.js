@@ -17,12 +17,14 @@ module.exports = {
           dark: '#a0aec0'
         },
         pblue: {
-          light: '#096FFF',
+          light: '#AED0FF',
+          medium: '#096FFF',
           dark: '#0954F9'
         },
         porange: {
           light: '#F9B48A',
-          dark: '#FA9083'
+          medium: '#FA9083',
+          dark: '#F62F17'
         }
       },
       spacing: {
@@ -44,16 +46,20 @@ module.exports = {
         '1r': '1vw',
         '2r': '2vw',
         '3r': '3vw',
-        '4r': '4vw'
+        '4r': '4vw',
+        'notes-mobile': 'calc((((100vw - 8vw) / 7) * 2) + 4vw - 5px)'
       },
       minHeight: {
         notes: '18rem',
         detail: 'calc(100vh - 8vw - 2rem - 54px)'
+      },
+      transitionProperty: {
+        border: 'border'
       }
     }
   },
   variants: {
-    opacity: ['group-hover', 'focus'],
+    opacity: ['group-hover', 'focus', 'responsive'],
     margin: ['first'],
     border: ['focus']
   },

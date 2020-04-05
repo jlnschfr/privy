@@ -1,7 +1,7 @@
 <template>
   <form
     ref="form"
-    class="max-w-md mx-auto mt-4r p-4r text-pblue-light shadow-xl"
+    class="max-w-md mx-auto mt-4r p-4r text-pblue-medium shadow-xl"
     @submit.prevent="authenticate"
   >
     <header>
@@ -39,7 +39,7 @@
       class="w-full mt-6"
     />
 
-    <p class="mt-4 text-pblue-light text-center">
+    <p class="mt-4 text-pblue-medium text-center">
       <span
         v-text="
           !isLogin ? 'Already got an account?' : 'Doesnt have an account?'

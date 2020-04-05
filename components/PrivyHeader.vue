@@ -1,5 +1,5 @@
 <template>
-  <header class="flex justify-between bg-pblue-light items-center px-4r py-2">
+  <header class="flex justify-between bg-pblue-medium items-center px-4r py-2">
     <h1 aria-label="Privy Notes">
       <nuxt-link to="/notes">
         <PrivyIcon ref="svg" class="PrivyIcon w-4"

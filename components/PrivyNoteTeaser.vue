@@ -8,7 +8,7 @@
       class="p-4r xl:p-2r col-start-1 col-end-5 flex items-center relative"
       :class="{
         'bg-pblue-dark text-white': item.isFav,
-        'text-pblue-light': !item.isFav
+        'text-pblue-medium': !item.isFav
       }"
     >
       <h2 class="text-3xl lg:text-4xl leading-none w-full">{{ item.title }}</h2>
@@ -17,7 +17,7 @@
       </p>
     </div>
     <div
-      class="p-4r xl:p-2r col-start-5 col-end-8 flex items-center justify-end text-white bg-pblue-light relative"
+      class="p-4r xl:p-2r col-start-5 col-end-8 flex items-center justify-end text-white bg-pblue-medium relative"
     >
       <p class="flex flex-col text-right mr-4r md:mr-2r">
         <strong class="text-5xl leading-none">{{ tasks.length }}</strong
@@ -29,19 +29,19 @@
       </p>
       <button
         :class="{
-          'text-porange-dark': item.isFav
+          'text-porange-medium': item.isFav
         }"
-        class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300"
+        class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-100 lg:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300"
         @click.stop="updateFavState(item)"
       >
         <FavIcon class="fill-current w-3" />
       </button>
       <button
         :class="{
-          'border-porange-light': isActiveForDelete,
-          'border-pblue-light': !isActiveForDelete
+          'border-porange-dark': isActiveForDelete,
+          'border-pblue-medium': !isActiveForDelete
         }"
-        class="absolute bottom-2r right-4r xl:bottom-1r xl:right-2r border-b-2 border-solid transition-all duration-300"
+        class="absolute bottom-2r right-4r xl:bottom-1r xl:right-2r border-b-2 border-solid transition-border duration-300 hover:border-porange-light"
         @click.stop="remove(item)"
       >
         Delete

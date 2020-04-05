@@ -1,6 +1,6 @@
 <template>
   <input
-    class="bg-transparent placeholder-pblue-light focus:outline-none focus:border-pblue-dark border-b border-pblue-light block w-full appearance-none leading-normal py-1"
+    class="bg-transparent placeholder-pblue-light focus:outline-none focus:border-pblue-dark border-b border-pblue-medium block w-full appearance-none leading-normal py-1"
     :type="type"
     :placeholder="placeholder"
     :value="value"

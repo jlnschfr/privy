@@ -1,6 +1,6 @@
 <template>
   <section
-    class="max-w-2xl mx-auto shadow-xl text-pblue-light min-h-detail flex flex-col justify-between"
+    class="max-w-2xl mx-auto shadow-xl text-pblue-medium min-h-detail flex flex-col justify-between"
   >
     <article>
       <header
@@ -12,6 +12,7 @@
 
       <div class="p-4r xl:p-2r">
         <Draggable
+          ref="items"
           v-model="items"
           handle=".Dragger"
           ghost-class="Ghost"
@@ -158,9 +159,18 @@ export default {
     if (!this.title) {
       this.$refs.title.$el.focus()
     }
+
+    // don't forget before destroy
+    window.addEventListener('keyup', this.handleKeyUp)
   },
 
   methods: {
+    handleKeyUp(event) {
+      event.stopPropagation()
+      if (event.keyCode === 13) {
+        this.createTask()
+      }
+    },
     createRte() {
       const rte = {
         type: 'Rte',
@@ -177,6 +187,11 @@ export default {
       }
 
       this.items.push(task)
+      const items = this.$refs.items.$el
+
+      setTimeout(() => {
+        items.lastChild.querySelector('input:not(.hidden').focus()
+      }, 50)
     },
 
     onItemUpdate(payload) {
@@ -252,6 +267,10 @@ export default {
   font-size: inherit;
 }
 
+.vue-tags-input .ti-new-tag-input::placeholder {
+  color: theme('colors.pblue.light');
+}
+
 .vue-tags-input .ti-input {
   border: none;
   padding: 0;
@@ -260,7 +279,12 @@ export default {
 .vue-tags-input .ti-tag {
   margin: 4px;
   font-size: inherit;
-  background-color: theme('colors.pblue.light');
+  background-color: theme('colors.pblue.medium');
+  transition: background-color 300ms;
+}
+
+.vue-tags-input .ti-tag:hover {
+  background-color: theme('colors.porange.medium');
 }
 
 @media (max-width: 640px) {

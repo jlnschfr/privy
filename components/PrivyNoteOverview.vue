@@ -1,7 +1,7 @@
 <template>
   <section>
     <StaggeredTransition
-      class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4r xl:gap-2r items-center"
+      class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4r xl:gap-2r pb-4r md:pb-0 items-center"
     >
       <PrivyNoteTeaser
         v-for="(item, key) in items"
@@ -11,7 +11,9 @@
       />
     </StaggeredTransition>
 
-    <div class="fixed bottom-2r right-2r">
+    <div
+      class="fixed bottom-2r right-notes-mobile transform -translate-x-1/2 md:-translate-x-0 md:right-2r"
+    >
       <CircleLink to="/note"> <PlusIcon class="fill-current w-4"/></CircleLink>
     </div>
   </section>
