@@ -114,6 +114,7 @@ export default {
   data() {
     return {
       isDragging: false,
+      isChanging: false,
       title: this.data.title || '',
       items: this.data.items || [],
       isFav: this.data.isFav || false,
@@ -152,6 +153,16 @@ export default {
     }, 500),
     tags: debounce(function() {
       this.onChange()
+    }, 500),
+    data: debounce(function() {
+      this.isChanging = true
+      this.title = this.data.title || ''
+      this.items = this.data.items || []
+      this.isFav = this.data.isFav || false
+      this.tags = this.data.tags || []
+      setTimeout(() => {
+        this.isChanging = false
+      }, 550)
     }, 500)
   },
 
@@ -159,15 +170,18 @@ export default {
     if (!this.title) {
       this.$refs.title.$el.focus()
     }
-
-    // don't forget before destroy
     window.addEventListener('keyup', this.handleKeyUp)
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.handleKeyUp)
   },
 
   methods: {
     handleKeyUp(event) {
-      event.stopPropagation()
-      if (event.keyCode === 13) {
+      if (event.keyCode === 13 && event.shiftKey) {
+        this.createRte()
+      } else if (event.keyCode === 13) {
         this.createTask()
       }
     },
@@ -207,10 +221,12 @@ export default {
     },
 
     onChange() {
-      if (this.id === '') {
-        this.create()
-      } else {
-        this.update()
+      if (!this.isChanging) {
+        if (this.id === '') {
+          this.create()
+        } else {
+          this.update()
+        }
       }
     },
 

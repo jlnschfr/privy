@@ -62,6 +62,8 @@ export default {
       if (!this.frequentUpdates) {
         this.frequentUpdates = setInterval(() => {
           if (navigator.onLine) {
+            // eslint-disable-next-line no-console
+            console.log('check for updates')
             this.$store.dispatch('getItems')
           }
         }, 15000)
