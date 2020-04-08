@@ -1,6 +1,7 @@
 <template>
   <main class="font-body">
     <PrivyHeader :user="user" @logout="logout" />
+    <PrivyDrawer :user="user" :items="items" />
     <div class="p-4r">
       <nuxt />
     </div>
@@ -9,11 +10,13 @@
 
 <script>
 import PrivyHeader from '@/components/PrivyHeader'
+import PrivyDrawer from '@/components/PrivyDrawer'
 import { auth } from '@/plugins/firebase.js'
 
 export default {
   components: {
-    PrivyHeader
+    PrivyHeader,
+    PrivyDrawer
   },
 
   data() {
@@ -24,7 +27,10 @@ export default {
 
   computed: {
     user() {
-      return this.$store.state.user
+      return this.$store.state.user ? this.$store.state.user : {}
+    },
+    items() {
+      return this.$store.state.items ? this.$store.state.items : []
     }
   },
 
@@ -62,8 +68,6 @@ export default {
       if (!this.frequentUpdates) {
         this.frequentUpdates = setInterval(() => {
           if (navigator.onLine) {
-            // eslint-disable-next-line no-console
-            console.log('check for updates')
             this.$store.dispatch('getItems')
           }
         }, 15000)

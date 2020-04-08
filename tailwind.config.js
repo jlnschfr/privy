@@ -53,6 +53,9 @@ module.exports = {
         notes: '18rem',
         detail: 'calc(100vh - 8vw - 2rem - 54px)'
       },
+      height: {
+        drawer: 'calc(100vh - 85px)'
+      },
       transitionProperty: {
         border: 'border'
       }
