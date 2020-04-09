@@ -62,6 +62,21 @@ export default {
     })
   },
 
+  updateItemItems({ state, commit }, payload) {
+    return new Promise((resolve) => {
+      commit('updateItemItems', payload)
+      resolve()
+
+      const item = state.items.find((item) => item.id === payload.id)
+      state.store
+        .collection('items')
+        .doc(item.id)
+        .set(item)
+        .then(() => {})
+        .catch(() => {})
+    })
+  },
+
   updateItem({ state, commit }, payload) {
     return new Promise((resolve) => {
       commit('updateItem', payload)

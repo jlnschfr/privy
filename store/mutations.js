@@ -18,6 +18,10 @@ export default {
     const index = state.items.findIndex((el) => el.id === payload.id)
     state.items[index] = payload
   },
+  updateItemItems(state, payload) {
+    const index = state.items.findIndex((el) => el.id === payload.id)
+    state.items[index].items = payload.items
+  },
   sortItems(state) {
     state.items.sort((a, b) => {
       if (a.isFav || b.isFav) {

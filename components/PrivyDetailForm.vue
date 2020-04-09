@@ -11,46 +11,14 @@
       </header>
 
       <div class="p-4r xl:p-2r">
-        <Draggable
-          ref="items"
-          v-model="items"
-          handle=".Dragger"
-          ghost-class="Ghost"
-          @start="isDragging = true"
-          @end="isDragging = false"
-        >
-          <div
-            v-for="item in items"
-            :key="item.uuid"
-            class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
-          >
-            <component
-              :is="item.type"
-              :data="item.data"
-              :uuid="item.uuid"
-              :editable="!isDragging"
-              @update="onItemUpdate"
-            ></component>
-            <button
-              class="Dragger absolute inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-              <DragIcon class="DragIcon fill-current" />
-            </button>
-            <button
-              class="Close absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              @click="onItemDelete(item.uuid)"
-            >
-              <CloseIcon class="CloseIcon fill-current" />
-            </button>
-          </div>
-        </Draggable>
+        <DraggableItems :id="id" ref="items" />
       </div>
     </article>
 
     <footer>
       <aside class="p-4r xl:p-2r">
         <vue-tags-input
-          v-model="tag"
+          v-model.lazy="tag"
           :tags="tags"
           @tags-changed="(newTags) => (tags = newTags)"
         />
@@ -74,24 +42,17 @@
 <script>
 import VueTagsInput from '@johmun/vue-tags-input'
 import TitleTextarea from '@/components/_TitleTextarea'
-import Rte from '@/components/_Rte'
-import Task from '@/components/_Task'
 import Button from '@/components/_Button'
-import Draggable from 'vuedraggable'
+import DraggableItems from '@/components/_DraggableItems'
 import debounce from 'lodash.debounce'
 import isEqual from 'lodash.isequal'
 import uuid from 'uuid'
-import DragIcon from '@/assets/svg/new/drag.svg'
-import CloseIcon from '@/assets/svg/new/cross.svg'
+
 import { createDateString } from '@/utils/date'
 
 export default {
   components: {
-    Rte,
-    Task,
-    Draggable,
-    DragIcon,
-    CloseIcon,
+    DraggableItems,
     Button,
     TitleTextarea,
     VueTagsInput
@@ -106,20 +67,17 @@ export default {
     data: {
       type: Object,
       required: false,
-      default: () => {
-        return {}
-      }
+      default: () => {}
     }
   },
 
   data() {
     return {
-      isDragging: false,
       title: this.data.title || '',
       items: this.data.items || [],
       isFav: this.data.isFav || false,
-      tag: '',
-      tags: this.data.tags || []
+      tags: this.data.tags || [],
+      tag: ''
     }
   },
 
@@ -146,9 +104,6 @@ export default {
 
   watch: {
     title: debounce(function() {
-      this.onChange()
-    }, 500),
-    items: debounce(function() {
       this.onChange()
     }, 500),
     tags: debounce(function() {
@@ -215,18 +170,6 @@ export default {
       }, 50)
     },
 
-    onItemUpdate(payload) {
-      const index = this.items.findIndex((item) => item.uuid === payload.uuid)
-      const items = this.items.slice()
-      items[index].data = payload.data
-      this.items = items
-    },
-
-    onItemDelete(uuid) {
-      const index = this.items.findIndex((item) => item.uuid === uuid)
-      this.items.splice(index, 1)
-    },
-
     onChange(value) {
       if (this.id === '') {
         this.create()
@@ -262,24 +205,6 @@ export default {
 </script>
 
 <style>
-.Dragger {
-  left: 0;
-  transform: translateX(-150%);
-}
-
-.DragIcon {
-  width: 0.75rem;
-}
-
-.CloseIcon {
-  width: 0.6rem;
-}
-
-.Ghost {
-  background-color: theme('colors.pgray.light');
-  color: theme('colors.pblue.dark');
-}
-
 .vue-tags-input.vue-tags-input {
   max-width: none;
 }
@@ -306,17 +231,5 @@ export default {
 
 .vue-tags-input .ti-tag:hover {
   background-color: theme('colors.porange.medium');
-}
-
-@media (max-width: 640px) {
-  .Dragger,
-  .Close {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .Dragger {
-    transform: translateX(-50%);
-  }
 }
 </style>
