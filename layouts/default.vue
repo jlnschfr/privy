@@ -1,6 +1,13 @@
 <template>
   <main class="font-body">
-    <PrivyHeader :user="user" @logout="logout" />
+    <PrivyHeader :user="user" @toggleDrawer="showDrawer = !showDrawer" />
+    <PrivyDrawer
+      :is-active="showDrawer"
+      :user="user"
+      :items="items"
+      @logout="logout"
+      @toggleDrawer="showDrawer = !showDrawer"
+    />
     <div class="p-4r">
       <nuxt />
     </div>
@@ -9,22 +16,28 @@
 
 <script>
 import PrivyHeader from '@/components/PrivyHeader'
+import PrivyDrawer from '@/components/PrivyDrawer'
 import { auth } from '@/plugins/firebase.js'
 
 export default {
   components: {
-    PrivyHeader
+    PrivyHeader,
+    PrivyDrawer
   },
 
   data() {
     return {
-      frequentUpdates: false
+      frequentUpdates: false,
+      showDrawer: false
     }
   },
 
   computed: {
     user() {
-      return this.$store.state.user
+      return this.$store.state.user ? this.$store.state.user : {}
+    },
+    items() {
+      return this.$store.state.items ? this.$store.state.items : []
     }
   },
 
@@ -62,8 +75,6 @@ export default {
       if (!this.frequentUpdates) {
         this.frequentUpdates = setInterval(() => {
           if (navigator.onLine) {
-            // eslint-disable-next-line no-console
-            console.log('check for updates')
             this.$store.dispatch('getItems')
           }
         }, 15000)
@@ -89,7 +100,11 @@ html {
 }
 
 .slide-enter-active,
-.slide-leave-active {
+.slide-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active,
+.fade-enter-active,
+.fade-leave-active {
   transition: all 0.3s;
 }
 .slide-enter {
@@ -105,6 +120,32 @@ html {
 
 .slide-leave-to {
   transform: translateY(1rem);
+  opacity: 0;
+}
+
+.slide-right-enter {
+  transform: translateX(100%);
+}
+
+.slide-right-enter-to,
+.slide-right-leave {
+  transform: translateY(0);
+}
+
+.slide-right-leave-to {
+  transform: translateX(100%);
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave-to {
   opacity: 0;
 }
 </style>
