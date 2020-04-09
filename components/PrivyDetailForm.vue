@@ -79,6 +79,7 @@ import Task from '@/components/_Task'
 import Button from '@/components/_Button'
 import Draggable from 'vuedraggable'
 import debounce from 'lodash.debounce'
+import isEqual from 'lodash.isequal'
 import uuid from 'uuid'
 import DragIcon from '@/assets/svg/new/drag.svg'
 import CloseIcon from '@/assets/svg/new/cross.svg'
@@ -114,7 +115,7 @@ export default {
   data() {
     return {
       isDragging: false,
-      isChanging: false,
+      title: this.data.title || '',
       items: this.data.items || [],
       isFav: this.data.isFav || false,
       tag: '',
@@ -123,16 +124,6 @@ export default {
   },
 
   computed: {
-    title: {
-      get() {
-        return this.data.title
-      },
-      set(value) {
-        console.log(value)
-        const data = this.prepareData(false)
-        this.$store.dispatch('updateItem', data).then(() => {})
-      }
-    },
     dateString: function() {
       return createDateString(this.data.createdDate)
     },
@@ -154,6 +145,9 @@ export default {
   },
 
   watch: {
+    title: debounce(function() {
+      this.onChange()
+    }, 500),
     items: debounce(function() {
       this.onChange()
     }, 500),
@@ -161,14 +155,21 @@ export default {
       this.onChange()
     }, 500),
     data: debounce(function() {
-      this.isChanging = true
-      this.title = this.data.title || ''
-      this.items = this.data.items || []
-      this.isFav = this.data.isFav || false
-      this.tags = this.data.tags || []
-      setTimeout(() => {
-        this.isChanging = false
-      }, 550)
+      if (this.title !== this.data.title) {
+        this.title = this.data.title || ''
+      }
+
+      if (this.isFav !== this.data.isFav) {
+        this.isFav = this.data.isFav || ''
+      }
+
+      if (!isEqual(this.items, this.data.items)) {
+        this.items = this.data.items || []
+      }
+
+      if (!isEqual(this.tags, this.data.tags)) {
+        this.items = this.data.items || []
+      }
     }, 500)
   },
 
@@ -227,30 +228,28 @@ export default {
     },
 
     onChange(value) {
-      if (!this.isChanging) {
-        if (this.id === '') {
-          this.create()
-        } else {
-          this.update()
-        }
+      if (this.id === '') {
+        this.create()
+      } else {
+        this.update()
       }
     },
 
     create() {
-      const data = this.prepareData(true)
+      const data = this.collectData({ initial: true })
       this.$store.dispatch('addItem', data).then((id) => {
         this.$router.push(`/note?id=${id}`)
       })
     },
 
     update() {
-      const data = this.prepareData(false)
+      const data = this.collectData({ initial: false })
       this.$store.dispatch('updateItem', data).then(() => {})
     },
 
-    prepareData(initial) {
+    collectData(options) {
       return {
-        id: initial ? uuid() : this.id,
+        id: options.initial ? uuid() : this.id,
         createdDate: new Date().toISOString(),
         title: this.title || 'untitled',
         isFav: this.isFav,
