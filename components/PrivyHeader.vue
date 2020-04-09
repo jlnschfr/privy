@@ -9,18 +9,20 @@
       <p class="mr-4">
         <span class="hidden sm:inline">logged in as</span> {{ user.email }}
       </p>
-      <Button text="Logout" type="text" @click="$emit('logout')" />
+      <p @click="$emit('toggleDrawer')">
+        <MenuIcon class="w-3 fill-current cursor-pointer" />
+      </p>
     </nav>
   </header>
 </template>
 
 <script>
-import Button from '@/components/_Button'
+import MenuIcon from '@/assets/svg/menu.svg'
 import PrivyIcon from '@/assets/svg/privy.svg'
 
 export default {
   components: {
-    Button,
+    MenuIcon,
     PrivyIcon
   },
   props: {

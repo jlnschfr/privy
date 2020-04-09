@@ -1,7 +1,13 @@
 <template>
   <main class="font-body">
-    <PrivyHeader :user="user" @logout="logout" />
-    <PrivyDrawer :user="user" :items="items" />
+    <PrivyHeader :user="user" @toggleDrawer="showDrawer = !showDrawer" />
+    <PrivyDrawer
+      :is-active="showDrawer"
+      :user="user"
+      :items="items"
+      @logout="logout"
+      @toggleDrawer="showDrawer = !showDrawer"
+    />
     <div class="p-4r">
       <nuxt />
     </div>
@@ -21,7 +27,8 @@ export default {
 
   data() {
     return {
-      frequentUpdates: false
+      frequentUpdates: false,
+      showDrawer: false
     }
   },
 
@@ -93,7 +100,11 @@ html {
 }
 
 .slide-enter-active,
-.slide-leave-active {
+.slide-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active,
+.fade-enter-active,
+.fade-leave-active {
   transition: all 0.3s;
 }
 .slide-enter {
@@ -109,6 +120,32 @@ html {
 
 .slide-leave-to {
   transform: translateY(1rem);
+  opacity: 0;
+}
+
+.slide-right-enter {
+  transform: translateX(100%);
+}
+
+.slide-right-enter-to,
+.slide-right-leave {
+  transform: translateY(0);
+}
+
+.slide-right-leave-to {
+  transform: translateX(100%);
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave-to {
   opacity: 0;
 }
 </style>

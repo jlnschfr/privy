@@ -14,7 +14,8 @@ module.exports = {
         pgray: {
           light: '#f7fafc',
           medium: '#e2e8f0',
-          dark: '#a0aec0'
+          dark: '#a0aec0',
+          drawer: 'rgba(160, 174, 192, 0.8)'
         },
         pblue: {
           light: '#AED0FF',
