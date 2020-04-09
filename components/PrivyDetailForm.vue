@@ -6,7 +6,7 @@
       <header
         class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
       >
-        <TitleTextarea ref="title" v-model="title" class="flex-auto" />
+        <TitleTextarea ref="title" v-model.lazy="title" class="flex-auto" />
         <p class="flex-initial text-right">{{ dateString }}</p>
       </header>
 
@@ -115,7 +115,6 @@ export default {
     return {
       isDragging: false,
       isChanging: false,
-      title: this.data.title || '',
       items: this.data.items || [],
       isFav: this.data.isFav || false,
       tag: '',
@@ -124,6 +123,16 @@ export default {
   },
 
   computed: {
+    title: {
+      get() {
+        return this.data.title
+      },
+      set(value) {
+        console.log(value)
+        const data = this.prepareData(false)
+        this.$store.dispatch('updateItem', data).then(() => {})
+      }
+    },
     dateString: function() {
       return createDateString(this.data.createdDate)
     },
@@ -145,9 +154,6 @@ export default {
   },
 
   watch: {
-    title: debounce(function() {
-      this.onChange()
-    }, 500),
     items: debounce(function() {
       this.onChange()
     }, 500),
@@ -220,7 +226,7 @@ export default {
       this.items.splice(index, 1)
     },
 
-    onChange() {
+    onChange(value) {
       if (!this.isChanging) {
         if (this.id === '') {
           this.create()
