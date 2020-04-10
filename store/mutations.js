@@ -8,6 +8,7 @@ export default {
     state.items = payload
   },
   addItem(state, payload) {
+    console.log('addItem mutation')
     state.items.push(payload)
   },
   deleteItem(state, payload) {

@@ -1,6 +1,5 @@
 <template>
   <Draggable
-    :key="key"
     v-model.lazy="items"
     handle=".Dragger"
     ghost-class="Ghost"
@@ -40,6 +39,7 @@ import DragIcon from '@/assets/svg/new/drag.svg'
 import CloseIcon from '@/assets/svg/new/cross.svg'
 import Rte from '@/components/_Rte'
 import Task from '@/components/_Task'
+import isEqual from 'lodash.isequal'
 
 export default {
   components: {
@@ -50,46 +50,37 @@ export default {
     CloseIcon
   },
   props: {
-    id: {
-      type: String,
+    items: {
+      type: Array,
       required: true
     }
   },
   data() {
     return {
       isDragging: false,
-      key: 0
-    }
-  },
-  computed: {
-    items: {
-      get() {
-        return this.$store.getters.getItem(this.id).items
-      },
-      set(value) {
-        this.$store.dispatch('updateItemKeys', {
-          id: this.id,
-          items: value
-        })
-      }
+      itms: this.items
     }
   },
   watch: {
     items: function() {
-      this.key += 1
+      if (!isEqual(this.itms, this.items)) {
+        this.itms = this.items
+      }
     }
   },
   methods: {
     onItemUpdate(payload) {
-      const index = this.items.findIndex((item) => item.uuid === payload.uuid)
-      const items = this.items.slice()
+      const index = this.itms.findIndex((item) => item.uuid === payload.uuid)
+      const items = this.itms.slice()
       items[index].data = payload.data
-      this.items = items
+      this.itms = items
+      this.$emit('changed', this.itms)
     },
 
     onItemDelete(uuid) {
-      const index = this.items.findIndex((item) => item.uuid === uuid)
-      this.items.splice(index, 1)
+      const index = this.itms.findIndex((item) => item.uuid === uuid)
+      this.itms.splice(index, 1)
+      this.$emit('changed', this.itms)
     }
   }
 }
