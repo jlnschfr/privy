@@ -51,33 +51,13 @@ export default {
   addItem({ state, commit }, payload) {
     return new Promise((resolve) => {
       commit('addItem', payload)
+      commit('sortItems')
       resolve(payload.id)
 
       state.store
         .collection('items')
         .doc(payload.id)
         .set(payload)
-        .then(() => {})
-        .catch(() => {})
-    })
-  },
-
-  updateItemKeys({ state, commit }, payload) {
-    return new Promise((resolve) => {
-      const keys = Object.keys(payload).filter((key) => key !== 'id')
-      const item = state.items.find((item) => item.id === payload.id)
-
-      keys.forEach((key) => {
-        item[key] = payload[key]
-      })
-
-      commit('updateItem', item)
-      resolve()
-
-      state.store
-        .collection('items')
-        .doc(item.id)
-        .set(item)
         .then(() => {})
         .catch(() => {})
     })

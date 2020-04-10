@@ -8,7 +8,6 @@ export default {
     state.items = payload
   },
   addItem(state, payload) {
-    console.log('addItem mutation')
     state.items.push(payload)
   },
   deleteItem(state, payload) {
@@ -18,10 +17,6 @@ export default {
   updateItem(state, payload) {
     const index = state.items.findIndex((el) => el.id === payload.id)
     state.items[index] = payload
-  },
-  updateItemItems(state, payload) {
-    const index = state.items.findIndex((el) => el.id === payload.id)
-    state.items[index].items = payload.items
   },
   sortItems(state) {
     state.items.sort((a, b) => {

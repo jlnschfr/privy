@@ -2,6 +2,7 @@
   <vue-tags-input
     v-model.lazy="tag"
     :tags="tgs"
+    class="immune-for-enter"
     @tags-changed="(newTags) => (tgs = newTags)"
   />
 </template>

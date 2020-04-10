@@ -6,7 +6,11 @@
       <header
         class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
       >
-        <TitleTextarea ref="title" v-model.lazy="title" class="flex-auto" />
+        <TitleTextarea
+          ref="title"
+          v-model.lazy="title"
+          class="flex-auto immune-for-enter"
+        />
         <p class="flex-initial text-right">{{ dateString }}</p>
       </header>
 
@@ -98,15 +102,12 @@ export default {
 
   watch: {
     title: debounce(function() {
-      console.log('changed title')
       this.onChange()
     }, 500),
     items: debounce(function() {
-      console.log('changed items')
       this.onChange()
     }, 500),
     tags: debounce(function() {
-      console.log('tags changed')
       this.onChange()
     }, 500),
     data: function() {
@@ -116,12 +117,12 @@ export default {
       if (this.data.isFav && this.isFav !== this.data.isFav) {
         this.isFav = this.data.isFav
       }
-      if (!isEqual(this.items, this.data.items)) {
+      if (this.data.items && !isEqual(this.items, this.data.items)) {
         this.items = this.data.items
         this.key += 1
       }
-      if (!isEqual(this.tags, this.data.tags)) {
-        this.tags = this.data.tags || []
+      if (this.data.tags && !isEqual(this.tags, this.data.tags)) {
+        this.tags = this.data.tags
       }
     }
   },
@@ -130,7 +131,7 @@ export default {
     if (!this.title) {
       this.$refs.title.$el.focus()
     }
-    // window.addEventListener('keyup', this.handleKeyUp)
+    window.addEventListener('keyup', this.handleKeyUp)
   },
 
   beforeDestroy() {
@@ -138,7 +139,7 @@ export default {
   },
 
   methods: {
-    onChange(value) {
+    onChange() {
       if (this.id === '') {
         this.create()
       } else {
@@ -148,16 +149,13 @@ export default {
 
     create() {
       const data = this.collectData()
-      console.log('create')
       this.$store.dispatch('addItem', data).then((id) => {
-        console.log('change route')
         this.$router.push(`/note?id=${id}`)
       })
     },
 
     update() {
       const data = this.collectData()
-      console.log('update')
       this.$store.dispatch('updateItem', data).then(() => {})
     },
 
@@ -171,16 +169,20 @@ export default {
         tags: this.tags
       }
     },
+
     handleKeyUp(event) {
-      if (event.keyCode === 13 && event.shiftKey) {
-        this.createRte()
-      } else if (event.keyCode === 13) {
-        this.createTask()
+      if (!document.activeElement.closest('.immune-for-enter')) {
+        if (event.keyCode === 13 && event.shiftKey) {
+          this.createRte()
+        } else if (event.keyCode === 13) {
+          this.createTask()
+        }
       }
     },
     createRte() {
       const rte = {
         type: 'Rte',
+        isNew: true,
         uuid: uuid()
       }
 
@@ -190,15 +192,11 @@ export default {
     createTask() {
       const task = {
         type: 'Task',
+        isNew: true,
         uuid: uuid()
       }
 
       this.items.push(task)
-      // const items = this.$refs.items.$el
-
-      // setTimeout(() => {
-      //   items.lastChild.querySelector('input:not(.hidden').focus()
-      // }, 50)
     }
   }
 }

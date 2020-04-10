@@ -1,18 +1,19 @@
 <template>
   <Draggable
-    v-model.lazy="items"
+    v-model.lazy="itms"
     handle=".Dragger"
     ghost-class="Ghost"
     @start="isDragging = true"
     @end="isDragging = false"
   >
     <div
-      v-for="item in items"
+      v-for="item in itms"
       :key="item.uuid"
       class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
     >
       <component
         :is="item.type"
+        :class="`element-${item.uuid}`"
         :data="item.data"
         :uuid="item.uuid"
         :editable="!isDragging"
@@ -39,7 +40,6 @@ import DragIcon from '@/assets/svg/new/drag.svg'
 import CloseIcon from '@/assets/svg/new/cross.svg'
 import Rte from '@/components/_Rte'
 import Task from '@/components/_Task'
-import isEqual from 'lodash.isequal'
 
 export default {
   components: {
@@ -63,9 +63,7 @@ export default {
   },
   watch: {
     items: function() {
-      if (!isEqual(this.itms, this.items)) {
-        this.itms = this.items
-      }
+      // this.focusLastAddedItem()
     }
   },
   methods: {
@@ -81,6 +79,14 @@ export default {
       const index = this.itms.findIndex((item) => item.uuid === uuid)
       this.itms.splice(index, 1)
       this.$emit('changed', this.itms)
+    },
+
+    focusLastAddedItem() {
+      setTimeout(() => {
+        const item = this.itms.find((item) => item.isNew)
+        const el = document.querySelector(`.element-${item.uuid}`)
+        el.querySelector('input:not(.hidden').focus()
+      }, 50)
     }
   }
 }
