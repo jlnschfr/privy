@@ -1,5 +1,6 @@
 <template>
   <Draggable
+    :key="key"
     v-model.lazy="items"
     handle=".Dragger"
     ghost-class="Ghost"
@@ -56,8 +57,8 @@ export default {
   },
   data() {
     return {
-      tempItems: this.items || [],
-      isDragging: false
+      isDragging: false,
+      key: 0
     }
   },
   computed: {
@@ -66,13 +67,16 @@ export default {
         return this.$store.getters.getItem(this.id).items
       },
       set(value) {
-        // eslint-disable-next-line no-console
-        console.log(value)
-        this.$store.dispatch('updateItemItems', {
+        this.$store.dispatch('updateItemKeys', {
           id: this.id,
-          items: this.items
+          items: value
         })
       }
+    }
+  },
+  watch: {
+    items: function() {
+      this.key += 1
     }
   },
   methods: {

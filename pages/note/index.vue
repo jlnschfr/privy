@@ -1,14 +1,14 @@
 <template>
-  <PrivyDetailForm :id="id" :data="data" />
+  <PrivyNoteDetail :id="id" :data="data" />
 </template>
 
 <script>
-import PrivyDetailForm from '@/components/PrivyDetailForm'
+import PrivyNoteDetail from '@/components/PrivyNoteDetail'
 
 export default {
   transition: 'slide',
   components: {
-    PrivyDetailForm
+    PrivyNoteDetail
   },
 
   computed: {

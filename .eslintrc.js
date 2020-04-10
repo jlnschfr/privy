@@ -19,6 +19,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'object-shorthand': 0,
-    'no-unused-expressions': 0
+    'no-unused-expressions': 0,
+    'no-console': 0
   }
 }

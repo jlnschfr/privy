@@ -62,12 +62,18 @@ export default {
     })
   },
 
-  updateItemItems({ state, commit }, payload) {
+  updateItemKeys({ state, commit }, payload) {
     return new Promise((resolve) => {
-      commit('updateItemItems', payload)
+      const keys = Object.keys(payload).filter((key) => key !== 'id')
+      const item = state.items.find((item) => item.id === payload.id)
+
+      keys.forEach((key) => {
+        item[key] = payload[key]
+      })
+
+      commit('updateItem', item)
       resolve()
 
-      const item = state.items.find((item) => item.id === payload.id)
       state.store
         .collection('items')
         .doc(item.id)
