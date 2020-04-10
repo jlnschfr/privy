@@ -4,8 +4,6 @@
     name="staggered-transition"
     mode="out-in"
     @before-enter="beforeEnter"
-    @enter="enter"
-    @leave="leave"
   >
     <slot></slot>
   </transition-group>
@@ -15,33 +13,20 @@
 export default {
   methods: {
     beforeEnter: (el) => {
-      el.classList.add('staggered-transition')
-    },
-    enter: (el, done) => {
-      const delay = el.dataset.index * 100
-      setTimeout(() => {
-        el.classList.add('is-animating')
-      }, delay)
-    },
-    leave: (el, done) => {
-      const delay = el.dataset.index * 100
-      setTimeout(() => {
-        el.classList.remove('is-animating')
-      }, delay)
+      el.style.transitionDelay = `${el.dataset.index * 50}ms`
     }
   }
 }
 </script>
 
 <style>
-.staggered-transition {
-  transition: all 500ms ease;
+.staggered-transition-enter-active,
+.staggered-transition-leave-active {
+  transition: all 300ms ease;
+}
+.staggered-transition-enter,
+.staggered-transition-leave-to {
   opacity: 0;
   transform: translateY(-50px);
-}
-
-.staggered-transition.is-animating {
-  opacity: 1;
-  transform: translateY(0);
 }
 </style>

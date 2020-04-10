@@ -1,6 +1,6 @@
 <template>
   <Draggable
-    v-model.lazy="itms"
+    v-model="itms"
     handle=".Dragger"
     ghost-class="Ghost"
     @start="isDragging = true"
@@ -40,6 +40,7 @@ import DragIcon from '@/assets/svg/new/drag.svg'
 import CloseIcon from '@/assets/svg/new/cross.svg'
 import Rte from '@/components/_Rte'
 import Task from '@/components/_Task'
+import isEqual from 'lodash.isequal'
 
 export default {
   components: {
@@ -63,6 +64,9 @@ export default {
   },
   watch: {
     items: function() {
+      if (!isEqual(this.itms, this.items)) {
+        this.itms = this.items
+      }
       // this.focusLastAddedItem()
     }
   },

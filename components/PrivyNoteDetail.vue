@@ -8,7 +8,7 @@
       >
         <TitleTextarea
           ref="title"
-          v-model.lazy="title"
+          v-model="title"
           class="flex-auto immune-for-enter"
         />
         <p class="flex-initial text-right">{{ dateString }}</p>

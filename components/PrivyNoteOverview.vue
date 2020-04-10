@@ -42,6 +42,19 @@ export default {
     }
   },
 
+  data() {
+    return {
+      test: 0
+    }
+  },
+
+  watch: {
+    items: function() {
+      console.log('force update')
+      this.test += 1
+    }
+  },
+
   mounted() {
     this.keyHandler = debounce(this.addNote, 150)
     window.addEventListener('keyup', this.keyHandler)

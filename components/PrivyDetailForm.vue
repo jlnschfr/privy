@@ -6,7 +6,7 @@
       <header
         class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
       >
-        <TitleTextarea ref="title" v-model.lazy="title" class="flex-auto" />
+        <TitleTextarea ref="title" v-model="title" class="flex-auto" />
         <p class="flex-initial text-right">{{ dateString }}</p>
       </header>
 
@@ -18,7 +18,7 @@
     <footer>
       <aside class="p-4r xl:p-2r">
         <vue-tags-input
-          v-model.lazy="tag"
+          v-model="tag"
           :tags="tags"
           @tags-changed="(newTags) => (tags = newTags)"
         />

@@ -16,7 +16,7 @@ export default {
       return this.$route.query.tag ? this.$route.query.tag : ''
     },
     items() {
-      return this.$store.state.items ? this.$store.state.items : []
+      return this.$store.getters.getItems()
     },
     filteredItems() {
       return this.tag
