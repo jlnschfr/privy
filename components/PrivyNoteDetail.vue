@@ -17,11 +17,7 @@
 
     <footer>
       <aside class="p-4r xl:p-2r">
-        <vue-tags-input
-          v-model.lazy="tag"
-          :tags="tags"
-          @tags-changed="(newTags) => (tags = newTags)"
-        />
+        <Tags :tags="tags" @changed="tags = $event" />
       </aside>
       <div
         class="flex justify-between items-center p-4r xl:p-2r border-t border-pblue-light"
@@ -39,7 +35,7 @@
 </template>
 
 <script>
-import VueTagsInput from '@johmun/vue-tags-input'
+import Tags from '@/components/_Tags'
 import TitleTextarea from '@/components/_TitleTextarea'
 import Button from '@/components/_Button'
 import DraggableItems from '@/components/_DraggableItems'
@@ -53,7 +49,7 @@ export default {
     DraggableItems,
     Button,
     TitleTextarea,
-    VueTagsInput
+    Tags
   },
 
   props: {
@@ -75,7 +71,6 @@ export default {
       items: this.data.items || [],
       isFav: this.data.isFav || false,
       tags: this.data.tags || [],
-      tag: '',
       key: 0
     }
   },
@@ -110,9 +105,10 @@ export default {
       console.log('changed items')
       this.onChange()
     }, 500),
-    tags: function() {
-      // this.onChange()
-    },
+    tags: debounce(function() {
+      console.log('tags changed')
+      this.onChange()
+    }, 500),
     data: function() {
       if (this.data.title && this.title !== this.data.title) {
         this.title = this.data.title
@@ -120,13 +116,13 @@ export default {
       if (this.data.isFav && this.isFav !== this.data.isFav) {
         this.isFav = this.data.isFav
       }
-      if (this.data.items && !isEqual(this.items, this.data.items)) {
+      if (!isEqual(this.items, this.data.items)) {
         this.items = this.data.items
         this.key += 1
       }
-      // if (!isEqual(this.tags, this.data.tags)) {
-      //   this.tags = this.data.tags || []
-      // }
+      if (!isEqual(this.tags, this.data.tags)) {
+        this.tags = this.data.tags || []
+      }
     }
   },
 
@@ -134,7 +130,7 @@ export default {
     if (!this.title) {
       this.$refs.title.$el.focus()
     }
-    window.addEventListener('keyup', this.handleKeyUp)
+    // window.addEventListener('keyup', this.handleKeyUp)
   },
 
   beforeDestroy() {
@@ -207,33 +203,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.vue-tags-input.vue-tags-input {
-  max-width: none;
-}
-
-.vue-tags-input .ti-new-tag-input-wrapper {
-  font-size: inherit;
-}
-
-.vue-tags-input .ti-new-tag-input::placeholder {
-  color: theme('colors.pblue.light');
-}
-
-.vue-tags-input .ti-input {
-  border: none;
-  padding: 0;
-}
-
-.vue-tags-input .ti-tag {
-  margin: 4px;
-  font-size: inherit;
-  background-color: theme('colors.pblue.medium');
-  transition: background-color 300ms;
-}
-
-.vue-tags-input .ti-tag:hover {
-  background-color: theme('colors.porange.medium');
-}
-</style>
