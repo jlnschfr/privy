@@ -108,7 +108,7 @@ export default {
 
   enablePersistence() {
     return new Promise((resolve) => {
-      firestore.enablePersistence().then(() => {
+      firestore.enablePersistence({ synchronizeTabs: true }).then(() => {
         resolve()
       })
     })

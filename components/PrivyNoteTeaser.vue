@@ -17,9 +17,9 @@
       </p>
     </div>
     <div
-      class="p-4r xl:p-2r col-start-5 col-end-8 flex items-center justify-end text-white bg-pblue-medium relative"
+      class="p-4r xl:p-2r col-start-5 col-end-8 flex items-center justify-between text-white bg-pblue-medium relative"
     >
-      <p class="flex flex-col text-right mr-4r md:mr-2r">
+      <p class="flex flex-col text-right">
         <strong class="text-5xl leading-none">{{ tasks.length }}</strong
         >tasks
       </p>

@@ -1,5 +1,5 @@
 <template>
-  <main class="font-body">
+  <div class="font-body">
     <PrivyHeader :user="user" @toggleDrawer="showDrawer = !showDrawer" />
     <PrivyDrawer
       :is-active="showDrawer"
@@ -8,27 +8,31 @@
       @logout="logout"
       @toggleDrawer="showDrawer = !showDrawer"
     />
-    <div class="p-4r">
+    <main class="p-4r">
       <nuxt />
-    </div>
-  </main>
+    </main>
+    <PrivyAddButton :is-active="showButton" />
+  </div>
 </template>
 
 <script>
 import PrivyHeader from '@/components/PrivyHeader'
 import PrivyDrawer from '@/components/PrivyDrawer'
+import PrivyAddButton from '@/components/PrivyAddButton'
 import { auth } from '@/plugins/firebase.js'
 
 export default {
   components: {
     PrivyHeader,
-    PrivyDrawer
+    PrivyDrawer,
+    PrivyAddButton
   },
 
   data() {
     return {
       frequentUpdates: false,
-      showDrawer: false
+      showDrawer: false,
+      currentRoute: this.$router.currentRoute.name
     }
   },
 
@@ -38,6 +42,15 @@ export default {
     },
     items() {
       return this.$store.state.items ? this.$store.state.items : []
+    },
+    showButton() {
+      return this.currentRoute === 'notes'
+    }
+  },
+
+  watch: {
+    $route(to, from) {
+      this.currentRoute = to.name
     }
   },
 
@@ -60,7 +73,7 @@ export default {
         this.$store.dispatch('handleAuthChanged', user)
 
         if (this.$store.state.user) {
-          if (this.$router.currentRoute.name === 'index') {
+          if (this.currentRoute === 'index') {
             this.$router.push('/notes')
           }
           this.bindFrequentUpdates()
