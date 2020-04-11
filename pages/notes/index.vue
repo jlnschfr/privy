@@ -27,7 +27,11 @@ export default {
                 )
               : false
           )
-        : this.items
+        : this.items.filter((item) =>
+            item.tags
+              ? item.tags.every((tag) => tag.text.toLowerCase() !== 'trash')
+              : false
+          )
     }
   }
 }

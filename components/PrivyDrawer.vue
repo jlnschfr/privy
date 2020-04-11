@@ -10,7 +10,14 @@
           <ul class="flex justify-center">
             <li class="mr-2 text-pgray-medium">My Profile</li>
             <li>
-              <Button text="Logout" type="text" @click="$emit('logout')" />
+              <Button
+                text="Logout"
+                type="text"
+                @click="
+                  $emit('logout')
+                  $emit('toggleDrawer')
+                "
+              />
             </li>
           </ul>
         </header>

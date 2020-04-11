@@ -38,7 +38,7 @@ export default {
 
   computed: {
     user() {
-      return this.$store.state.user ? this.$store.state.user : {}
+      return this.$store.state.user
     },
     items() {
       return this.$store.state.items ? this.$store.state.items : []

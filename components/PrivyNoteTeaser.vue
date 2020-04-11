@@ -73,15 +73,18 @@ export default {
   },
 
   computed: {
-    dateString: function() {
+    dateString() {
       return createDateString(this.item.createdDate)
     },
-    tasks: function() {
+    tag() {
+      return this.$route.query.tag ? this.$route.query.tag : ''
+    },
+    tasks() {
       return this.item.items.filter((item) => {
         return item.type === 'Task'
       })
     },
-    done: function() {
+    done() {
       return this.tasks.filter((item) => {
         return item.data && item.data.state
       })
@@ -95,7 +98,12 @@ export default {
 
     remove(item) {
       if (this.isActiveForDelete) {
-        this.$store.dispatch('deleteItem', item)
+        if (this.tag === 'trash') {
+          this.$store.dispatch('deleteItem', item)
+        } else {
+          this.item.tags.push({ text: 'Trash' })
+          this.$store.dispatch('updateItem', this.item)
+        }
         this.isActiveForDelete = false
       } else {
         this.isActiveForDelete = true

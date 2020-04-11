@@ -28,8 +28,8 @@ export default {
   props: {
     user: {
       type: Object,
-      default: null,
-      required: false
+      required: false,
+      default: null
     }
   },
   data() {

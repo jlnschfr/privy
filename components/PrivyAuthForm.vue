@@ -9,7 +9,7 @@
     </header>
 
     <Input
-      placeholder="user"
+      placeholder="mail"
       type="email"
       class="mt-4"
       @focus="error = ''"
