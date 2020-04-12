@@ -88,6 +88,12 @@ export default {
       if (!this.frequentUpdates) {
         this.frequentUpdates = setInterval(() => {
           if (navigator.onLine) {
+            if (
+              document.activeElement.tagName.toUpperCase() === 'INPUT' ||
+              document.activeElement.closest('.ProseMirror')
+            ) {
+              return
+            }
             this.$store.dispatch('getItems')
           }
         }, 15000)
