@@ -3,13 +3,63 @@
     <transition name="slide-right">
       <aside
         v-if="isActive"
-        class="fixed top-0 right-0 z-50 bg-white h-full text-pblue-medium"
+        class="w-4/5 sm:min-w-drawer sm:w-auto fixed top-0 right-0 z-50 bg-white h-full text-pblue-medium flex flex-col justify-between"
       >
-        <header class="p-4r border-b border-pblue-light">
-          <p class="text-3xl">{{ user.email }}</p>
-          <ul class="flex justify-center">
-            <li class="mr-2 text-pgray-medium">My Profile</li>
-            <li>
+        <div class="">
+          <header class="p-6 border-b border-pblue-light text-center">
+            <p class="flex justify-center">
+              <PrivyIcon ref="svg" class="fill-blue w-4" />
+            </p>
+            <p class="text-2xl mt-2">{{ user.email }}</p>
+            <p>
+              <span class="mr-2">{{ items.length }} notes</span>
+              <span>{{ tasksAmount }} tasks</span>
+            </p>
+          </header>
+          <nav class="p-6 flex justify-center overflow-auto max-h-drawerNav">
+            <ul>
+              <li @click="$emit('toggleDrawer')">
+                <nuxt-link to="notes" class="flex items-center">
+                  <span
+                    class="mr-2 bg-pblue-dark text-white rounded-full h-3 w-3 flex items-center justify-center"
+                    >{{ getTagAmount() }}</span
+                  >All</nuxt-link
+                >
+              </li>
+
+              <li
+                v-for="(tag, key) in reducedTags"
+                :key="key"
+                class="mt-4"
+                @click="$emit('toggleDrawer')"
+              >
+                <nuxt-link :to="`notes?tag=${tag}`" class="flex items-center">
+                  <span
+                    class="mr-2 bg-pblue-dark text-white rounded-full h-3 w-3 flex items-center justify-center"
+                    >{{ getTagAmount(tag) }}</span
+                  >
+                  {{ tag }}
+                </nuxt-link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <footer>
+          <ul>
+            <li
+              class="px-6 py-3 border-t border-pblue-light flex items-center justify-center"
+              @click="$emit('toggleDrawer')"
+            >
+              <nuxt-link to="notes?tag=trash" class="flex items-center">
+                <span class="mr-2"
+                  ><TrashIcon class="mr-2 w-2 fill-current"/></span
+                >Trash</nuxt-link
+              >
+            </li>
+            <li
+              class="px-6 py-3 border-t border-pblue-light flex items-center justify-center"
+            >
+              <LogoutIcon class="mr-2 w-2 fill-current" />
               <Button
                 text="Logout"
                 type="text"
@@ -20,32 +70,7 @@
               />
             </li>
           </ul>
-        </header>
-        <nav class="p-4r flex justify-center">
-          <ul>
-            <li @click="$emit('toggleDrawer')">
-              <nuxt-link to="notes">All</nuxt-link>
-            </li>
-
-            <li
-              v-for="(tag, key) in tags"
-              :key="key"
-              class="mt-2r"
-              @click="$emit('toggleDrawer')"
-            >
-              <nuxt-link
-                :to="`notes?tag=${tag}`"
-                class="flex items-center justify-between"
-              >
-                {{ tag }}
-                <span
-                  class="ml-2 bg-pblue-dark text-white rounded-full h-3 w-3 flex items-center justify-center"
-                  >{{ getAmount(tag) }}</span
-                ></nuxt-link
-              >
-            </li>
-          </ul>
-        </nav>
+        </footer>
       </aside>
     </transition>
     <transition name="fade">
@@ -60,10 +85,16 @@
 
 <script>
 import Button from '@/components/_Button'
+import PrivyIcon from '@/assets/svg/privy.svg'
+import LogoutIcon from '@/assets/svg/logout.svg'
+import TrashIcon from '@/assets/svg/trash.svg'
 
 export default {
   components: {
-    Button
+    Button,
+    PrivyIcon,
+    LogoutIcon,
+    TrashIcon
   },
   props: {
     isActive: {
@@ -83,25 +114,44 @@ export default {
   },
 
   computed: {
-    availableTags() {
-      return this.items.flatMap((item) => item.tags).map((item) => item.text)
-    },
-
-    tags() {
-      return this.availableTags.filter(
-        (item, pos, arr) => arr.indexOf(item) === pos
+    itemsNotTrashed() {
+      return this.items.filter(
+        (item) => !item.tags.some((tag) => tag.text === 'Trash')
       )
+    },
+    tasksAmount() {
+      return this.itemsNotTrashed.reduce(
+        (acc, cur) =>
+          acc + cur.items.filter((item) => item.type === 'Task').length,
+        0
+      )
+    },
+    availableTags() {
+      return this.itemsNotTrashed
+        .flatMap((item) => item.tags)
+        .map((item) => item.text)
+    },
+    reducedTags() {
+      return this.availableTags
+        .filter((item, pos, arr) => arr.indexOf(item) === pos)
+        .sort()
     }
   },
 
   methods: {
-    getAmount(tag) {
-      return this.availableTags.filter((item) => item === tag).length
-    },
-    handleOutsideClick(event) {
-      // eslint-disable-next-line no-console
-      console.log(event)
+    getTagAmount(currentTag) {
+      if (currentTag) {
+        return this.availableTags.filter((item) => item === currentTag).length
+      } else {
+        return this.itemsNotTrashed.length
+      }
     }
   }
 }
 </script>
+
+<style>
+.fill-blue path {
+  fill: theme('colors.pblue.dark') !important;
+}
+</style>
