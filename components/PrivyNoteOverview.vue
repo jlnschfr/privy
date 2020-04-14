@@ -12,8 +12,11 @@
     </StaggeredTransition>
 
     <transition name="fade">
-      <div v-if="items.length === 0" class="absolute top-4r text-center w-full">
-        <h3 class="text-3xl">Whoopsie! I can't find any notes</h3>
+      <div
+        v-if="items.length === 0 && !isFetchingItems"
+        class="absolute top-4r text-center w-full"
+      >
+        <h3 class="text-3xl mt-4">Sorry! I can't find any notes</h3>
         <nuxt-link to="note">create a new note</nuxt-link> or
         <nuxt-link to="notes">reset your filter</nuxt-link>
       </div>
@@ -37,6 +40,12 @@ export default {
       type: Array,
       required: false,
       default: () => []
+    }
+  },
+
+  computed: {
+    isFetchingItems() {
+      return this.$store.state.isFetchingItems
     }
   },
 

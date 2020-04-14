@@ -8,7 +8,8 @@
       @logout="logout"
       @toggleDrawer="showDrawer = !showDrawer"
     />
-    <main class="p-4r">
+    <main class="p-4r relative">
+      <Spinner :is-active="isFetchingItems" />
       <nuxt />
     </main>
     <PrivyAddButton :is-active="showButton" />
@@ -19,13 +20,15 @@
 import PrivyHeader from '@/components/PrivyHeader'
 import PrivyDrawer from '@/components/PrivyDrawer'
 import PrivyAddButton from '@/components/PrivyAddButton'
+import Spinner from '@/components/_Spinner'
 import { auth } from '@/plugins/firebase.js'
 
 export default {
   components: {
     PrivyHeader,
     PrivyDrawer,
-    PrivyAddButton
+    PrivyAddButton,
+    Spinner
   },
 
   data() {
@@ -37,6 +40,9 @@ export default {
   },
 
   computed: {
+    isFetchingItems() {
+      return this.$store.state.isFetchingItems
+    },
     user() {
       return this.$store.state.user
     },

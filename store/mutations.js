@@ -6,6 +6,7 @@ export default {
   },
   setItems(state, payload) {
     state.items = payload
+    state.isFetchingItems = false
   },
   addItem(state, payload) {
     state.items.push(payload)
@@ -17,6 +18,9 @@ export default {
   updateItem(state, payload) {
     const index = state.items.findIndex((el) => el.id === payload.id)
     state.items[index] = payload
+  },
+  setIsFetchingItems(state) {
+    state.isFetchingItems = true
   },
   sortItems(state) {
     // TODO: Needs Refactoring

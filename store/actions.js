@@ -93,6 +93,8 @@ export default {
   },
 
   getItems({ state, commit }) {
+    commit('setIsFetchingItems')
+
     state.store
       .collection('items')
       .get()
