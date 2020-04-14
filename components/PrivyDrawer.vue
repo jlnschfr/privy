@@ -30,7 +30,7 @@
               <li
                 v-for="(tag, key) in reducedTags"
                 :key="key"
-                class="mt-4"
+                class="mt-4 last:mb-6"
                 @click="$emit('toggleDrawer')"
               >
                 <nuxt-link
