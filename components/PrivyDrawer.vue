@@ -58,9 +58,8 @@
               @click="$emit('toggleDrawer')"
             >
               <nuxt-link to="notes?tag=trash" class="flex items-center">
-                <span class="mr-2"
-                  ><TrashIcon class="mr-2 w-2 fill-current"/></span
-                >Trash</nuxt-link
+                <TrashIcon class="mr-2 w-2 fill-current" />
+                Trash</nuxt-link
               >
             </li>
             <li
