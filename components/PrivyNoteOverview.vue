@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <StaggeredTransition
-      class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4r xl:gap-2r pb-4r md:pb-0 items-center"
+      class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4r xl:gap-2r pb-4r md:pb-0 items-center mb-6"
     >
       <PrivyNoteTeaser
         v-for="(item, key) in items"
