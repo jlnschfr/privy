@@ -33,9 +33,16 @@
                 class="mt-4"
                 @click="$emit('toggleDrawer')"
               >
-                <nuxt-link :to="`notes?tag=${tag}`" class="flex items-center">
+                <nuxt-link
+                  :to="`notes?tag=${tag}`"
+                  class="flex items-center"
+                  :class="{ 'text-porange-dark': tag === currentTag }"
+                >
                   <span
                     class="mr-2 bg-pblue-dark text-white rounded-full h-3 w-3 flex items-center justify-center"
+                    :class="{
+                      'bg-porange-dark': tag === currentTag
+                    }"
                     >{{ getTagAmount(tag) }}</span
                   >
                   {{ tag }}
@@ -114,6 +121,9 @@ export default {
   },
 
   computed: {
+    currentTag() {
+      return this.$route.query.tag ? this.$route.query.tag : ''
+    },
     itemsNotTrashed() {
       return this.items.filter(
         (item) => !item.tags.some((tag) => tag.text === 'Trash')
