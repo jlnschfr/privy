@@ -11,7 +11,9 @@
         'text-pblue-medium': !item.isFav
       }"
     >
-      <h2 class="text-3xl lg:text-4xl leading-none w-full">{{ item.title }}</h2>
+      <h2 class="text-3xl lg:text-4xl leading-none w-full hyphens-auto">
+        {{ item.title }}
+      </h2>
       <p class="absolute bottom-2r left-4r xl:bottom-1r xl:left-2r">
         {{ dateString }}
       </p>
@@ -130,4 +132,8 @@ export default {
 /* .PrivyNoteTeaser:focus {
   outline: theme('colors.porange.dark') solid 0.5rem;
 } */
+
+.hyphens-auto {
+  hyphens: auto;
+}
 </style>
