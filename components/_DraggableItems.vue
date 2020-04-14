@@ -13,10 +13,11 @@
     >
       <component
         :is="item.type"
-        :class="`element-${item.uuid}`"
+        :data-uuid="item.uuid"
         :data="item.data"
         :uuid="item.uuid"
         :editable="!isDragging"
+        class="draggable-item"
         @update="onItemUpdate"
       ></component>
       <button
@@ -64,10 +65,11 @@ export default {
   },
   watch: {
     items: function() {
+      console.log('items changed')
       if (!isEqual(this.itms, this.items)) {
         this.itms = this.items
       }
-      // this.focusLastAddedItem()
+      this.focusLastAddedItem()
     }
   },
   methods: {
@@ -88,9 +90,20 @@ export default {
     focusLastAddedItem() {
       setTimeout(() => {
         const item = this.itms.find((item) => item.isNew)
-        const el = document.querySelector(`.element-${item.uuid}`)
-        el.querySelector('input:not(.hidden').focus()
-      }, 50)
+
+        if (item) {
+          const task = document
+            .querySelector(`[data-uuid='${item.uuid}']`)
+            .querySelector('input:not(.hidden)')
+
+          if (task) {
+            task.focus()
+          }
+
+          item.isNew = false
+          this.onItemUpdate(item)
+        }
+      }, 150)
     }
   }
 }

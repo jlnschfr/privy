@@ -171,11 +171,21 @@ export default {
     },
 
     handleKeyUp(event) {
-      if (!document.activeElement.closest('.immune-for-enter')) {
+      const focusEl = document.activeElement
+
+      if (focusEl && !focusEl.closest('.immune-for-enter')) {
         if (event.keyCode === 13 && event.shiftKey) {
           this.createRte()
         } else if (event.keyCode === 13) {
-          this.createTask()
+          const draggableItem = focusEl.closest('.draggable-item')
+
+          if (draggableItem) {
+            const uuid = draggableItem.dataset.uuid
+            const index = this.items.findIndex((item) => item.uuid === uuid)
+            this.createTask(index)
+          } else {
+            this.createTask()
+          }
         }
       }
     },
@@ -189,14 +199,18 @@ export default {
       this.items.push(rte)
     },
 
-    createTask() {
+    createTask(index) {
       const task = {
         type: 'Task',
         isNew: true,
         uuid: uuid()
       }
 
-      this.items.push(task)
+      if (!isNaN(index)) {
+        this.items.splice(index + 1, 0, task)
+      } else {
+        this.items.push(task)
+      }
     }
   }
 }

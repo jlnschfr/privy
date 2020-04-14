@@ -90,6 +90,7 @@ export default {
           if (navigator.onLine) {
             if (
               document.activeElement.tagName.toUpperCase() === 'INPUT' ||
+              document.activeElement.tagName.toUpperCase() === 'TEXTAREA' ||
               document.activeElement.closest('.ProseMirror')
             ) {
               return
