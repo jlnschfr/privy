@@ -5,6 +5,7 @@
     ghost-class="Ghost"
     @start="isDragging = true"
     @end="isDragging = false"
+    @change="onChange()"
   >
     <div
       v-for="item in itms"
@@ -65,7 +66,6 @@ export default {
   },
   watch: {
     items: function() {
-      console.log('items changed')
       if (!isEqual(this.itms, this.items)) {
         this.itms = this.items
       }
@@ -84,6 +84,10 @@ export default {
     onItemDelete(uuid) {
       const index = this.itms.findIndex((item) => item.uuid === uuid)
       this.itms.splice(index, 1)
+      this.$emit('changed', this.itms)
+    },
+
+    onChange() {
       this.$emit('changed', this.itms)
     },
 
