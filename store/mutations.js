@@ -19,12 +19,13 @@ export default {
     state.items[index] = payload
   },
   sortItems(state) {
+    // TODO: Needs Refactoring
     state.items.sort((a, b) => {
       if (a.isFav || b.isFav) {
         if (a.isFav && !b.isFav) {
           return -1
         } else if (a.isFav && b.isFav) {
-          return 0
+          return Date.parse(a.createdDate) >= Date.parse(b.createdDate) ? -1 : 1
         } else {
           return 1
         }
