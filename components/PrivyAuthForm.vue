@@ -1,7 +1,7 @@
 <template>
   <form
     ref="form"
-    class="max-w-md mx-auto mt-4r p-4r text-pblue-medium shadow-xl"
+    class="max-w-md mx-auto mt-4r p-4r text-pblue-medium shadow-xl bg-white"
     @submit.prevent="authenticate"
   >
     <header>

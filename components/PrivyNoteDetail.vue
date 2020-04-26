@@ -1,6 +1,6 @@
 <template>
   <section
-    class="max-w-2xl mx-auto shadow-xl text-pblue-medium min-h-detail flex flex-col justify-between"
+    class="max-w-2xl mx-auto shadow-xl text-pblue-medium min-h-detail flex flex-col justify-between bg-white"
   >
     <article>
       <header

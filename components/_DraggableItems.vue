@@ -89,10 +89,12 @@ export default {
   },
   computed: {
     uncheckedItems: function() {
-      return this.itms.filter((item) => !item.data.state)
+      return this.itms.filter((item) => !item.data || !item.data.state)
     },
     checkedItems: function() {
-      return this.itms.filter((item) => item.type === 'Task' && item.data.state)
+      return this.itms.filter(
+        (item) => item.data && item.data.state && item.type === 'Task'
+      )
     }
   },
   watch: {
@@ -131,8 +133,14 @@ export default {
             .querySelector(`[data-uuid='${item.uuid}']`)
             .querySelector('input:not(.hidden)')
 
+          const rte = document
+            .querySelector(`[data-uuid='${item.uuid}']`)
+            .querySelector('.ProseMirror')
+
           if (task) {
             task.focus()
+          } else if (rte) {
+            rte.focus()
           }
 
           item.isNew = false
