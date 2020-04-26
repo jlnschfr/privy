@@ -155,7 +155,7 @@ export default {
 <style>
 .Dragger {
   left: 0;
-  transform: translateX(-150%);
+  transform: translateX(-100%);
 }
 
 .DragIcon {
