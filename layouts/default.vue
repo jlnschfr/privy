@@ -35,7 +35,8 @@ export default {
     return {
       frequentUpdates: false,
       showDrawer: false,
-      currentRoute: this.$router.currentRoute.name
+      currentRoute: this.$router.currentRoute.name,
+      isIdle: false
     }
   },
 
@@ -64,6 +65,14 @@ export default {
     this.$store.dispatch('enablePersistence').then(() => {
       this.bindAuthChanged()
     })
+  },
+
+  onIdle() {
+    this.isIdle = true
+  },
+
+  onActive() {
+    this.isIdle = false
   },
 
   methods: {
@@ -95,6 +104,7 @@ export default {
         this.frequentUpdates = setInterval(() => {
           if (navigator.onLine) {
             if (
+              !this.isIdle ||
               document.activeElement.tagName.toUpperCase() === 'INPUT' ||
               document.activeElement.tagName.toUpperCase() === 'TEXTAREA' ||
               document.activeElement.closest('.ProseMirror')

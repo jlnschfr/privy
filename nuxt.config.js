@@ -43,7 +43,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/firebase' }],
+  plugins: [
+    { src: '~/plugins/firebase' },
+    { src: '@/plugins/idle-vue.js', mode: 'client' }
+  ],
   /*
    ** Nuxt.js modules
    */

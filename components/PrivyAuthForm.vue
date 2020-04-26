@@ -33,7 +33,7 @@
       @input="repeatedPassword = $event"
     />
 
-    <Button type="submit" visual="true" class="w-full mt-6">{{
+    <Button type="submit" visual class="w-full mt-6">{{
       !isLogin ? 'Register' : 'Login'
     }}</Button>
 
