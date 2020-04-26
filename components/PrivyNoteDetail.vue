@@ -30,8 +30,10 @@
           <span v-if="tasks.length">{{ donePercentage }}% done</span>
         </p>
         <nav>
-          <Button text="Add Text" type="text" class="mr-4" @click="createRte" />
-          <Button text="Add Task" type="text" @click="createTask" />
+          <Button type="button" class="mr-4" @click="createRte"
+            >Add Text</Button
+          >
+          <Button type="button" @click="createTask">Add Task</Button>
         </nav>
       </div>
     </footer>

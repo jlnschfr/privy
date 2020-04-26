@@ -19,11 +19,11 @@
           <nav class="p-6 flex justify-center overflow-auto max-h-drawerNav">
             <ul>
               <li @click="$emit('toggleDrawer')">
-                <nuxt-link to="notes" class="flex items-center">
-                  <span
+                <Button type="nuxt-link" to="notes" class="flex items-center"
+                  ><span
                     class="mr-2 bg-pblue-dark text-white rounded-full h-3 w-3 flex items-center justify-center"
                     >{{ getTagAmount() }}</span
-                  >All</nuxt-link
+                  >All</Button
                 >
               </li>
 
@@ -33,7 +33,8 @@
                 class="mt-4 last:mb-6"
                 @click="$emit('toggleDrawer')"
               >
-                <nuxt-link
+                <Button
+                  type="nuxt-link"
                   :to="`notes?tag=${tag}`"
                   class="flex items-center"
                   :class="{ 'text-porange-dark': tag === currentTag }"
@@ -44,9 +45,8 @@
                       'bg-porange-dark': tag === currentTag
                     }"
                     >{{ getTagAmount(tag) }}</span
-                  >
-                  {{ tag }}
-                </nuxt-link>
+                  >{{ tag }}
+                </Button>
               </li>
             </ul>
           </nav>
@@ -57,23 +57,27 @@
               class="px-6 py-3 border-t border-pblue-light flex items-center justify-center"
               @click="$emit('toggleDrawer')"
             >
-              <nuxt-link to="notes?tag=trash" class="flex items-center">
-                <TrashIcon class="mr-2 w-2 fill-current" />
-                Trash</nuxt-link
+              <Button
+                type="nuxt-link"
+                to="notes?tag=trash"
+                class="flex items-center"
               >
+                <TrashIcon class="mr-2 w-2 fill-current" /> Trash
+              </Button>
             </li>
             <li
               class="px-6 py-3 border-t border-pblue-light flex items-center justify-center"
             >
-              <LogoutIcon class="mr-2 w-2 fill-current" />
               <Button
-                text="Logout"
-                type="text"
+                type="button"
+                class="flex items-center"
                 @click="
                   $emit('logout')
                   $emit('toggleDrawer')
                 "
-              />
+              >
+                <LogoutIcon class="mr-2 w-2 fill-current" /> Logout
+              </Button>
             </li>
           </ul>
         </footer>

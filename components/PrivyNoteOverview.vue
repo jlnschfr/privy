@@ -17,8 +17,8 @@
         class="absolute top-4r text-center w-full"
       >
         <h3 class="text-3xl mt-4">Sorry! I can't find any notes</h3>
-        <nuxt-link to="note">create a new note</nuxt-link> or
-        <nuxt-link to="notes">reset your filter</nuxt-link>
+        <Button type="nuxt-link" to="note">create a new note</Button> or
+        <Button type="nuxt-link" to="notes">reset your filter</Button>
       </div>
     </transition>
   </div>
@@ -26,13 +26,15 @@
 
 <script>
 import PrivyNoteTeaser from '@/components/PrivyNoteTeaser'
+import Button from '@/components/_Button'
 import StaggeredTransition from '@/components/_StaggeredTransition'
 import debounce from 'lodash.debounce'
 
 export default {
   components: {
     PrivyNoteTeaser,
-    StaggeredTransition
+    StaggeredTransition,
+    Button
   },
 
   props: {

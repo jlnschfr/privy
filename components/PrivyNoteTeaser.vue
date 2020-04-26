@@ -29,25 +29,25 @@
         <strong class="text-5xl leading-none">{{ done.length }}</strong
         >done
       </p>
-      <button
+      <Button
+        type="button"
         :class="{
           'text-porange-medium': item.isFav
         }"
-        class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-100 lg:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300"
-        @click.stop="updateFavState(item)"
+        class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-100 lg:opacity-0 group-hover:opacity-100 focus:opacity-100"
+        @click="updateFavState(item)"
+        @click.native.stop=""
       >
-        <FavIcon class="fill-current w-3" />
-      </button>
-      <button
-        :class="{
-          'border-porange-dark': isActiveForDelete,
-          'border-pblue-medium': !isActiveForDelete
-        }"
-        class="absolute bottom-2r right-4r xl:bottom-1r xl:right-2r border-b-2 border-solid transition-border duration-300 hover:border-porange-light"
-        @click.stop="remove(item)"
+        <FavIcon class="fill-current w-3"
+      /></Button>
+      <Button
+        type="button"
+        class="absolute bottom-2r right-4r xl:bottom-1r xl:right-2r"
+        :is-animating="isActiveForDelete"
+        @click="remove(item)"
+        @click.native.stop=""
+        >Delete</Button
       >
-        Delete
-      </button>
     </div>
   </article>
 </template>
@@ -55,10 +55,12 @@
 <script>
 import FavIcon from '@/assets/svg/new/heart.svg'
 import { createDateString } from '@/utils/date'
+import Button from '@/components/_Button'
 
 export default {
   components: {
-    FavIcon
+    FavIcon,
+    Button
   },
 
   props: {

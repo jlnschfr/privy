@@ -33,23 +33,17 @@
       @input="repeatedPassword = $event"
     />
 
-    <Button
-      type="button"
-      :text="!isLogin ? 'Register' : 'Login'"
-      class="w-full mt-6"
-    />
+    <Button type="submit" visual="true" class="w-full mt-6">{{
+      !isLogin ? 'Register' : 'Login'
+    }}</Button>
 
     <p class="mt-4 text-pblue-medium text-center">
       <span
-        v-text="
-          !isLogin ? 'Already got an account?' : 'Doesnt have an account?'
-        "
+        v-text="!isLogin ? 'Already got an account?' : 'Dont have an account?'"
       ></span>
-      <span
-        class="underline"
-        @click="isLogin = !isLogin"
-        v-text="!isLogin ? 'Login' : 'Register'"
-      ></span>
+      <Button type="button" @click="isLogin = !isLogin">{{
+        isLogin ? 'Register' : 'Login'
+      }}</Button>
     </p>
     <p class="mt-4 text-sm text-porange-dark text-center">{{ error }}</p>
   </form>
