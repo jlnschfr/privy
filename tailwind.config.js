@@ -15,7 +15,8 @@ module.exports = {
           light: '#f7fafc',
           medium: '#e2e8f0',
           dark: '#a0aec0',
-          drawer: 'rgba(9, 84, 249, 0.85)'
+          drawer: 'rgba(9, 84, 249, 0.85)',
+          background: '#fbf4f5'
         },
         pblue: {
           light: '#AED0FF',

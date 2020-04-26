@@ -1,6 +1,6 @@
 <template>
   <article
-    class="PrivyNoteTeaser group cursor-pointer min-h-notes grid grid-cols-7 shadow-lg"
+    class="PrivyNoteTeaser group cursor-pointer min-h-notes grid grid-cols-7 shadow-lg bg-white"
     tabindex="0"
     @click="open(item.id)"
   >

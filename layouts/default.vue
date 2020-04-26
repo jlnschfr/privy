@@ -1,5 +1,5 @@
 <template>
-  <div class="font-body">
+  <div class="font-body bg-pgray-background min-h-screen">
     <PrivyHeader :user="user" @toggleDrawer="showDrawer = !showDrawer" />
     <PrivyDrawer
       :is-active="showDrawer"
