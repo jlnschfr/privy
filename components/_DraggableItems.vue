@@ -5,7 +5,7 @@
       handle=".Dragger"
       ghost-class="Ghost"
       animation="150"
-      @start="isDragging = true"
+      @start="onStart"
       @end="isDragging = false"
       @change="onChange()"
     >
@@ -119,6 +119,11 @@ export default {
       const index = this.itms.findIndex((item) => item.uuid === uuid)
       this.itms.splice(index, 1)
       this.$emit('changed', this.itms)
+    },
+
+    onStart() {
+      this.isDragging = true
+      window.navigator.vibrate(200)
     },
 
     onChange() {
