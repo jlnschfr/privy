@@ -23,12 +23,12 @@
           @update="onItemUpdate"
         ></component>
         <button
-          class="Dragger absolute inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          class="Dragger absolute flex justify-center w-3 inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         >
           <DragIcon class="DragIcon fill-current" />
         </button>
         <button
-          class="Close absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          class="Close absolute flex justify-center w-3 inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           @click="onItemDelete(item.uuid)"
         >
           <CloseIcon class="CloseIcon fill-current" />
@@ -50,7 +50,7 @@
         @update="onItemUpdate"
       ></component>
       <button
-        class="Close absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        class="Close absolute flex justify-center w-3 inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         @click="onItemDelete(item.uuid)"
       >
         <CloseIcon class="CloseIcon fill-current" />
