@@ -1,14 +1,42 @@
 <template>
-  <Draggable
-    v-model="itms"
-    handle=".Dragger"
-    ghost-class="Ghost"
-    @start="isDragging = true"
-    @end="isDragging = false"
-    @change="onChange()"
-  >
+  <div>
+    <Draggable
+      v-model="itms"
+      handle=".Dragger"
+      ghost-class="Ghost"
+      @start="isDragging = true"
+      @end="isDragging = false"
+      @change="onChange()"
+    >
+      <div
+        v-for="item in uncheckedItems"
+        :key="item.uuid"
+        class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
+      >
+        <component
+          :is="item.type"
+          :data-uuid="item.uuid"
+          :data="item.data"
+          :uuid="item.uuid"
+          :editable="!isDragging"
+          class="draggable-item"
+          @update="onItemUpdate"
+        ></component>
+        <button
+          class="Dragger absolute inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <DragIcon class="DragIcon fill-current" />
+        </button>
+        <button
+          class="Close absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          @click="onItemDelete(item.uuid)"
+        >
+          <CloseIcon class="CloseIcon fill-current" />
+        </button>
+      </div>
+    </Draggable>
     <div
-      v-for="item in itms"
+      v-for="item in checkedItems"
       :key="item.uuid"
       class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
     >
@@ -22,18 +50,13 @@
         @update="onItemUpdate"
       ></component>
       <button
-        class="Dragger absolute inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      >
-        <DragIcon class="DragIcon fill-current" />
-      </button>
-      <button
         class="Close absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         @click="onItemDelete(item.uuid)"
       >
         <CloseIcon class="CloseIcon fill-current" />
       </button>
     </div>
-  </Draggable>
+  </div>
 </template>
 
 <script>
@@ -62,6 +85,14 @@ export default {
     return {
       isDragging: false,
       itms: this.items
+    }
+  },
+  computed: {
+    uncheckedItems: function() {
+      return this.itms.filter((item) => !item.data.state)
+    },
+    checkedItems: function() {
+      return this.itms.filter((item) => item.type === 'Task' && item.data.state)
     }
   },
   watch: {
