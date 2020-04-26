@@ -123,7 +123,7 @@ export default {
 
     onStart() {
       this.isDragging = true
-      window.navigator.vibrate(50)
+      window.navigator.vibrate(10)
     },
 
     onChange() {
