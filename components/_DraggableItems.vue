@@ -4,6 +4,7 @@
       v-model="itms"
       handle=".Dragger"
       ghost-class="Ghost"
+      animation="150"
       @start="isDragging = true"
       @end="isDragging = false"
       @change="onChange()"
