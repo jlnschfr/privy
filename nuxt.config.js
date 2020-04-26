@@ -52,6 +52,12 @@ export default {
    */
   modules: ['nuxt-svg-loader', '@nuxtjs/pwa'],
 
+  pwa: {
+    meta: {
+      theme_color: '#0954F9'
+    }
+  },
+
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/stylelint-module',
