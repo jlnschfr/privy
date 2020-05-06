@@ -40,8 +40,14 @@ export default {
 
   computed: {
     homeLink() {
-      const tag = this.$store.getters.getCurrentTag()
-      return tag ? `/notes?tag=${tag}` : `/notes`
+      const currentTag = this.$store.getters.getCurrentTag()
+      const route = this.$route.name
+
+      if (route === 'notes' || !currentTag) {
+        return `/notes`
+      } else {
+        return `/notes?tag=${currentTag}`
+      }
     }
   },
 
