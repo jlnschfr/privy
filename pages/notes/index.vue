@@ -39,6 +39,12 @@ export default {
     }
   },
 
+  watch: {
+    tag() {
+      this.$store.dispatch('setCurrentTag', this.tag)
+    }
+  },
+
   methods: {
     getNotesNotTrashedFromTag(currentTag) {
       return this.notesNotTrashed.filter((note) =>

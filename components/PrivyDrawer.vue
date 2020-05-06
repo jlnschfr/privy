@@ -125,7 +125,7 @@ export default {
 
   computed: {
     currentTag() {
-      return this.$route.query.tag ? this.$route.query.tag : ''
+      return this.$store.getters.getCurrentTag()
     },
     notesNotTrashed() {
       return this.notes.filter(

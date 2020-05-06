@@ -114,5 +114,9 @@ export default {
         resolve()
       })
     })
+  },
+
+  setCurrentTag({ commit }, payload) {
+    commit('setCurrentTag', payload)
   }
 }

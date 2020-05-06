@@ -22,6 +22,9 @@ export default {
   setIsFetchingNotes(state) {
     state.isFetchingNotes = true
   },
+  setCurrentTag(state, payload) {
+    state.currentTag = payload
+  },
   sortNotes(state) {
     // TODO: Needs Refactoring
     state.notes.sort((a, b) => {

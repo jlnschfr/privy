@@ -8,5 +8,10 @@ export default {
   getNotes: (state) => () => {
     if (!state.notes) return []
     return state.notes
+  },
+
+  getCurrentTag: (state) => () => {
+    if (!state.currentTag) return ''
+    return state.currentTag
   }
 }

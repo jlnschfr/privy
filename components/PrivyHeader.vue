@@ -1,7 +1,7 @@
 <template>
   <header class="flex justify-between bg-pblue-medium items-center px-4r py-2">
     <h1 aria-label="Privy Notes">
-      <nuxt-link to="/notes">
+      <nuxt-link :to="homeLink">
         <PrivyIcon ref="svg" class="PrivyIcon w-4"
       /></nuxt-link>
     </h1>
@@ -35,6 +35,13 @@ export default {
   data() {
     return {
       paths: []
+    }
+  },
+
+  computed: {
+    homeLink() {
+      const tag = this.$store.getters.getCurrentTag()
+      return tag ? `/notes?tag=${tag}` : `/notes`
     }
   },
 
