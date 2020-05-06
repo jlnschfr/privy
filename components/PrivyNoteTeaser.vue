@@ -2,17 +2,17 @@
   <article
     class="PrivyNoteTeaser group cursor-pointer min-h-notes grid grid-cols-7 shadow-lg bg-white"
     tabindex="0"
-    @click="open(item.id)"
+    @click="open(note.id)"
   >
     <div
       class="p-4r xl:p-2r col-start-1 col-end-5 flex items-center relative"
       :class="{
-        'bg-pblue-dark text-white': item.isFav,
-        'text-pblue-medium': !item.isFav
+        'bg-pblue-dark text-white': note.isFav,
+        'text-pblue-medium': !note.isFav
       }"
     >
       <h2 class="text-3xl lg:text-4xl leading-none w-full hyphens-auto">
-        {{ item.title }}
+        {{ note.title }}
       </h2>
       <p class="absolute bottom-2r left-4r xl:bottom-1r xl:left-2r">
         {{ dateString }}
@@ -32,10 +32,10 @@
       <Button
         type="button"
         :class="{
-          'text-porange-medium': item.isFav
+          'text-porange-medium': note.isFav
         }"
         class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-100 lg:opacity-0 group-hover:opacity-100 focus:opacity-100"
-        @click="updateFavState(item)"
+        @click="updateFavState(note)"
         @click.native.stop=""
       >
         <FavIcon class="fill-current w-3"
@@ -44,7 +44,7 @@
         type="button"
         class="absolute bottom-2r right-4r xl:bottom-1r xl:right-2r"
         :is-animating="isActiveForDelete"
-        @click="remove(item)"
+        @click="remove(note)"
         @click.native.stop=""
         >Delete</Button
       >
@@ -64,7 +64,7 @@ export default {
   },
 
   props: {
-    item: {
+    note: {
       type: Object,
       required: true
     }
@@ -78,13 +78,13 @@ export default {
 
   computed: {
     dateString() {
-      return createDateString(this.item.createdDate)
+      return createDateString(this.note.createdDate)
     },
     tag() {
       return this.$route.query.tag ? this.$route.query.tag : ''
     },
     tasks() {
-      return this.item.items.filter((item) => {
+      return this.note.items.filter((item) => {
         return item.type === 'Task'
       })
     },
@@ -100,13 +100,13 @@ export default {
       this.$router.push(`/note?id=${id}`)
     },
 
-    remove(item) {
+    remove(note) {
       if (this.isActiveForDelete) {
         if (this.tag === 'trash') {
-          this.$store.dispatch('deleteItem', item)
+          this.$store.dispatch('deleteNote', note)
         } else {
-          this.item.tags.push({ text: 'Trash' })
-          this.$store.dispatch('updateItem', this.item)
+          this.note.tags.push({ text: 'Trash' })
+          this.$store.dispatch('updateNote', this.note)
         }
         this.isActiveForDelete = false
       } else {
@@ -117,14 +117,14 @@ export default {
       }
     },
 
-    updateFavState(item) {
+    updateFavState(note) {
       const data = {
-        ...item,
-        isFav: !this.item.isFav
+        ...note,
+        isFav: !this.note.isFav
       }
 
       data.createdDate = new Date().toISOString()
-      this.$store.dispatch('updateItem', data)
+      this.$store.dispatch('updateNote', data)
     }
   }
 }

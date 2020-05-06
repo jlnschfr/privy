@@ -4,16 +4,16 @@
       class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4r xl:gap-2r pb-4r md:pb-0 items-center mb-6"
     >
       <PrivyNoteTeaser
-        v-for="(item, key) in items"
+        v-for="(note, key) in notes"
         :key="key"
-        :item="item"
+        :note="note"
         :data-index="key"
       />
     </StaggeredTransition>
 
     <transition name="fade">
       <div
-        v-if="items.length === 0 && !isFetchingItems"
+        v-if="notes.length === 0 && !isFetchingNotes"
         class="absolute top-4r text-center w-full"
       >
         <h3 class="text-3xl mt-4">Sorry! I can't find any notes</h3>
@@ -38,7 +38,7 @@ export default {
   },
 
   props: {
-    items: {
+    notes: {
       type: Array,
       required: false,
       default: () => []
@@ -46,8 +46,8 @@ export default {
   },
 
   computed: {
-    isFetchingItems() {
-      return this.$store.state.isFetchingItems
+    isFetchingNotes() {
+      return this.$store.state.isFetchingNotes
     }
   },
 

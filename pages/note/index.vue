@@ -16,7 +16,7 @@ export default {
       return this.$route.query.id
     },
     data() {
-      return this.$store.getters.getItem(this.id)
+      return this.$store.getters.getNote(this.id)
     }
   }
 }

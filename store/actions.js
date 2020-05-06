@@ -34,7 +34,7 @@ export default {
       .signOut()
       .then(() => {
         state.user = null
-        state.items = null
+        state.notes = null
         state.store = null
       })
       .catch()
@@ -44,18 +44,18 @@ export default {
     commit('setUser', user)
     if (user) {
       commit('setStore', user.uid)
-      dispatch('getItems')
+      dispatch('getNotes')
     }
   },
 
-  addItem({ state, commit }, payload) {
+  addNote({ state, commit }, payload) {
     return new Promise((resolve) => {
-      commit('addItem', payload)
-      commit('sortItems')
+      commit('addNote', payload)
+      commit('sortNotes')
       resolve(payload.id)
 
       state.store
-        .collection('items')
+        .collection('notes')
         .doc(payload.id)
         .set(payload)
         .then(() => {})
@@ -63,14 +63,14 @@ export default {
     })
   },
 
-  updateItem({ state, commit }, payload) {
+  updateNote({ state, commit }, payload) {
     return new Promise((resolve) => {
-      commit('updateItem', payload)
-      commit('sortItems')
+      commit('updateNote', payload)
+      commit('sortNotes')
       resolve()
 
       state.store
-        .collection('items')
+        .collection('notes')
         .doc(payload.id)
         .set(payload)
         .then(() => {})
@@ -78,13 +78,13 @@ export default {
     })
   },
 
-  deleteItem({ state, commit }, payload) {
+  deleteNote({ state, commit }, payload) {
     return new Promise((resolve) => {
-      commit('deleteItem', payload)
+      commit('deleteNote', payload)
       resolve()
 
       state.store
-        .collection('items')
+        .collection('notes')
         .doc(payload.id)
         .delete()
         .then(() => {})
@@ -92,19 +92,19 @@ export default {
     })
   },
 
-  getItems({ state, commit }) {
-    commit('setIsFetchingItems')
+  getNotes({ state, commit }) {
+    commit('setIsFetchingNotes')
 
     state.store
-      .collection('items')
+      .collection('notes')
       .get()
       .then((querySnapshot) => {
-        const items = []
+        const notes = []
         querySnapshot.forEach((doc) => {
-          items.push({ id: doc.id, ...doc.data() })
+          notes.push({ id: doc.id, ...doc.data() })
         })
-        commit('setItems', items)
-        commit('sortItems')
+        commit('setNotes', notes)
+        commit('sortNotes')
       })
   },
 

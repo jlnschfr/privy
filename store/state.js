@@ -1,6 +1,6 @@
 export default () => ({
   user: null,
-  items: null,
+  notes: null,
   store: null,
-  isFetchingItems: false
+  isFetchingNotes: false
 })

@@ -10,7 +10,7 @@
       @change="onChange()"
     >
       <div
-        v-for="item in uncheckedItems"
+        v-for="item in itms"
         :key="item.uuid"
         class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
       >
@@ -36,27 +36,6 @@
         </button>
       </div>
     </Draggable>
-    <div
-      v-for="item in checkedItems"
-      :key="item.uuid"
-      class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
-    >
-      <component
-        :is="item.type"
-        :data-uuid="item.uuid"
-        :data="item.data"
-        :uuid="item.uuid"
-        :editable="!isDragging"
-        class="draggable-item"
-        @update="onItemUpdate"
-      ></component>
-      <button
-        class="Close absolute flex justify-center w-3 inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        @click="onItemDelete(item.uuid)"
-      >
-        <CloseIcon class="CloseIcon fill-current" />
-      </button>
-    </div>
   </div>
 </template>
 
@@ -88,16 +67,6 @@ export default {
       itms: this.items
     }
   },
-  computed: {
-    uncheckedItems: function() {
-      return this.itms.filter((item) => !item.data || !item.data.state)
-    },
-    checkedItems: function() {
-      return this.itms.filter(
-        (item) => item.data && item.data.state && item.type === 'Task'
-      )
-    }
-  },
   watch: {
     items: function() {
       if (!isEqual(this.itms, this.items)) {
@@ -106,12 +75,30 @@ export default {
       this.focusLastAddedItem()
     }
   },
+
   methods: {
+    sortItems(items) {
+      const itms = [...items]
+
+      return itms.sort((a, b) => {
+        if (a.data.state && !b.data.state) {
+          return 1
+        } else if (
+          (a.data.state && b.data.state) ||
+          (!a.data.state && !b.data.state)
+        ) {
+          return 0
+        } else if (!a.data.state && b.data.state) {
+          return -1
+        }
+      })
+    },
+
     onItemUpdate(payload) {
       const index = this.itms.findIndex((item) => item.uuid === payload.uuid)
       const items = this.itms.slice()
       items[index].data = payload.data
-      this.itms = items
+      this.itms = this.sortItems(items)
       this.$emit('changed', this.itms)
     },
 

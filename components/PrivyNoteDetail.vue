@@ -30,9 +30,9 @@
           <span v-if="tasks.length">{{ donePercentage }}% done</span>
         </p>
         <nav>
-          <Button type="button" class="mr-4" @click="createRte"
-            >Add Text</Button
-          >
+          <Button type="button" class="mr-4" @click="createRte">
+            Add Text
+          </Button>
           <Button type="button" @click="createTask">Add Task</Button>
         </nav>
       </div>
@@ -151,14 +151,14 @@ export default {
 
     create() {
       const data = this.collectData()
-      this.$store.dispatch('addItem', data).then((id) => {
+      this.$store.dispatch('addNote', data).then((id) => {
         this.$router.push(`/note?id=${id}`)
       })
     },
 
     update() {
       const data = this.collectData()
-      this.$store.dispatch('updateItem', data).then(() => {})
+      this.$store.dispatch('updateNote', data).then(() => {})
     },
 
     collectData(options) {

@@ -1,12 +1,12 @@
 export default {
-  getItem: (state) => (id) => {
-    if (!state.items) return {}
-    const data = state.items.find((item) => item.id === id)
+  getNote: (state) => (id) => {
+    if (!state.notes) return {}
+    const data = state.notes.find((note) => note.id === id)
     return data || {}
   },
 
-  getItems: (state) => () => {
-    if (!state.items) return []
-    return state.items
+  getNotes: (state) => () => {
+    if (!state.notes) return []
+    return state.notes
   }
 }

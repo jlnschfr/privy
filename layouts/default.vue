@@ -4,12 +4,12 @@
     <PrivyDrawer
       :is-active="showDrawer"
       :user="user"
-      :items="items"
+      :notes="notes"
       @logout="logout"
       @toggleDrawer="showDrawer = !showDrawer"
     />
     <main class="p-4r relative">
-      <Spinner :is-active="isFetchingItems" />
+      <Spinner :is-active="isFetchingNotes" />
       <nuxt />
     </main>
     <PrivyAddButton :is-active="showButton" />
@@ -41,14 +41,14 @@ export default {
   },
 
   computed: {
-    isFetchingItems() {
-      return this.$store.state.isFetchingItems
+    isFetchingNotes() {
+      return this.$store.state.isFetchingNotes
     },
     user() {
       return this.$store.state.user
     },
-    items() {
-      return this.$store.state.items ? this.$store.state.items : []
+    notes() {
+      return this.$store.getters.getNotes()
     },
     showButton() {
       return this.currentRoute === 'notes'
@@ -111,7 +111,7 @@ export default {
             ) {
               return
             }
-            this.$store.dispatch('getItems')
+            this.$store.dispatch('getNotes')
           }
         }, 15000)
       }

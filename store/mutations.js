@@ -4,27 +4,27 @@ export default {
   setUser(state, payload) {
     state.user = payload
   },
-  setItems(state, payload) {
-    state.items = payload
-    state.isFetchingItems = false
+  setNotes(state, payload) {
+    state.notes = payload
+    state.isFetchingNotes = false
   },
-  addItem(state, payload) {
-    state.items.push(payload)
+  addNote(state, payload) {
+    state.notes.push(payload)
   },
-  deleteItem(state, payload) {
-    const index = state.items.findIndex((el) => el.id === payload.id)
-    state.items.splice(index, 1)
+  deleteNote(state, payload) {
+    const index = state.notes.findIndex((note) => note.id === payload.id)
+    state.notes.splice(index, 1)
   },
-  updateItem(state, payload) {
-    const index = state.items.findIndex((el) => el.id === payload.id)
-    state.items[index] = payload
+  updateNote(state, payload) {
+    const index = state.notes.findIndex((note) => note.id === payload.id)
+    state.notes[index] = payload
   },
-  setIsFetchingItems(state) {
-    state.isFetchingItems = true
+  setIsFetchingNotes(state) {
+    state.isFetchingNotes = true
   },
-  sortItems(state) {
+  sortNotes(state) {
     // TODO: Needs Refactoring
-    state.items.sort((a, b) => {
+    state.notes.sort((a, b) => {
       if (a.isFav || b.isFav) {
         if (a.isFav && !b.isFav) {
           return -1

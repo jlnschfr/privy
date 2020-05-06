@@ -1,5 +1,5 @@
 <template>
-  <PrivyNoteOverview :items="filteredItems" />
+  <PrivyNoteOverview :notes="filteredNotes" />
 </template>
 
 <script>
@@ -15,34 +15,34 @@ export default {
     tag() {
       return this.$route.query.tag ? this.$route.query.tag : ''
     },
-    items() {
-      return this.$store.getters.getItems()
+    notes() {
+      return this.$store.getters.getNotes()
     },
-    itemsNotTrashed() {
-      return this.items.filter(
-        (item) => !item.tags.some((tag) => tag.text === 'Trash')
+    notesNotTrashed() {
+      return this.notes.filter(
+        (note) => !note.tags.some((tag) => tag.text === 'Trash')
       )
     },
-    itemsTrashed() {
-      return this.items.filter((item) =>
-        item.tags.some((tag) => tag.text === 'Trash')
+    notesTrashed() {
+      return this.notes.filter((note) =>
+        note.tags.some((tag) => tag.text === 'Trash')
       )
     },
-    filteredItems() {
+    filteredNotes() {
       if (this.tag === 'trash') {
-        return this.itemsTrashed
+        return this.notesTrashed
       } else if (this.tag) {
-        return this.getItemsNotTrashedFromTag(this.tag)
+        return this.getNotesNotTrashedFromTag(this.tag)
       } else {
-        return this.itemsNotTrashed
+        return this.notesNotTrashed
       }
     }
   },
 
   methods: {
-    getItemsNotTrashedFromTag(currentTag) {
-      return this.itemsNotTrashed.filter((item) =>
-        item.tags.some(
+    getNotesNotTrashedFromTag(currentTag) {
+      return this.notesNotTrashed.filter((note) =>
+        note.tags.some(
           (tag) => tag.text.toLowerCase() === currentTag.toLowerCase()
         )
       )

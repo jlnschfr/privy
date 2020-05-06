@@ -12,7 +12,7 @@
             </p>
             <p class="text-2xl mt-2">{{ user.email }}</p>
             <p>
-              <span class="mr-2">{{ items.length }} notes</span>
+              <span class="mr-2">{{ notes.length }} notes</span>
               <span>{{ tasksAmount }} tasks</span>
             </p>
           </header>
@@ -116,7 +116,7 @@ export default {
       required: false,
       default: () => {}
     },
-    items: {
+    notes: {
       type: Array,
       required: false,
       default: () => []
@@ -127,26 +127,26 @@ export default {
     currentTag() {
       return this.$route.query.tag ? this.$route.query.tag : ''
     },
-    itemsNotTrashed() {
-      return this.items.filter(
-        (item) => !item.tags.some((tag) => tag.text === 'Trash')
+    notesNotTrashed() {
+      return this.notes.filter(
+        (note) => !note.tags.some((tag) => tag.text === 'Trash')
       )
     },
     tasksAmount() {
-      return this.itemsNotTrashed.reduce(
+      return this.notesNotTrashed.reduce(
         (acc, cur) =>
           acc + cur.items.filter((item) => item.type === 'Task').length,
         0
       )
     },
     availableTags() {
-      return this.itemsNotTrashed
-        .flatMap((item) => item.tags)
-        .map((item) => item.text)
+      return this.notesNotTrashed
+        .flatMap((note) => note.tags)
+        .map((note) => note.text)
     },
     reducedTags() {
       return this.availableTags
-        .filter((item, pos, arr) => arr.indexOf(item) === pos)
+        .filter((note, pos, arr) => arr.indexOf(note) === pos)
         .sort()
     }
   },
@@ -154,9 +154,9 @@ export default {
   methods: {
     getTagAmount(currentTag) {
       if (currentTag) {
-        return this.availableTags.filter((item) => item === currentTag).length
+        return this.availableTags.filter((note) => note === currentTag).length
       } else {
-        return this.itemsNotTrashed.length
+        return this.notesNotTrashed.length
       }
     }
   }
