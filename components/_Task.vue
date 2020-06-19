@@ -23,8 +23,8 @@
 
 <script>
 import Input from '@/components/_Input'
-import CheckboxFilled from '@/assets/svg/new/checkbox-checked.svg'
-import Checkbox from '@/assets/svg/new/checkbox-unchecked.svg'
+import CheckboxFilled from '@/assets/svg/checkbox-checked.svg'
+import Checkbox from '@/assets/svg/checkbox-unchecked.svg'
 
 export default {
   components: {

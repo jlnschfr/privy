@@ -32,7 +32,7 @@
           class="Close absolute flex justify-center w-3 inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           @click="onItemDelete(item.uuid)"
         >
-          <CloseIcon class="CloseIcon fill-current" />
+          <CloseIcon class="CloseIcon fill-current w-2" />
         </button>
       </div>
     </Draggable>
@@ -41,8 +41,8 @@
 
 <script>
 import Draggable from 'vuedraggable'
-import DragIcon from '@/assets/svg/new/drag.svg'
-import CloseIcon from '@/assets/svg/new/cross.svg'
+import DragIcon from '@/assets/svg/drag.svg'
+import CloseIcon from '@/assets/svg/cross.svg'
 import Rte from '@/components/_Rte'
 import Task from '@/components/_Task'
 import isEqual from 'lodash.isequal'
@@ -153,10 +153,6 @@ export default {
 
 .DragIcon {
   width: 0.75rem;
-}
-
-.CloseIcon {
-  width: 0.6rem;
 }
 
 .Ghost {

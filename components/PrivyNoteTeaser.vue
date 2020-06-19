@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import FavIcon from '@/assets/svg/new/heart.svg'
+import FavIcon from '@/assets/svg/heart.svg'
 import { createDateString } from '@/utils/date'
 import Button from '@/components/_Button'
 

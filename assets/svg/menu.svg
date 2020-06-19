@@ -1,5 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 195 195" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <path d="M26,105L0,105L0,90L26,90L26,105ZM26,19.75L0,19.75L0,34.75L26,34.75L26,19.75ZM26,160.25L0,160.25L0,175.25L26,175.25L26,160.25ZM195,90L53,90L53,105L195,105L195,90ZM195,19.75L53,19.75L53,34.75L195,34.75L195,19.75ZM195,160.25L53,160.25L53,175.25L195,175.25L195,160.25Z" style="fill-rule:nonzero;"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
