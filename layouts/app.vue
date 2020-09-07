@@ -5,7 +5,6 @@
       :is-active="showDrawer"
       :user="user"
       :notes="notes"
-      @logout="logout"
       @toggleDrawer="showDrawer = !showDrawer"
     />
     <main class="p-4r relative">
@@ -21,7 +20,6 @@ import PrivyHeader from '@/components/PrivyHeader'
 import PrivyDrawer from '@/components/PrivyDrawer'
 import PrivyAddButton from '@/components/PrivyAddButton'
 import Spinner from '@/components/_Spinner'
-import { auth } from '@/plugins/firebase.js'
 
 export default {
   components: {
@@ -61,10 +59,12 @@ export default {
     }
   },
 
-  created() {
-    this.$store.dispatch('enablePersistence').then(() => {
-      this.bindAuthChanged()
-    })
+  mounted() {
+    this.bindFrequentUpdates()
+  },
+
+  destroyed() {
+    this.unbindFrequentUpdates()
   },
 
   onIdle() {
@@ -76,31 +76,6 @@ export default {
   },
 
   methods: {
-    // move to component
-    logout() {
-      this.$store
-        .dispatch('logout')
-        .then(() => {})
-        .catch(() => {})
-    },
-
-    // shareable across all layouts?
-    bindAuthChanged() {
-      auth.onAuthStateChanged((user) => {
-        this.$store.dispatch('handleAuthChanged', user)
-
-        if (this.$store.state.user) {
-          if (this.currentRoute === 'index') {
-            this.$router.push('/notes')
-          }
-          this.bindFrequentUpdates()
-        } else {
-          this.$router.push('/')
-          this.unbindFrequentUpdates()
-        }
-      })
-    },
-
     bindFrequentUpdates() {
       if (!this.frequentUpdates) {
         this.frequentUpdates = setInterval(() => {

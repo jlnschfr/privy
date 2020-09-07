@@ -1,6 +1,14 @@
 import { auth, firestore } from '@/plugins/firebase.js'
 
 export default {
+  enablePersistence() {
+    return new Promise((resolve) => {
+      firestore.enablePersistence({ synchronizeTabs: true }).then(() => {
+        resolve()
+      })
+    })
+  },
+
   createUserWithEmailAndPassword({ dispatch }, payload) {
     return new Promise((resolve, reject) => {
       auth
@@ -29,24 +37,28 @@ export default {
     })
   },
 
-  logout({ state }) {
+  logout({ dispatch }) {
     auth
       .signOut()
       .then(() => {
-        state.user = null
-        state.notes = null
-        state.store = null
+        console.log('logged out')
+        dispatch('handleAuthChanged')
       })
       .catch()
   },
 
   handleAuthChanged({ commit, dispatch }, user) {
-    commit('setUser', user)
     if (user) {
+      commit('setUser', user)
       commit('setStore', user.uid)
       dispatch('getNotes')
+    } else {
+      console.log('reset')
+      commit('reset')
     }
   },
+
+  // refactored till here
 
   addNote({ state, commit }, payload) {
     return new Promise((resolve) => {
@@ -106,14 +118,6 @@ export default {
         commit('setNotes', notes)
         commit('sortNotes')
       })
-  },
-
-  enablePersistence() {
-    return new Promise((resolve) => {
-      firestore.enablePersistence({ synchronizeTabs: true }).then(() => {
-        resolve()
-      })
-    })
   },
 
   setCurrentTag({ commit }, payload) {

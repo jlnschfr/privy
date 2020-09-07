@@ -68,14 +68,7 @@
             <li
               class="px-6 py-3 border-t border-pblue-light flex items-center justify-center"
             >
-              <Button
-                type="button"
-                class="flex items-center"
-                @click="
-                  $emit('logout')
-                  $emit('toggleDrawer')
-                "
-              >
+              <Button type="button" class="flex items-center" @click="logout()">
                 <LogoutIcon class="mr-2 w-2 fill-current" /> Logout
               </Button>
             </li>
@@ -158,6 +151,12 @@ export default {
       } else {
         return this.notesNotTrashed.length
       }
+    },
+    logout() {
+      this.$store
+        .dispatch('logout')
+        .then(() => {})
+        .catch(() => {})
     }
   }
 }

@@ -45,5 +45,10 @@ export default {
   },
   setStore(state, payload) {
     state.store = firestore.collection('user').doc(payload)
+  },
+  reset(state) {
+    state.user = null
+    state.notes = null
+    state.store = null
   }
 }
