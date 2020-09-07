@@ -38,26 +38,20 @@ export default {
     })
   },
 
-  logout({ state }) {
+  logout() {
     auth
       .signOut()
-      .then(() => {
-        state.user = null
-        state.notes = null
-        state.store = null
-      })
+      .then()
       .catch()
   },
 
   handleAuthChanged({ commit, dispatch }, user) {
-    commit('setUser', user)
-
     if (user) {
+      commit('setUser', user)
       commit('setStore', user.uid)
       dispatch('getNotes')
     } else {
-      // console.log('reset')
-      // commit('reset')
+      commit('reset')
     }
   },
 

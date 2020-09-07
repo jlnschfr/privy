@@ -10,7 +10,7 @@
             <p class="flex justify-center">
               <PrivyIcon ref="svg" class="fill-blue w-4" />
             </p>
-            <p class="text-2xl mt-2">{{ user.email }}</p>
+            <p class="text-2xl mt-2">{{ user ? user.email : '' }}</p>
             <p>
               <span class="mr-2">{{ notes.length }} notes</span>
               <span>{{ tasksAmount }} tasks</span>
@@ -153,10 +153,7 @@ export default {
       }
     },
     logout() {
-      this.$store
-        .dispatch('logout')
-        .then(() => {})
-        .catch(() => {})
+      this.$store.dispatch('logout')
     }
   }
 }

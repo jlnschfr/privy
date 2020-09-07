@@ -6,7 +6,7 @@
 import PrivyAuthForm from '@/components/PrivyAuthForm'
 
 export default {
-  layout: 'auth',
+  layout: 'blank',
   transition: 'slide',
   components: {
     PrivyAuthForm

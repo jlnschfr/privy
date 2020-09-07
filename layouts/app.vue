@@ -23,6 +23,7 @@ import PrivyAddButton from '@/components/PrivyAddButton'
 import Spinner from '@/components/_Spinner'
 
 export default {
+  name: 'App',
   components: {
     PrivyHeader,
     PrivyDrawer,

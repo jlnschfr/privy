@@ -1,6 +1,9 @@
 import { firestore } from '@/plugins/firebase.js'
 
 export default {
+  setPersistence(state, payload) {
+    state.persistence = payload
+  },
   setUser(state, payload) {
     state.user = payload
   },
@@ -53,8 +56,5 @@ export default {
     state.currentTag = null
     state.notes = null
     state.store = null
-  },
-  setPersistence(state, payload) {
-    state.persistence = payload
   }
 }

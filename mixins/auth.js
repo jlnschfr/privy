@@ -8,12 +8,6 @@ export default {
     }
   },
 
-  computed: {
-    user() {
-      return this.$store.state.user
-    }
-  },
-
   watch: {
     $route(to, from) {
       this.currentRoute = to.name
@@ -31,8 +25,7 @@ export default {
   },
 
   beforeDestroy() {
-    console.log(this.unsubscribe)
-    this.unsubscribe()
+    this.unsubscribe || this.unsubscribe()
   },
 
   methods: {
@@ -40,20 +33,12 @@ export default {
       this.unsubscribe = auth.onAuthStateChanged((user) => {
         this.$store.dispatch('handleAuthChanged', user)
 
-        console.log(this.currentRoute)
-
         if (this.$store.state.user) {
           if (this.currentRoute === 'index') {
-            console.log('user and redirecting to notes')
             this.$router.push('/notes')
-          } else {
-            console.log('user')
           }
         } else if (this.currentRoute !== 'index') {
-          console.log('no user and redirecting to index')
           this.$router.push('/')
-        } else {
-          console.log('no user')
         }
       })
     }
