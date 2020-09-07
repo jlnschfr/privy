@@ -48,7 +48,13 @@ export default {
   },
   reset(state) {
     state.user = null
+    state.persistence = null
+    state.isFetchingNotes = false
+    state.currentTag = null
     state.notes = null
     state.store = null
+  },
+  setPersistence(state, payload) {
+    state.persistence = payload
   }
 }

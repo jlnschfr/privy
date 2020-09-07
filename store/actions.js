@@ -1,9 +1,10 @@
 import { auth, firestore } from '@/plugins/firebase.js'
 
 export default {
-  enablePersistence() {
+  enablePersistence({ commit }) {
     return new Promise((resolve) => {
       firestore.enablePersistence({ synchronizeTabs: true }).then(() => {
+        commit('setPersistence', true)
         resolve()
       })
     })
@@ -37,24 +38,26 @@ export default {
     })
   },
 
-  logout({ dispatch }) {
+  logout({ state }) {
     auth
       .signOut()
       .then(() => {
-        console.log('logged out')
-        dispatch('handleAuthChanged')
+        state.user = null
+        state.notes = null
+        state.store = null
       })
       .catch()
   },
 
   handleAuthChanged({ commit, dispatch }, user) {
+    commit('setUser', user)
+
     if (user) {
-      commit('setUser', user)
       commit('setStore', user.uid)
       dispatch('getNotes')
     } else {
-      console.log('reset')
-      commit('reset')
+      // console.log('reset')
+      // commit('reset')
     }
   },
 

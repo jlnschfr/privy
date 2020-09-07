@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import auth from '@/mixins/auth.js'
 import PrivyHeader from '@/components/PrivyHeader'
 import PrivyDrawer from '@/components/PrivyDrawer'
 import PrivyAddButton from '@/components/PrivyAddButton'
@@ -28,6 +29,7 @@ export default {
     PrivyAddButton,
     Spinner
   },
+  mixins: [auth],
 
   data() {
     return {
