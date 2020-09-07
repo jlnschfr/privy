@@ -25,10 +25,10 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce'
 import PrivyNoteTeaser from '@/components/PrivyNoteTeaser'
 import Button from '@/components/_Button'
 import StaggeredTransition from '@/components/_StaggeredTransition'
-import debounce from 'lodash.debounce'
 
 export default {
   components: {

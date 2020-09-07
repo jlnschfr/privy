@@ -76,6 +76,7 @@ export default {
   },
 
   methods: {
+    // move to component
     logout() {
       this.$store
         .dispatch('logout')
@@ -83,6 +84,7 @@ export default {
         .catch(() => {})
     },
 
+    // shareable across all layouts?
     bindAuthChanged() {
       auth.onAuthStateChanged((user) => {
         this.$store.dispatch('handleAuthChanged', user)
@@ -125,63 +127,3 @@ export default {
   }
 }
 </script>
-
-<style>
-html {
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-
-.slide-enter-active,
-.slide-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active,
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s;
-}
-.slide-enter {
-  transform: translateY(-1rem);
-  opacity: 0;
-}
-
-.slide-enter-to,
-.slide-leave {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.slide-leave-to {
-  transform: translateY(1rem);
-  opacity: 0;
-}
-
-.slide-right-enter {
-  transform: translateX(100%);
-}
-
-.slide-right-enter-to,
-.slide-right-leave {
-  transform: translateY(0);
-}
-
-.slide-right-leave-to {
-  transform: translateX(100%);
-}
-
-.fade-enter {
-  opacity: 0;
-}
-
-.fade-enter-to,
-.fade-leave {
-  opacity: 1;
-}
-
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

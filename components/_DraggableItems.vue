@@ -41,11 +41,11 @@
 
 <script>
 import Draggable from 'vuedraggable'
+import isEqual from 'lodash.isequal'
 import DragIcon from '@/assets/svg/drag.svg'
 import CloseIcon from '@/assets/svg/cross.svg'
 import Rte from '@/components/_Rte'
 import Task from '@/components/_Task'
-import isEqual from 'lodash.isequal'
 
 export default {
   components: {

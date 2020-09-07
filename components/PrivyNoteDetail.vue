@@ -41,13 +41,13 @@
 </template>
 
 <script>
+import isEqual from 'lodash.isequal'
+import debounce from 'lodash.debounce'
+import uuid from 'uuid'
 import Tags from '@/components/_Tags'
 import TitleTextarea from '@/components/_TitleTextarea'
 import Button from '@/components/_Button'
 import DraggableItems from '@/components/_DraggableItems'
-import isEqual from 'lodash.isequal'
-import debounce from 'lodash.debounce'
-import uuid from 'uuid'
 import { createDateString } from '@/utils/date'
 
 export default {
