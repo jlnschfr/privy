@@ -31,6 +31,8 @@ export default {
    */
   loading: { color: '#F9B48A' },
 
+  layoutTransition: 'fade',
+
   /*
    ** Global CSS
    */

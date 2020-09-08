@@ -8,8 +8,8 @@
       @toggleDrawer="showDrawer = !showDrawer"
     />
     <main class="p-4r relative">
-      <Spinner :is-active="isFetchingNotes" />
-      <nuxt />
+      <Spinner :is-active="isFetchingNotes || !(notes && user)" />
+      <nuxt v-if="notes && user" />
     </main>
     <PrivyAddButton :is-active="showButton" />
   </div>
