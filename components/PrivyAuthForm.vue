@@ -1,17 +1,17 @@
 <template>
   <form
     ref="form"
-    class="max-w-md mx-auto mt-4r p-4r text-pblue-medium shadow-xl bg-white"
+    class="max-w-sm mx-auto px-6 py-8 shadow-xl bg-white"
     @submit.prevent="authenticate"
   >
-    <header>
-      <h2 class="text-3xl lg:text-4xl">Login</h2>
+    <header class="flex justify-center">
+      <PrivyIcon class="w-6" />
     </header>
 
     <Input
       placeholder="mail"
       type="email"
-      class="mt-4"
+      class="mt-8"
       @focus="error = ''"
       @input="email = $event"
     />
@@ -33,28 +33,30 @@
       @input="repeatedPassword = $event"
     />
 
-    <Button type="submit" visual class="w-full mt-6">{{
+    <Button type="submit" class="w-full mt-6">{{
       !isLogin ? 'Register' : 'Login'
     }}</Button>
 
-    <p class="mt-4 text-pblue-medium text-center">
+    <p class="mt-6 text-center">
       <span
         v-text="!isLogin ? 'Already got an account?' : 'Dont have an account?'"
       ></span>
-      <Button type="button" @click="isLogin = !isLogin">{{
-        isLogin ? 'Register' : 'Login'
-      }}</Button>
+      <button type="button" @click="isLogin = !isLogin">
+        {{ isLogin ? 'Register now' : 'Login' }}
+      </button>
     </p>
-    <p class="mt-4 text-sm text-porange-dark text-center">{{ error }}</p>
+    <p class="mt-4 text-sm text-secondary-500 text-center">{{ error }}</p>
   </form>
 </template>
 
 <script>
+import PrivyIcon from '@/assets/svg/privy.svg'
 import Input from '@/components/_Input'
 import Button from '@/components/_Button'
 
 export default {
   components: {
+    PrivyIcon,
     Input,
     Button
   },
@@ -65,8 +67,7 @@ export default {
       email: '',
       password: '',
       repeatedPassword: '',
-      error: '',
-      myInput: ''
+      error: ''
     }
   },
   methods: {

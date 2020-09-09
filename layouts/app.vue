@@ -1,5 +1,7 @@
 <template>
-  <div class="font-body bg-pgray-background min-h-screen">
+  <div
+    class="font-body font-normal text-neutral-200 bg-neutral-500 min-h-screen"
+  >
     <PrivyHeader :user="user" @toggleDrawer="showDrawer = !showDrawer" />
     <PrivyDrawer
       :is-active="showDrawer"
@@ -64,6 +66,7 @@ export default {
 
   mounted() {
     this.bindFrequentUpdates()
+    // this.$store.dispatch('logout')
   },
 
   destroyed() {

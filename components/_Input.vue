@@ -1,11 +1,12 @@
 <template>
   <input
-    class="bg-transparent placeholder-pblue-light focus:outline-none focus:border-pblue-dark border-b border-pblue-medium block w-full appearance-none leading-normal py-1"
+    class="bg-transparent placeholder-neutral-200 focus:outline-none border-b border-neutral-200 block w-full appearance-none leading-normal py-1"
     :type="type"
     :placeholder="placeholder"
     :value="value"
     autocomplete="off"
     @input="$emit('input', $event.target.value)"
+    @focus="$emit('focus')"
   />
 </template>
 

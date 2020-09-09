@@ -7,26 +7,23 @@
 module.exports = {
   theme: {
     fontFamily: {
-      body: ['Noway', 'sans-serif']
+      body: ['Nunito', 'sans-serif']
     },
     extend: {
       colors: {
-        pgray: {
-          light: '#f7fafc',
-          medium: '#e2e8f0',
-          dark: '#a0aec0',
-          drawer: 'rgba(9, 84, 249, 0.85)',
-          background: '#fbf4f5'
+        neutral: {
+          600: '#FFFFFF',
+          500: '#F5F5F5',
+          400: '#D7D7D7',
+          300: '#B4B4B4',
+          200: '#4A4A4A',
+          100: '#303030'
         },
-        pblue: {
-          light: '#AED0FF',
-          medium: '#096FFF',
-          dark: '#0954F9'
+        primary: {
+          500: '#285799'
         },
-        porange: {
-          light: '#F9B48A',
-          medium: '#FA9083',
-          dark: '#F62F17'
+        secondary: {
+          500: '#AF6331'
         }
       },
       spacing: {
@@ -38,10 +35,14 @@ module.exports = {
         '4': '2rem',
         '5': '2.5rem',
         '6': '3rem',
-        '1r': '1vw',
-        '2r': '2vw',
-        '3r': '3vw',
-        '4r': '4vw'
+        '7': '3.5rem',
+        '8': '4rem',
+        '1vw': '1vw',
+        '2vw': '2vw',
+        '3vw': '3vw',
+        '4vw': '4vw',
+        '5vw': '5vw',
+        '6vw': '6vw'
       },
       inset: {
         '0': 0,
