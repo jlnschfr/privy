@@ -2,75 +2,58 @@
   <section>
     <transition name="slide-right">
       <aside
-        v-if="isActive"
-        class="w-4/5 sm:min-w-drawer sm:w-auto fixed top-0 right-0 z-50 bg-white h-full text-pblue-medium flex flex-col justify-between"
+        v-if="isActive || !isMobile"
+        class="w-4/5 sm:max-w-drawer fixed top-0 right-0 sm:left-0 z-50 bg-neutral-100 h-full text-neutral-300 flex flex-col justify-between"
       >
-        <div class="">
-          <header class="p-6 border-b border-pblue-light text-center">
+        <div>
+          <header class="p-4 text-center">
             <p class="flex justify-center">
-              <PrivyIcon ref="svg" class="fill-blue w-4" />
-            </p>
-            <p class="text-2xl mt-2">{{ user ? user.email : '' }}</p>
-            <p>
-              <span class="mr-2">{{ notes.length }} notes</span>
-              <span>{{ tasksAmount }} tasks</span>
+              <PrivyIcon ref="svg" class="w-5" />
             </p>
           </header>
-          <nav class="p-6 flex justify-center overflow-auto max-h-drawerNav">
-            <ul>
-              <li @click="$emit('toggleDrawer')">
-                <Button type="nuxt-link" to="notes" class="flex items-center"
-                  ><span
-                    class="mr-2 bg-pblue-dark text-white rounded-full h-3 w-3 flex items-center justify-center"
-                    >{{ getTagAmount() }}</span
-                  >All</Button
-                >
+          <nav class="px-6 overflow-auto max-h-drawerNav">
+            <ul class="w-full">
+              <li>
+                <nuxt-link to="notes" class="flex items-center">
+                  <GridIcon class="w-2 mr-1" /> Notes
+                </nuxt-link>
+              </li>
+              <li class="mt-2">
+                <nuxt-link to="notes?tag=trash" class="flex items-center">
+                  <TrashIcon class="w-2 mr-1" /> Trash
+                </nuxt-link>
               </li>
 
-              <li
-                v-for="(tag, key) in reducedTags"
-                :key="key"
-                class="mt-4 last:mb-6"
-                @click="$emit('toggleDrawer')"
-              >
-                <Button
-                  type="nuxt-link"
-                  :to="`notes?tag=${tag}`"
-                  class="flex items-center"
-                  :class="{ 'text-porange-dark': tag === currentTag }"
-                >
-                  <span
-                    class="mr-2 bg-pblue-dark text-white rounded-full h-3 w-3 flex items-center justify-center"
-                    :class="{
-                      'bg-porange-dark': tag === currentTag
-                    }"
-                    >{{ getTagAmount(tag) }}</span
-                  >{{ tag }}
-                </Button>
+              <li v-for="(tag, key) in reducedTags" :key="key" class="mt-2">
+                <div class="flex justify-between">
+                  <nuxt-link
+                    :to="`notes?tag=${tag}`"
+                    class="flex items-center"
+                    :class="{ 'text-neutral-600': tag === currentTag }"
+                  >
+                    <HashIcon class="w-2 mr-1" /> {{ tag }}
+                  </nuxt-link>
+                  {{ getTagAmount(tag) }}
+                </div>
               </li>
             </ul>
           </nav>
         </div>
-        <footer>
-          <ul>
-            <li
-              class="px-6 py-3 border-t border-pblue-light flex items-center justify-center"
-              @click="$emit('toggleDrawer')"
-            >
-              <Button
-                type="nuxt-link"
-                to="notes?tag=trash"
-                class="flex items-center"
-              >
-                <TrashIcon class="mr-2 w-2 fill-current" /> Trash
-              </Button>
+        <footer class="px-6 py-4">
+          <ul class="w-full">
+            <li>Weather</li>
+            <li class="mt-2">
+              <button class="flex items-center">
+                <SunIcon class="w-2 mr-1" /> Light Mode
+              </button>
             </li>
-            <li
-              class="px-6 py-3 border-t border-pblue-light flex items-center justify-center"
-            >
-              <Button type="button" class="flex items-center" @click="logout()">
-                <LogoutIcon class="mr-2 w-2 fill-current" /> Logout
-              </Button>
+            <li class="mt-2">
+              <button
+                class="flex items-center"
+                @click="$store.dispatch('logout')"
+              >
+                <LogoutIcon class="w-2 mr-1" /> Logout
+              </button>
             </li>
           </ul>
         </footer>
@@ -79,26 +62,33 @@
     <transition name="fade">
       <div
         v-if="isActive"
-        class="bg-pgray-drawer w-screen h-screen fixed top-0 left-0 z-40"
-        @click="$emit('toggleDrawer')"
+        class="bg-neutral-300 w-screen h-screen fixed top-0 left-0 z-40"
+        @click="$emit('toggle-drawer')"
       ></div>
     </transition>
   </section>
 </template>
 
 <script>
-import Button from '@/components/_Button'
 import PrivyIcon from '@/assets/svg/privy.svg'
 import LogoutIcon from '@/assets/svg/logout.svg'
+import GridIcon from '@/assets/svg/grid.svg'
+import HashIcon from '@/assets/svg/hash.svg'
 import TrashIcon from '@/assets/svg/trash.svg'
+import SunIcon from '@/assets/svg/sun.svg'
+import ViewportHandler from '@/mixins/viewport-handler.js'
+import LogoAnimator from '@/mixins/logo-animator.js'
 
 export default {
   components: {
-    Button,
     PrivyIcon,
     LogoutIcon,
-    TrashIcon
+    TrashIcon,
+    GridIcon,
+    HashIcon,
+    SunIcon
   },
+  mixins: [ViewportHandler, LogoAnimator],
   props: {
     isActive: {
       type: Boolean,
@@ -123,13 +113,6 @@ export default {
     notesNotTrashed() {
       return this.notes.filter(
         (note) => !note.tags.some((tag) => tag.text === 'Trash')
-      )
-    },
-    tasksAmount() {
-      return this.notesNotTrashed.reduce(
-        (acc, cur) =>
-          acc + cur.items.filter((item) => item.type === 'Task').length,
-        0
       )
     },
     availableTags() {
@@ -158,9 +141,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.fill-blue path {
-  fill: theme('colors.pblue.dark') !important;
-}
-</style>

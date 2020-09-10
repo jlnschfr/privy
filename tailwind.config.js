@@ -59,8 +59,8 @@ module.exports = {
       maxHeight: {
         drawerNav: 'calc(100vh - 374px)'
       },
-      minWidth: {
-        drawer: '24rem'
+      maxWidth: {
+        drawer: '18rem'
       },
       transitionProperty: {
         border: 'border'

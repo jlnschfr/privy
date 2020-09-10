@@ -36,7 +36,11 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['assets/css/fonts.css', 'assets/css/transitions.css'],
+  css: [
+    'assets/css/fonts.css',
+    'assets/css/transitions.css',
+    'assets/css/animations.css'
+  ],
 
   router: {
     middleware: 'auth'

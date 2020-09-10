@@ -1,0 +1,15 @@
+.has-fill-animation {
+  animation: fill 0.75s ease forwards;
+}
+
+@keyframes fill {
+  0% {
+    fill: current;
+  }
+  50% {
+    fill: theme('colors.secondary.500');
+  }
+  100% {
+    fill: current;
+  }
+}

@@ -5,7 +5,7 @@
     @submit.prevent="authenticate"
   >
     <header class="flex justify-center">
-      <PrivyIcon class="w-6" />
+      <PrivyIcon class="w-5" />
     </header>
 
     <Input

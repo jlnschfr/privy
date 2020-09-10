@@ -1,22 +1,23 @@
 <template>
-  <header class="flex justify-between bg-pblue-medium items-center px-4r py-2">
-    <h1 aria-label="Privy Notes">
-      <nuxt-link :to="homeLink">
+  <header
+    class="flex justify-between sm:justify-end bg-neutral-600 border-b border-neutral-400 items-center px-4 py-2"
+  >
+    <h1 class="block sm:hidden" aria-label="Privy Notes">
+      <nuxt-link to="/notes">
         <PrivyIcon ref="svg" class="PrivyIcon w-4"
       /></nuxt-link>
     </h1>
-    <nav v-if="user" class="flex items-center text-white">
-      <p class="mr-4">
-        <span class="hidden sm:inline">logged in as</span> {{ user.email }}
-      </p>
-      <p @click="$emit('toggleDrawer')">
+    <nav v-if="user" class="flex sm:hidden items-center">
+      <p @click="$emit('toggle-drawer')">
         <MenuIcon class="w-3 fill-current cursor-pointer" />
       </p>
     </nav>
+    <p class="hidden sm:block">logged in as {{ user ? user.email : '' }}</p>
   </header>
 </template>
 
 <script>
+import LogoAnimator from '@/mixins/logo-animator.js'
 import MenuIcon from '@/assets/svg/menu.svg'
 import PrivyIcon from '@/assets/svg/privy.svg'
 
@@ -25,72 +26,13 @@ export default {
     MenuIcon,
     PrivyIcon
   },
+  mixins: [LogoAnimator],
   props: {
     user: {
       type: Object,
       required: false,
       default: null
     }
-  },
-  data() {
-    return {
-      paths: []
-    }
-  },
-
-  computed: {
-    homeLink() {
-      const currentTag = this.$store.getters.getCurrentTag()
-      const route = this.$route.name
-
-      if (route === 'notes' || !currentTag) {
-        return `/notes`
-      } else {
-        return `/notes?tag=${currentTag}`
-      }
-    }
-  },
-
-  watch: {
-    $route() {
-      this.animatePaths()
-    }
-  },
-
-  mounted() {
-    this.paths = this.$refs.svg.$el.querySelectorAll('path')
-  },
-
-  methods: {
-    animatePaths() {
-      this.paths.forEach((path, index) => {
-        setTimeout(() => {
-          path.classList.add('is-animating')
-
-          setTimeout(() => {
-            path.classList.remove('is-animating')
-          }, 750)
-        }, 100 * index)
-      })
-    }
   }
 }
 </script>
-
-<style>
-.PrivyIcon path.is-animating {
-  animation: fill 0.75s ease forwards;
-}
-
-@keyframes fill {
-  0% {
-    fill: current;
-  }
-  50% {
-    fill: theme('colors.pblue.dark');
-  }
-  100% {
-    fill: current;
-  }
-}
-</style>
