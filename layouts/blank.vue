@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import auth from '@/mixins/auth.js'
+import AuthHandler from '@/mixins/auth-handler.js'
 
 export default {
   name: 'Blank',
-  mixins: [auth]
+  mixins: [AuthHandler]
 }
 </script>

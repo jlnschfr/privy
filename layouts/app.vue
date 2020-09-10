@@ -2,12 +2,12 @@
   <div
     class="font-body font-normal text-neutral-200 bg-neutral-500 min-h-screen"
   >
-    <PrivyHeader :user="user" @toggleDrawer="showDrawer = !showDrawer" />
+    <PrivyHeader :user="user" @toggle-drawer="showDrawer = !showDrawer" />
     <PrivyDrawer
       :is-active="showDrawer"
       :user="user"
       :notes="notes"
-      @toggleDrawer="showDrawer = !showDrawer"
+      @toggle-drawer="showDrawer = !showDrawer"
     />
     <main class="p-4r relative">
       <Spinner :is-active="isFetchingNotes || !(notes && user)" />
@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import auth from '@/mixins/auth.js'
+import AuthHanlder from '@/mixins/auth-handler.js'
+import ContentUpdater from '@/mixins/content-updater.js'
 import PrivyHeader from '@/components/PrivyHeader'
 import PrivyDrawer from '@/components/PrivyDrawer'
 import PrivyAddButton from '@/components/PrivyAddButton'
@@ -32,14 +33,12 @@ export default {
     PrivyAddButton,
     Spinner
   },
-  mixins: [auth],
+  mixins: [AuthHanlder, ContentUpdater],
 
   data() {
     return {
-      frequentUpdates: false,
       showDrawer: false,
-      currentRoute: this.$router.currentRoute.name,
-      isIdle: false
+      currentRoute: this.$router.currentRoute.name
     }
   },
 
@@ -61,49 +60,6 @@ export default {
   watch: {
     $route(to, from) {
       this.currentRoute = to.name
-    }
-  },
-
-  mounted() {
-    this.bindFrequentUpdates()
-    // this.$store.dispatch('logout')
-  },
-
-  destroyed() {
-    this.unbindFrequentUpdates()
-  },
-
-  onIdle() {
-    this.isIdle = true
-  },
-
-  onActive() {
-    this.isIdle = false
-  },
-
-  methods: {
-    bindFrequentUpdates() {
-      if (!this.frequentUpdates) {
-        this.frequentUpdates = setInterval(() => {
-          if (navigator.onLine) {
-            if (
-              !this.isIdle ||
-              document.activeElement.tagName.toUpperCase() === 'INPUT' ||
-              document.activeElement.tagName.toUpperCase() === 'TEXTAREA' ||
-              document.activeElement.closest('.ProseMirror')
-            ) {
-              return
-            }
-            this.$store.dispatch('getNotes')
-          }
-        }, 15000)
-      }
-    },
-
-    unbindFrequentUpdates() {
-      if (this.frequentUpdates) {
-        clearInterval(this.frequentUpdates)
-      }
     }
   }
 }
