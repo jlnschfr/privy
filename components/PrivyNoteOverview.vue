@@ -47,7 +47,7 @@ export default {
 
   computed: {
     isFetchingNotes() {
-      return this.$store.state.isFetchingNotes
+      return this.$store.getters.getIsFetchingNotes()
     }
   },
 

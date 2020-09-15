@@ -3,6 +3,6 @@ export default () => ({
   notes: null,
   store: null,
   isFetchingNotes: false,
-  currentTag: null,
-  persistence: null
+  isPersistent: false,
+  currentTag: null
 })

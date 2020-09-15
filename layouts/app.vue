@@ -9,7 +9,7 @@
       :notes="notes"
       @toggle-drawer="showDrawer = !showDrawer"
     />
-    <main class="p-4r relative">
+    <main class="p-4vw relative">
       <Spinner :is-active="isFetchingNotes || !(notes && user)" />
       <nuxt v-if="notes && user" />
     </main>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import AuthHanlder from '@/mixins/auth-handler.js'
+import AuthHandler from '@/mixins/auth-handler.js'
 import ContentUpdater from '@/mixins/content-updater.js'
 import PrivyHeader from '@/components/PrivyHeader'
 import PrivyDrawer from '@/components/PrivyDrawer'
@@ -33,7 +33,7 @@ export default {
     PrivyAddButton,
     Spinner
   },
-  mixins: [AuthHanlder, ContentUpdater],
+  mixins: [AuthHandler, ContentUpdater],
 
   data() {
     return {
@@ -44,10 +44,10 @@ export default {
 
   computed: {
     isFetchingNotes() {
-      return this.$store.state.isFetchingNotes
+      return this.$store.getters.getIsFetchingNotes()
     },
     user() {
-      return this.$store.state.user
+      return this.$store.getters.getUser()
     },
     notes() {
       return this.$store.getters.getNotes()

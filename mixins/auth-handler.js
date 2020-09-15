@@ -15,7 +15,7 @@ export default {
   },
 
   created() {
-    if (this.$store.state.persistence) {
+    if (!this.$store.getters.getIsPersistent()) {
       this.$store.dispatch('enablePersistence').then(() => {
         this.bindAuthChanged()
       })
@@ -33,7 +33,7 @@ export default {
       this.unsubscribe = auth.onAuthStateChanged((user) => {
         this.$store.dispatch('handleAuthChanged', user)
 
-        if (this.$store.state.user) {
+        if (this.$store.getters.getUser()) {
           if (this.currentRoute === 'index') {
             this.$router.push('/notes')
           }

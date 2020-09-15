@@ -1,8 +1,8 @@
 import { firestore } from '@/plugins/firebase.js'
 
 export default {
-  setPersistence(state, payload) {
-    state.persistence = payload
+  setIsPersistent(state, payload) {
+    state.isPersistent = payload
   },
   setUser(state, payload) {
     state.user = payload
@@ -29,7 +29,6 @@ export default {
     state.currentTag = payload
   },
   sortNotes(state) {
-    // TODO: Needs Refactoring
     state.notes.sort((a, b) => {
       if (a.isFav || b.isFav) {
         if (a.isFav && !b.isFav) {
@@ -51,7 +50,6 @@ export default {
   },
   reset(state) {
     state.user = null
-    state.persistence = null
     state.isFetchingNotes = false
     state.currentTag = null
     state.notes = null

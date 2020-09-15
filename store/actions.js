@@ -4,7 +4,7 @@ export default {
   enablePersistence({ commit }) {
     return new Promise((resolve) => {
       firestore.enablePersistence({ synchronizeTabs: true }).then(() => {
-        commit('setPersistence', true)
+        commit('setIsPersistent', true)
         resolve()
       })
     })
@@ -54,8 +54,6 @@ export default {
       commit('reset')
     }
   },
-
-  // refactored till here
 
   addNote({ state, commit }, payload) {
     return new Promise((resolve) => {
