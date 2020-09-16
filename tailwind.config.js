@@ -29,6 +29,7 @@ module.exports = {
       spacing: {
         px: '1px',
         '0': '0',
+        '0_5': '0.25rem',
         '1': '0.5rem',
         '2': '1rem',
         '3': '1.5rem',
@@ -54,7 +55,6 @@ module.exports = {
         'notes-mobile': 'calc((((100vw - 8vw) / 7) * 2) + 4vw - 5px)'
       },
       minHeight: {
-        notes: '18rem',
         detail: 'calc(100vh - 8vw - 2rem - 54px)'
       },
       maxHeight: {

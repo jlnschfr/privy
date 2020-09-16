@@ -1,66 +1,79 @@
 <template>
   <article
-    class="PrivyNoteTeaser group cursor-pointer min-h-notes grid grid-cols-7 shadow-lg bg-white"
+    class="PrivyNoteTeaser cursor-pointer shadow-lg bg-neutral-600"
     tabindex="0"
     @click="open(note.id)"
   >
     <div
-      class="p-4r xl:p-2r col-start-1 col-end-5 flex items-center relative"
-      :class="{
-        'bg-pblue-dark text-white': note.isFav,
-        'text-pblue-medium': !note.isFav
-      }"
+      class="flex p-4"
+      :class="{ 'items-center': !tasks.length, 'items-end': tasks.length }"
     >
-      <h2 class="text-3xl lg:text-4xl leading-none w-full hyphens-auto">
-        {{ note.title }}
-      </h2>
-      <p class="absolute bottom-2r left-4r xl:bottom-1r xl:left-2r">
-        {{ dateString }}
-      </p>
+      <div class="text-center border-r pr-2 mr-2 border-neutral-400">
+        <span class="block">{{ month }}</span>
+        <span class="block text-xl font-bold">{{ day }}</span>
+        <span class="block">{{ year }}</span>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold leading-none w-full hyphens-auto">
+          {{ note.title }}
+        </h2>
+        <p v-if="tasks.length" class="mt-0_5">
+          <span>{{ tasks.length }} tasks</span>
+          <span>{{ done.length }} done</span>
+        </p>
+      </div>
     </div>
-    <div
-      class="p-4r xl:p-2r col-start-5 col-end-8 flex items-center justify-between text-white bg-pblue-medium relative"
-    >
-      <p class="flex flex-col text-right">
-        <strong class="text-5xl leading-none">{{ tasks.length }}</strong
-        >tasks
-      </p>
-      <p class="flex flex-col text-right">
-        <strong class="text-5xl leading-none">{{ done.length }}</strong
-        >done
-      </p>
-      <Button
-        type="button"
-        :class="{
-          'text-porange-medium': note.isFav
-        }"
-        class="absolute top-2r right-4r xl:top-1r xl:right-2r opacity-100 lg:opacity-0 group-hover:opacity-100 focus:opacity-100"
-        @click="updateFavState(note)"
-        @click.native.stop=""
-      >
-        <FavIcon class="fill-current w-3"
-      /></Button>
-      <Button
-        type="button"
-        class="absolute bottom-2r right-4r xl:bottom-1r xl:right-2r"
-        :is-animating="isActiveForDelete"
-        @click="remove(note)"
-        @click.native.stop=""
-        >Delete</Button
-      >
+    <div class="flex items-center justify-between p-4">
+      <div class="flex items-center">
+        <p
+          v-for="(noteTag, key) in note.tags.slice(0, 1)"
+          :key="key"
+          class="px-2 py-0_5 mr-1 bg-primary-500 text-neutral-600 rounded-full flex items-center justify-center"
+        >
+          {{ noteTag.text }}
+        </p>
+        <p v-if="note.tags.length > 1">+{{ note.tags.length - 1 }}</p>
+      </div>
+      <div class="flex items-center">
+        <IconButton
+          class="mr-2"
+          :class="{
+            'text-secondary-500': note.isFav
+          }"
+          @click="toggleFav(note)"
+          @click.native.stop=""
+        >
+          <FavIcon
+            class="w-2"
+            :class="{
+              'fill-current': note.isFav
+            }"
+          />
+        </IconButton>
+        <IconButton
+          class="bg-primary-500 text-neutral-600"
+          @click="remove(note)"
+          @click.native.stop=""
+        >
+          <TrashIcon class="w-2 fill"
+        /></IconButton>
+      </div>
     </div>
   </article>
 </template>
 
 <script>
 import FavIcon from '@/assets/svg/heart.svg'
+import TrashIcon from '@/assets/svg/trash.svg'
 import { createDateString } from '@/utils/date'
-import Button from '@/components/_Button'
+import IconButton from '@/components/_IconButton'
 
 export default {
   components: {
     FavIcon,
-    Button
+    TrashIcon,
+    IconButton
   },
 
   props: {
@@ -70,15 +83,15 @@ export default {
     }
   },
 
-  data() {
-    return {
-      isActiveForDelete: false
-    }
-  },
-
   computed: {
-    dateString() {
-      return createDateString(this.note.createdDate)
+    month() {
+      return createDateString(this.note.createdDate, { month: 'short' })
+    },
+    day() {
+      return createDateString(this.note.createdDate, { day: '2-digit' })
+    },
+    year() {
+      return createDateString(this.note.createdDate, { year: 'numeric' })
     },
     tag() {
       return this.$route.query.tag ? this.$route.query.tag : ''
@@ -101,23 +114,15 @@ export default {
     },
 
     remove(note) {
-      if (this.isActiveForDelete) {
-        if (this.tag === 'trash') {
-          this.$store.dispatch('deleteNote', note)
-        } else {
-          this.note.tags.push({ text: 'Trash' })
-          this.$store.dispatch('updateNote', this.note)
-        }
-        this.isActiveForDelete = false
+      if (this.tag === 'trash') {
+        this.$store.dispatch('deleteNote', note)
       } else {
-        this.isActiveForDelete = true
-        setTimeout(() => {
-          this.isActiveForDelete = false
-        }, 4000)
+        this.note.tags.push({ text: 'Trash' })
+        this.$store.dispatch('updateNote', this.note)
       }
     },
 
-    updateFavState(note) {
+    toggleFav(note) {
       const data = {
         ...note,
         isFav: !this.note.isFav
@@ -131,10 +136,6 @@ export default {
 </script>
 
 <style scoped>
-/* .PrivyNoteTeaser:focus {
-  outline: theme('colors.porange.dark') solid 0.5rem;
-} */
-
 .hyphens-auto {
   hyphens: auto;
 }

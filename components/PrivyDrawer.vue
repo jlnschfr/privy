@@ -1,6 +1,6 @@
 <template>
   <section>
-    <transition name="slide-right">
+    <transition name="mobile-slide-right">
       <aside
         v-if="isActive || !isMobile"
         class="w-4/5 sm:max-w-drawer fixed top-0 right-0 sm:left-0 z-50 bg-neutral-100 h-full text-neutral-300 flex flex-col justify-between py-4"

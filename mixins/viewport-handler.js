@@ -9,7 +9,7 @@ export default {
   },
 
   created() {
-    this.resizeHandler = debounce(this.handleResize.bind(this), 250)
+    this.resizeHandler = debounce(this.handleResize.bind(this), 150)
     window.addEventListener('resize', this.resizeHandler)
   },
 
