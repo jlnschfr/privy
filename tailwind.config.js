@@ -42,7 +42,8 @@ module.exports = {
         '3vw': '3vw',
         '4vw': '4vw',
         '5vw': '5vw',
-        '6vw': '6vw'
+        '6vw': '6vw',
+        app: 'calc(18rem + 4vw)'
       },
       inset: {
         '0': 0,

@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import NotesHandler from '@/mixins/notes-handler.js'
+import TagHandler from '@/mixins/tag-handler.js'
 import PrivyNoteOverview from '@/components/PrivyNoteOverview'
 
 export default {
@@ -11,49 +13,6 @@ export default {
   components: {
     PrivyNoteOverview
   },
-
-  computed: {
-    tag() {
-      return this.$route.query.tag ? this.$route.query.tag : ''
-    },
-    notes() {
-      return this.$store.getters.getNotes()
-    },
-    notesNotTrashed() {
-      return this.notes.filter(
-        (note) => !note.tags.some((tag) => tag.text === 'Trash')
-      )
-    },
-    notesTrashed() {
-      return this.notes.filter((note) =>
-        note.tags.some((tag) => tag.text === 'Trash')
-      )
-    },
-    filteredNotes() {
-      if (this.tag === 'trash') {
-        return this.notesTrashed
-      } else if (this.tag) {
-        return this.getNotesNotTrashedFromTag(this.tag)
-      } else {
-        return this.notesNotTrashed
-      }
-    }
-  },
-
-  watch: {
-    tag() {
-      this.$store.dispatch('setCurrentTag', this.tag)
-    }
-  },
-
-  methods: {
-    getNotesNotTrashedFromTag(currentTag) {
-      return this.notesNotTrashed.filter((note) =>
-        note.tags.some(
-          (tag) => tag.text.toLowerCase() === currentTag.toLowerCase()
-        )
-      )
-    }
-  }
+  mixins: [NotesHandler, TagHandler]
 }
 </script>

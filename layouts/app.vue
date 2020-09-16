@@ -6,10 +6,9 @@
     <PrivyDrawer
       :is-active="showDrawer"
       :user="user"
-      :notes="notes"
       @toggle-drawer="showDrawer = !showDrawer"
     />
-    <main class="p-4vw relative">
+    <main class="p-4vw sm:pl-app relative">
       <Spinner :is-active="isFetchingNotes || !(notes && user)" />
       <nuxt v-if="notes && user" />
     </main>
