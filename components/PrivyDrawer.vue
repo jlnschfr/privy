@@ -49,7 +49,7 @@
         </div>
         <footer class="px-6 mt-4">
           <ul class="w-full">
-            <li>Weather</li>
+            <li><Weather /></li>
             <li class="mt-2">
               <button class="flex items-center">
                 <SunIcon class="w-2 mr-1" /> Light Mode
@@ -88,6 +88,7 @@ import ViewportHandler from '@/mixins/viewport-handler.js'
 import LogoAnimator from '@/mixins/logo-animator.js'
 import NotesHandler from '@/mixins/notes-handler.js'
 import TagHandler from '@/mixins/tag-handler.js'
+import Weather from '@/components/_Weather'
 
 export default {
   components: {
@@ -96,7 +97,8 @@ export default {
     TrashIcon,
     GridIcon,
     HashIcon,
-    SunIcon
+    SunIcon,
+    Weather
   },
   mixins: [ViewportHandler, LogoAnimator, NotesHandler, TagHandler],
   props: {
