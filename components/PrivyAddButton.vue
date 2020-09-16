@@ -1,18 +1,22 @@
 <template>
   <transition name="fade">
     <div v-if="isActive" class="fixed bottom-2r right-4r">
-      <CircleLink to="/note"> <PlusIcon class="fill-current w-3"/></CircleLink>
+      <nuxt-link
+        tabindex="1"
+        to="/note"
+        class="bg-secondary-500 shadow-lg text-white rounded-full h-16 w-16 flex items-center justify-center"
+      >
+        <PlusIcon class="fill-current w-4" />
+      </nuxt-link>
     </div>
   </transition>
 </template>
 
 <script>
-import CircleLink from '@/components/_CircleLink'
 import PlusIcon from '@/assets/svg/plus.svg'
 
 export default {
   components: {
-    CircleLink,
     PlusIcon
   },
 
