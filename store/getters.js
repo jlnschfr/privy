@@ -26,5 +26,14 @@ export default {
   getCurrentTag: (state) => () => {
     if (!state.currentTag) return ''
     return state.currentTag
+  },
+
+  getSnackbar: (state) => () => {
+    if (!state.snackbar) return null
+    return state.snackbar
+  },
+
+  getSnackbarIsActive: (state) => () => {
+    return state.snackbarIsActive
   }
 }

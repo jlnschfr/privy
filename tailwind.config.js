@@ -48,11 +48,12 @@ module.exports = {
       },
       inset: {
         '0': 0,
-        '1r': '1vw',
-        '2r': '2vw',
-        '3r': '3vw',
-        '4r': '4vw',
-        'notes-mobile': 'calc((((100vw - 8vw) / 7) * 2) + 4vw - 5px)'
+        '1vw': '1vw',
+        '2vw': '2vw',
+        '3vw': '3vw',
+        '4vw': '4vw',
+        'notes-mobile': 'calc((((100vw - 8vw) / 7) * 2) + 4vw - 5px)',
+        '50': '50%'
       },
       minHeight: {
         detail: 'calc(100vh - 8vw - 2rem - 54px)'
@@ -62,6 +63,9 @@ module.exports = {
       },
       maxWidth: {
         drawer: '18rem'
+      },
+      minWidth: {
+        snackbar: '18rem'
       },
       transitionProperty: {
         border: 'border'

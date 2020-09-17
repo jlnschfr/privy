@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="w-full">{{ location }}</div>
-    <div class="flex items-center mt-2">
-      <component :is="icon" class="fill-current w-7" />
+    <div v-if="temperature !== ''" class="flex items-center mt-2">
+      <component :is="icon" class="fill-current w-6" />
       <div>
         <p class="text-2xl leading-none">{{ Math.round(temperature) }}°</p>
         <p>{{ description }}</p>
@@ -44,11 +44,26 @@ export default {
   },
   data() {
     return {
-      temperature: 0,
+      temperature: '',
       location: '',
       description: '',
       icon: '',
-      iconMap: {
+      iconMap: {},
+      isNight: false
+    }
+  },
+  mounted() {
+    this.interval = setInterval(this.getLocation.bind(this), 300000)
+    this.getLocation()
+  },
+
+  destroyed() {
+    clearInterval(this.interval)
+  },
+
+  methods: {
+    generateIconMap() {
+      this.iconMap = {
         freezing_rain_heavy: 'SleetIcon',
         freezing_rain: 'SleetIcon',
         freezing_rain_light: 'SleetIcon',
@@ -69,22 +84,11 @@ export default {
         fog: 'FogIcon',
         cloudy: 'CloudlyIcon',
         mostly_cloudy: 'CloudlyIcon',
-        partly_cloudy: 'DaySunnyOvercastIcon',
-        mostly_clear: 'DaySunnyOvercastIcon',
-        clear: 'DaySunnyIcon'
+        partly_cloudy: 'CloudlyIcon',
+        mostly_clear: 'CloudlyIcon',
+        clear: this.isNight ? 'NightClearIcon' : 'DaySunnyIcon'
       }
-    }
-  },
-  mounted() {
-    this.getLocation()
-    // TODO: init api interval
-  },
-
-  destroyed() {
-    // TODO: destroy api interval
-  },
-
-  methods: {
+    },
     async getLocation() {
       const url = new URL('https://geolocation-db.com/json/')
       const response = await fetch(url)
@@ -92,7 +96,10 @@ export default {
         const json = await response.json()
         const lat = json.latitude
         const lon = json.longitude
-        this.location = `${json.city}, ${json.country_name}`
+        console.log(json)
+        this.location = json.city
+          ? `${json.city}, ${json.country_name}`
+          : `${json.country_name}`
         this.getWeather(lat, lon)
       }
     },
@@ -106,9 +113,9 @@ export default {
       const response = await fetch(url)
       if (response.ok) {
         const json = await response.json()
-        // TODO: make icon map computed property
-        this.icon = this.iconMap[json.weather_code.value]
         this.isNight = new Date(json.sunset.value) < new Date()
+        this.generateIconMap()
+        this.icon = this.iconMap[json.weather_code.value]
         this.temperature = json.temp.value
         this.description = json.weather_code.value.replace('_', ' ')
       }

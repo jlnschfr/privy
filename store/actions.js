@@ -55,6 +55,23 @@ export default {
     }
   },
 
+  setCurrentTag({ commit }, payload) {
+    commit('setCurrentTag', payload)
+  },
+
+  showSnackbar({ commit }, payload) {
+    commit('setSnackbarIsActive', false)
+
+    setTimeout(() => {
+      commit('setSnackbar', payload)
+      commit('setSnackbarIsActive', true)
+    }, 100)
+  },
+
+  hideSnackbar({ commit }) {
+    commit('setSnackbarIsActive', false)
+  },
+
   addNote({ state, commit }, payload) {
     return new Promise((resolve) => {
       commit('addNote', payload)
@@ -113,9 +130,5 @@ export default {
         commit('setNotes', notes)
         commit('sortNotes')
       })
-  },
-
-  setCurrentTag({ commit }, payload) {
-    commit('setCurrentTag', payload)
   }
 }

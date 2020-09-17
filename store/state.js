@@ -4,5 +4,7 @@ export default () => ({
   store: null,
   isFetchingNotes: false,
   isPersistent: false,
-  currentTag: null
+  currentTag: null,
+  snackbar: null,
+  snackbarIsActive: false
 })

@@ -48,11 +48,19 @@ export default {
   setStore(state, payload) {
     state.store = firestore.collection('user').doc(payload)
   },
+  setSnackbar(state, payload) {
+    state.snackbar = payload
+  },
+  setSnackbarIsActive(state, payload) {
+    state.snackbarIsActive = payload
+  },
   reset(state) {
     state.user = null
     state.isFetchingNotes = false
     state.currentTag = null
     state.notes = null
     state.store = null
+    state.snackbar = null
+    state.snackbarIsActive = false
   }
 }

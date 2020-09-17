@@ -5,7 +5,6 @@
     <PrivyHeader :user="user" @toggle-drawer="showDrawer = !showDrawer" />
     <PrivyDrawer
       :is-active="showDrawer"
-      :user="user"
       @toggle-drawer="showDrawer = !showDrawer"
     />
     <main class="p-4vw sm:pl-app relative">
@@ -13,6 +12,7 @@
       <nuxt v-if="notes && user" />
     </main>
     <PrivyAddButton :is-active="showButton" />
+    <PrivySnackbar />
   </div>
 </template>
 
@@ -22,6 +22,7 @@ import ContentUpdater from '@/mixins/content-updater.js'
 import PrivyHeader from '@/components/PrivyHeader'
 import PrivyDrawer from '@/components/PrivyDrawer'
 import PrivyAddButton from '@/components/PrivyAddButton'
+import PrivySnackbar from '@/components/PrivySnackbar'
 import Spinner from '@/components/_Spinner'
 
 export default {
@@ -30,6 +31,7 @@ export default {
     PrivyHeader,
     PrivyDrawer,
     PrivyAddButton,
+    PrivySnackbar,
     Spinner
   },
   mixins: [AuthHandler, ContentUpdater],

@@ -114,11 +114,30 @@ export default {
     },
 
     remove(note) {
-      if (this.tag === 'trash') {
+      const alreadyTrashed = this.tag === 'trash'
+
+      if (alreadyTrashed) {
         this.$store.dispatch('deleteNote', note)
       } else {
         this.note.tags.push({ text: 'Trash' })
         this.$store.dispatch('updateNote', this.note)
+      }
+
+      this.$store.dispatch('showSnackbar', {
+        text: 'Item deleted',
+        callback: () => {
+          this.undoRemove(note, alreadyTrashed)
+        }
+      })
+    },
+
+    undoRemove(note, alreadyTrashed) {
+      if (alreadyTrashed) {
+        this.$store.dispatch('addNote', note)
+      } else {
+        const index = note.tags.findIndex((el) => el.text === 'Trash')
+        note.tags.splice(index, 1)
+        this.$store.dispatch('updateNote', note)
       }
     },
 

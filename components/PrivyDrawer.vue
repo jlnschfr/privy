@@ -105,11 +105,6 @@ export default {
     isActive: {
       type: Boolean,
       required: true
-    },
-    user: {
-      type: Object,
-      required: false,
-      default: () => {}
     }
   },
 

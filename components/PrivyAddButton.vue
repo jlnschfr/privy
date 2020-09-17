@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-if="isActive" class="fixed bottom-2r right-4r">
+    <div v-if="isActive" class="fixed bottom-2vw right-4vw">
       <nuxt-link
         tabindex="1"
         to="/note"
