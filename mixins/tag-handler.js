@@ -20,9 +20,9 @@ export default {
     }
   },
   methods: {
-    getTagAmount(currentTag) {
-      if (currentTag) {
-        return this.availableTags.filter((note) => note === currentTag).length
+    getTagAmount(tag) {
+      if (tag) {
+        return this.availableTags.filter((note) => note === tag).length
       } else {
         return this.notesNotTrashed.length
       }

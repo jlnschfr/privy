@@ -1,5 +1,5 @@
 <template>
-  <PrivyNoteDetail :id="id" :data="data" />
+  <PrivyNoteDetail :id="id" :note="note" />
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
     id() {
       return this.$route.query.id
     },
-    data() {
+    note() {
       return this.$store.getters.getNote(this.id)
     }
   }

@@ -64,16 +64,16 @@
 </template>
 
 <script>
-import FavIcon from '@/assets/svg/heart.svg'
-import TrashIcon from '@/assets/svg/trash.svg'
 import { createDateString } from '@/utils/date'
+import FavIcon from '@/assets/svg/heart.svg'
 import IconButton from '@/components/_IconButton'
+import TrashIcon from '@/assets/svg/trash.svg'
 
 export default {
   components: {
     FavIcon,
-    TrashIcon,
-    IconButton
+    IconButton,
+    TrashIcon
   },
 
   props: {

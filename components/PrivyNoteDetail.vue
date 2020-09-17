@@ -15,7 +15,11 @@
       </header>
 
       <div class="p-4r xl:p-2r">
-        <DraggableItems :key="key" :items="items" @changed="items = $event" />
+        <PrivyDraggableItems
+          :key="key"
+          :items="items"
+          @changed="items = $event"
+        />
       </div>
     </article>
 
@@ -41,21 +45,21 @@
 </template>
 
 <script>
-import isEqual from 'lodash.isequal'
 import debounce from 'lodash.debounce'
+import isEqual from 'lodash.isequal'
 import uuid from 'uuid'
+import { createDateString } from '@/utils/date'
+import Button from '@/components/_Button'
+import PrivyDraggableItems from '@/components/PrivyDraggableItems'
 import Tags from '@/components/_Tags'
 import TitleTextarea from '@/components/_TitleTextarea'
-import Button from '@/components/_Button'
-import DraggableItems from '@/components/_DraggableItems'
-import { createDateString } from '@/utils/date'
 
 export default {
   components: {
-    DraggableItems,
     Button,
-    TitleTextarea,
-    Tags
+    PrivyDraggableItems,
+    Tags,
+    TitleTextarea
   },
 
   props: {
@@ -64,7 +68,7 @@ export default {
       required: false,
       default: ''
     },
-    data: {
+    note: {
       type: Object,
       required: false,
       default: () => {}
@@ -73,17 +77,17 @@ export default {
 
   data() {
     return {
-      title: this.data.title || '',
-      items: this.data.items || [],
-      isFav: this.data.isFav || false,
-      tags: this.data.tags || [],
+      title: this.note.title || '',
+      items: this.note.items || [],
+      isFav: this.note.isFav || false,
+      tags: this.note.tags || [],
       key: 0
     }
   },
 
   computed: {
     dateString: function() {
-      return createDateString(this.data.createdDate)
+      return createDateString(this.note.createdDate)
     },
     tasks: function() {
       return this.items.filter((item) => {
@@ -112,19 +116,19 @@ export default {
     tags: debounce(function() {
       this.onChange()
     }, 500),
-    data: function() {
-      if (this.data.title && this.title !== this.data.title) {
-        this.title = this.data.title
+    note: function() {
+      if (this.note.title && this.title !== this.note.title) {
+        this.title = this.note.title
       }
-      if (this.data.isFav && this.isFav !== this.data.isFav) {
-        this.isFav = this.data.isFav
+      if (this.note.isFav && this.isFav !== this.note.isFav) {
+        this.isFav = this.note.isFav
       }
-      if (this.data.items && !isEqual(this.items, this.data.items)) {
-        this.items = this.data.items
+      if (this.note.items && !isEqual(this.items, this.note.items)) {
+        this.items = this.note.items
         this.key += 1
       }
-      if (this.data.tags && !isEqual(this.tags, this.data.tags)) {
-        this.tags = this.data.tags
+      if (this.note.tags && !isEqual(this.tags, this.note.tags)) {
+        this.tags = this.note.tags
       }
     }
   },

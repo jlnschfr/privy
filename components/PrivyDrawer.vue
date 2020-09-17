@@ -78,33 +78,39 @@
 </template>
 
 <script>
-import PrivyIcon from '@/assets/svg/privy.svg'
-import LogoutIcon from '@/assets/svg/logout.svg'
 import GridIcon from '@/assets/svg/grid.svg'
 import HashIcon from '@/assets/svg/hash.svg'
-import TrashIcon from '@/assets/svg/trash.svg'
-import SunIcon from '@/assets/svg/sun.svg'
-import ViewportHandler from '@/mixins/viewport-handler.js'
 import LogoAnimator from '@/mixins/logo-animator.js'
+import LogoutIcon from '@/assets/svg/logout.svg'
 import NotesHandler from '@/mixins/notes-handler.js'
+import PrivyIcon from '@/assets/svg/privy.svg'
+import SunIcon from '@/assets/svg/sun.svg'
 import TagHandler from '@/mixins/tag-handler.js'
+import TrashIcon from '@/assets/svg/trash.svg'
+import ViewportHandler from '@/mixins/viewport-handler.js'
 import Weather from '@/components/_Weather'
 
 export default {
   components: {
-    PrivyIcon,
-    LogoutIcon,
-    TrashIcon,
     GridIcon,
     HashIcon,
+    LogoutIcon,
+    PrivyIcon,
     SunIcon,
+    TrashIcon,
     Weather
   },
-  mixins: [ViewportHandler, LogoAnimator, NotesHandler, TagHandler],
+  mixins: [LogoAnimator, NotesHandler, TagHandler, ViewportHandler],
   props: {
     isActive: {
       type: Boolean,
       required: true
+    }
+  },
+
+  computed: {
+    notes() {
+      return this.$store.getters.getNotes()
     }
   },
 

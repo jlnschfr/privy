@@ -26,14 +26,7 @@ export default {
   props: {
     notes: {
       type: Array,
-      required: false,
-      default: () => []
-    }
-  },
-
-  computed: {
-    isFetchingNotes() {
-      return this.$store.getters.getIsFetchingNotes()
+      required: true
     }
   }
 }

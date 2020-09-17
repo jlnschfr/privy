@@ -50,15 +50,15 @@
 </template>
 
 <script>
-import PrivyIcon from '@/assets/svg/privy.svg'
-import Input from '@/components/_Input'
 import Button from '@/components/_Button'
+import Input from '@/components/_Input'
+import PrivyIcon from '@/assets/svg/privy.svg'
 
 export default {
   components: {
-    PrivyIcon,
+    Button,
     Input,
-    Button
+    PrivyIcon
   },
 
   data() {

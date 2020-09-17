@@ -13,6 +13,12 @@ export default {
   components: {
     PrivyNoteOverview
   },
-  mixins: [NotesHandler, TagHandler]
+  mixins: [NotesHandler, TagHandler],
+
+  computed: {
+    notes() {
+      return this.$store.getters.getNotes()
+    }
+  }
 }
 </script>

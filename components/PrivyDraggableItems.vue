@@ -81,14 +81,14 @@ export default {
       const itms = [...items]
 
       return itms.sort((a, b) => {
-        if (a.data.state && !b.data.state) {
+        if (a.data?.state && !b.data?.state) {
           return 1
         } else if (
-          (a.data.state && b.data.state) ||
-          (!a.data.state && !b.data.state)
+          (a.data?.state && b.data?.state) ||
+          (!a.data?.state && !b.data?.state)
         ) {
           return 0
-        } else if (!a.data.state && b.data.state) {
+        } else if (!a.data?.state && b.data?.state) {
           return -1
         }
       })
@@ -103,9 +103,21 @@ export default {
     },
 
     onItemDelete(uuid) {
+      const items = [...this.itms]
       const index = this.itms.findIndex((item) => item.uuid === uuid)
       this.itms.splice(index, 1)
       this.$emit('changed', this.itms)
+
+      this.$store.dispatch('showSnackbar', {
+        text: 'Item deleted',
+        callback: () => {
+          this.undoRemove(items)
+        }
+      })
+    },
+
+    undoRemove(items) {
+      this.$emit('changed', items)
     },
 
     onStart() {

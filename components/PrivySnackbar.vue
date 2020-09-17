@@ -1,5 +1,5 @@
 <template>
-  <transition v-if="active" name="fade">
+  <transition v-if="isActive" name="fade">
     <div
       class="min-w-snackbar bg-neutral-600 fixed left-50 bottom-2vw px-3 py-2 shadow-lg flex items-center justify-between"
     >
@@ -28,14 +28,14 @@ export default {
     text() {
       return this.snackbar?.text
     },
-    active() {
+    isActive() {
       return this.$store.getters.getSnackbarIsActive()
     }
   },
 
   watch: {
-    active: function() {
-      if (this.active) {
+    isActive: function() {
+      if (this.isActive) {
         if (this.timeout) {
           clearTimeout(this.timeout)
         }

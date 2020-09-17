@@ -1,8 +1,5 @@
 export default {
   computed: {
-    notes() {
-      return this.$store.getters.getNotes()
-    },
     notesTrashed() {
       return this.notes.filter((note) =>
         note.tags.some((tag) => tag.text === 'Trash')
