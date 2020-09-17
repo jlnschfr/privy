@@ -1,45 +1,35 @@
 <template>
   <section
-    class="max-w-2xl mx-auto shadow-xl text-pblue-medium min-h-detail flex flex-col justify-between bg-white"
+    class="max-w-2xl mx-auto shadow-xl min-h-detail flex flex-col justify-between bg-neutral-600"
   >
     <article>
-      <header
-        class="flex justify-between items-center border-b border-pblue-light p-4r xl:p-2r"
-      >
+      <header class="flex items-center border-b border-neutral-400 p-4">
+        <PrivyDate :date="note.createdDate" />
         <TitleTextarea
           ref="title"
           v-model="title"
-          class="flex-auto immune-for-enter"
+          class="flex-auto immune-for-enter mr-2"
         />
-        <p class="flex-initial text-right">{{ dateString }}</p>
+        <PrivyNoteInteraction :note="note" />
       </header>
 
-      <div class="p-4r xl:p-2r">
-        <PrivyDraggableItems
-          :key="key"
-          :items="items"
-          @changed="items = $event"
-        />
+      <div class="p-4">
+        <PrivyDraggableItems :items="items" @changed="items = $event" />
       </div>
     </article>
 
-    <footer>
-      <aside class="p-4r xl:p-2r">
+    <footer
+      class="flex justify-between items-end p-4 border-t border-neutral-400"
+    >
+      <aside class="max-w-tags">
         <Tags :tags="tags" @changed="tags = $event" />
       </aside>
-      <div
-        class="flex justify-between items-center p-4r xl:p-2r border-t border-pblue-light"
-      >
-        <p>
-          <span v-if="tasks.length">{{ donePercentage }}% done</span>
-        </p>
-        <nav>
-          <Button type="button" class="mr-4" @click="createRte">
-            Add Text
-          </Button>
-          <Button type="button" @click="createTask">Add Task</Button>
-        </nav>
-      </div>
+      <nav class="flex">
+        <Button class="mr-4" @click="createRte">
+          Add Text
+        </Button>
+        <Button @click="createTask">Add Task</Button>
+      </nav>
     </footer>
   </section>
 </template>
@@ -48,16 +38,19 @@
 import debounce from 'lodash.debounce'
 import isEqual from 'lodash.isequal'
 import uuid from 'uuid'
-import { createDateString } from '@/utils/date'
 import Button from '@/components/_Button'
+import PrivyDate from '@/components/PrivyDate'
 import PrivyDraggableItems from '@/components/PrivyDraggableItems'
+import PrivyNoteInteraction from '@/components/PrivyNoteInteraction'
 import Tags from '@/components/_Tags'
 import TitleTextarea from '@/components/_TitleTextarea'
 
 export default {
   components: {
     Button,
+    PrivyDate,
     PrivyDraggableItems,
+    PrivyNoteInteraction,
     Tags,
     TitleTextarea
   },
@@ -80,29 +73,7 @@ export default {
       title: this.note.title || '',
       items: this.note.items || [],
       isFav: this.note.isFav || false,
-      tags: this.note.tags || [],
-      key: 0
-    }
-  },
-
-  computed: {
-    dateString: function() {
-      return createDateString(this.note.createdDate)
-    },
-    tasks: function() {
-      return this.items.filter((item) => {
-        return item.type === 'Task'
-      })
-    },
-    done: function() {
-      return this.tasks.filter((item) => {
-        return item.data && item.data.state
-      })
-    },
-    donePercentage: function() {
-      return this.tasks.length
-        ? Math.round((this.done.length * 100) / this.tasks.length)
-        : ''
+      tags: this.note.tags || []
     }
   },
 
@@ -125,7 +96,6 @@ export default {
       }
       if (this.note.items && !isEqual(this.items, this.note.items)) {
         this.items = this.note.items
-        this.key += 1
       }
       if (this.note.tags && !isEqual(this.tags, this.note.tags)) {
         this.tags = this.note.tags
@@ -195,6 +165,7 @@ export default {
         }
       }
     },
+
     createRte() {
       const rte = {
         type: 'Rte',

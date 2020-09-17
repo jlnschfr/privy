@@ -1,7 +1,7 @@
 <template>
   <button
     :type="type"
-    class="bg-transparent text-neutral-200 border-neutral-200 border block px-4 py-1"
+    class="bg-transparent text-neutral-200 border-neutral-200 border block px-4 py-0_5"
     @click="$emit('click')"
   >
     <slot />

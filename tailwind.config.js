@@ -52,20 +52,20 @@ module.exports = {
         '2vw': '2vw',
         '3vw': '3vw',
         '4vw': '4vw',
-        'notes-mobile': 'calc((((100vw - 8vw) / 7) * 2) + 4vw - 5px)',
         '50': '50%'
       },
       minHeight: {
-        detail: 'calc(100vh - 8vw - 2rem - 54px)'
+        detail: 'calc(100vh - 8vw - 57px)'
       },
       maxHeight: {
-        drawerNav: 'calc(100vh - 374px)'
-      },
-      maxWidth: {
-        drawer: '18rem'
+        drawerNav: 'calc(100vh - 24rem)'
       },
       minWidth: {
         snackbar: '18rem'
+      },
+      maxWidth: {
+        drawer: '18rem',
+        tags: '15rem;'
       },
       transitionProperty: {
         border: 'border'
