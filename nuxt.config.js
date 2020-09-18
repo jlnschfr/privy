@@ -50,6 +50,10 @@ export default {
    */
   modules: ['nuxt-svg-loader', '@nuxtjs/pwa'],
 
+  router: {
+    trailingSlash: true
+  },
+
   pwa: {
     meta: {
       theme_color: '#285799'

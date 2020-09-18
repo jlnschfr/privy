@@ -4,7 +4,7 @@
   >
     <div class="flex items-center md:hidden">
       <h1 aria-label="Privy Notes" class="mr-2">
-        <nuxt-link to="/notes">
+        <nuxt-link to="/notes/">
           <PrivyIcon ref="svg" class="PrivyIcon w-4"
         /></nuxt-link>
       </h1>

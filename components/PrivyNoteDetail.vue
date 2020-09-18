@@ -126,7 +126,7 @@ export default {
     create() {
       const data = this.collectData()
       this.$store.dispatch('addNote', data).then((id) => {
-        this.$router.push(`/note?id=${id}`)
+        this.$router.push(`/note/?id=${id}`)
       })
     },
 

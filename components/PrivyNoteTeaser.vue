@@ -68,7 +68,7 @@ export default {
 
   methods: {
     open(id) {
-      this.$router.push(`/note?id=${id}`)
+      this.$router.push(`/note/?id=${id}`)
     }
   }
 }

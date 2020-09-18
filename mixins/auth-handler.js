@@ -35,7 +35,7 @@ export default {
 
         if (this.$store.getters.getUser()) {
           if (this.currentRoute === 'index') {
-            this.$router.push('/notes')
+            this.$router.push('/notes/')
           }
         } else if (this.currentRoute !== 'index') {
           this.$router.push('/')

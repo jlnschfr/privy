@@ -15,7 +15,7 @@
             <ul class="w-full">
               <li>
                 <nuxt-link
-                  to="notes"
+                  to="/notes/"
                   class="flex items-center outline-none"
                   :class="{ 'text-neutral-600': currentTag === '' }"
                 >
@@ -24,7 +24,7 @@
               </li>
               <li class="mt-2">
                 <nuxt-link
-                  to="notes?tag=trash"
+                  to="/notes/?tag=trash"
                   class="flex items-center outline-none"
                   :class="{ 'text-neutral-600': currentTag === 'trash' }"
                 >
@@ -35,7 +35,7 @@
               <li v-for="(tag, key) in reducedTags" :key="key" class="mt-2">
                 <div class="flex justify-between">
                   <nuxt-link
-                    :to="`notes?tag=${tag}`"
+                    :to="`/notes/?tag=${tag}`"
                     class="flex items-center outline-none"
                     :class="{ 'text-neutral-600': tag === currentTag }"
                   >

@@ -55,7 +55,7 @@ export default {
         this.$store.dispatch('updateNote', this.note)
       }
 
-      this.$router.push(`/notes`)
+      this.$router.push(`/notes/`)
 
       this.$store.dispatch('showSnackbar', {
         text: 'Item deleted',
