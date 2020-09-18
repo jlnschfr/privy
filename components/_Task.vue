@@ -7,9 +7,11 @@
       class="hidden"
       @input="onChange('checkbox')"
     />
-    <label :for="uuid" class="pr-2">
-      <CheckboxFilled v-if="state" class="w-3 h-3 fill-current" />
-      <Checkbox v-else class="w-3 h-3 fill-current" />
+    <label :for="uuid" class="flex items-center pr-2">
+      <span
+        class="inline-flex border border-neutral-200 w-3 h-3 items-center justify-center"
+        ><CheckIcon v-if="state" class="w-2" />
+      </span>
     </label>
     <Input
       v-model="text"
@@ -22,14 +24,12 @@
 </template>
 
 <script>
-import Checkbox from '@/assets/svg/checkbox-unchecked.svg'
-import CheckboxFilled from '@/assets/svg/checkbox-checked.svg'
+import CheckIcon from '@/assets/svg/check.svg'
 import Input from '@/components/_Input'
 
 export default {
   components: {
-    Checkbox,
-    CheckboxFilled,
+    CheckIcon,
     Input
   },
 

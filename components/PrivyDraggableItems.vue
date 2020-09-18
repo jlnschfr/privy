@@ -24,7 +24,7 @@
           @update="onItemUpdate"
         ></component>
         <button
-          class="Dragger absolute flex justify-center items-center w-3 inset-y-0 left-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-1/2 md:-translate-x-full"
+          class="Dragger absolute flex justify-center items-center w-3 inset-y-0 left-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-1/2"
         >
           <DragIcon class="DragIcon fill-current" />
         </button>
