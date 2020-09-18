@@ -26,11 +26,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: '#F9B48A' },
-
+  loading: false,
   layoutTransition: 'fade',
 
   /*
@@ -38,13 +34,9 @@ export default {
    */
   css: [
     'assets/css/fonts.css',
-    'assets/css/transitions.css',
+    'assets/css/test.css',
     'assets/css/animations.css'
   ],
-
-  router: {
-    middleware: 'auth'
-  },
 
   /*
    ** Plugins to load before mounting the App
@@ -60,7 +52,7 @@ export default {
 
   pwa: {
     meta: {
-      theme_color: '#0954F9'
+      theme_color: '#285799'
     }
   },
 
