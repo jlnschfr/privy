@@ -32,18 +32,14 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    'assets/css/fonts.css',
-    'assets/css/transitions.css',
-    'assets/css/animations.css'
-  ],
+  css: ['~/assets/css/index.css'],
 
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
     { src: '~/plugins/firebase' },
-    { src: '@/plugins/idle-vue.js', mode: 'client' }
+    { src: '~/plugins/idle-vue.js', mode: 'client' }
   ],
   /*
    ** Nuxt.js modules
