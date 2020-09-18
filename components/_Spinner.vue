@@ -1,8 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-if="isActive" class="absolute right-4r top-1r">
-      <SpinnerIcon class="w-4" />
-    </div>
+    <SpinnerIcon v-if="isActive" class="w-4" />
   </transition>
 </template>
 

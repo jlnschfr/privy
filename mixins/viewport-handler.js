@@ -11,6 +11,7 @@ export default {
   created() {
     this.resizeHandler = debounce(this.handleResize.bind(this), 150)
     window.addEventListener('resize', this.resizeHandler)
+    this.handleResize()
   },
 
   beforeDestroy() {
@@ -19,7 +20,7 @@ export default {
 
   methods: {
     handleResize() {
-      this.isMobile = !window.matchMedia('(min-width: 640px)').matches
+      this.isMobile = !window.matchMedia('(min-width: 1024px)').matches
     }
   }
 }

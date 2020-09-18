@@ -2,13 +2,21 @@
   <div
     class="font-body font-normal text-neutral-200 bg-neutral-500 min-h-screen"
   >
-    <PrivyHeader :user="user" @toggle-drawer="showDrawer = !showDrawer" />
+    <PrivyHeader
+      :user="user"
+      :notes="notes"
+      :is-fetching-notes="isFetchingNotes"
+      @toggle-drawer="showDrawer = !showDrawer"
+    />
     <PrivyDrawer
       :is-active="showDrawer"
       @toggle-drawer="showDrawer = !showDrawer"
     />
-    <main class="p-4vw sm:pl-app relative">
-      <Spinner :is-active="isFetchingNotes || !(notes && user)" />
+    <main class="p-4vw md:pl-app relative">
+      <Spinner
+        :is-active="isFetchingNotes || !(notes && user)"
+        class="hidden md:block fixed bottom-2vw"
+      />
       <nuxt v-if="notes && user" />
     </main>
     <PrivyAddButton :is-active="showButton" />

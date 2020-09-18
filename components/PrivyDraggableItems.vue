@@ -12,7 +12,7 @@
       <div
         v-for="item in itms"
         :key="item.uuid"
-        class="group relative pr-4r xl:pr-2r mt-4 first:mt-0 pl-4r sm:pl-0"
+        class="group relative px-2 mt-4 first:mt-0"
       >
         <component
           :is="item.type"
@@ -24,12 +24,12 @@
           @update="onItemUpdate"
         ></component>
         <button
-          class="Dragger absolute flex justify-center w-3 inset-y-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          class="Dragger absolute flex justify-center items-center w-3 inset-y-0 left-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-1/2 md:-translate-x-full"
         >
           <DragIcon class="DragIcon fill-current" />
         </button>
         <button
-          class="Close absolute flex justify-center w-3 inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          class="Close absolute flex justify-center items-center w-3 inset-y-0 right-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           @click="onItemDelete(item.uuid)"
         >
           <CloseIcon class="CloseIcon fill-current w-2" />
@@ -40,20 +40,20 @@
 </template>
 
 <script>
-import Draggable from 'vuedraggable'
 import isEqual from 'lodash.isequal'
-import DragIcon from '@/assets/svg/drag.svg'
+import Draggable from 'vuedraggable'
 import CloseIcon from '@/assets/svg/cross.svg'
+import DragIcon from '@/assets/svg/drag.svg'
 import Rte from '@/components/_Rte'
 import Task from '@/components/_Task'
 
 export default {
   components: {
+    CloseIcon,
     Draggable,
-    Rte,
-    Task,
     DragIcon,
-    CloseIcon
+    Rte,
+    Task
   },
   props: {
     items: {
@@ -96,15 +96,15 @@ export default {
 
     onItemUpdate(payload) {
       const index = this.itms.findIndex((item) => item.uuid === payload.uuid)
-      const items = this.itms.slice()
+      const items = [...this.itms]
       items[index].data = payload.data
       this.itms = this.sortItems(items)
       this.$emit('changed', this.itms)
     },
 
     onItemDelete(uuid) {
-      const items = [...this.itms]
       const index = this.itms.findIndex((item) => item.uuid === uuid)
+      const items = [...this.itms]
       this.itms.splice(index, 1)
       this.$emit('changed', this.itms)
 
@@ -158,29 +158,11 @@ export default {
 </script>
 
 <style>
-.Dragger {
-  left: 0;
-  transform: translateX(-100%);
-}
-
 .DragIcon {
   width: 0.75rem;
 }
 
 .Ghost {
-  background-color: theme('colors.pgray.light');
-  color: theme('colors.pblue.dark');
-}
-
-@media (max-width: 640px) {
-  .Dragger,
-  .Close {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .Dragger {
-    transform: translateX(-50%);
-  }
+  background-color: theme('colors.neutral.500');
 }
 </style>

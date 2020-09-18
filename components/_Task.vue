@@ -14,7 +14,7 @@
     <Input
       v-model="text"
       class="border-none"
-      :class="{ 'line-through text-pgray-dark': state }"
+      :class="{ 'line-through': state }"
       type="text"
       @input="onChange('text')"
     />
@@ -22,15 +22,15 @@
 </template>
 
 <script>
-import Input from '@/components/_Input'
-import CheckboxFilled from '@/assets/svg/checkbox-checked.svg'
 import Checkbox from '@/assets/svg/checkbox-unchecked.svg'
+import CheckboxFilled from '@/assets/svg/checkbox-checked.svg'
+import Input from '@/components/_Input'
 
 export default {
   components: {
-    Input,
+    Checkbox,
     CheckboxFilled,
-    Checkbox
+    Input
   },
 
   props: {

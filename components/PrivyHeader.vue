@@ -1,18 +1,21 @@
 <template>
   <header
-    class="flex justify-between sm:justify-end bg-neutral-600 border-b border-neutral-400 items-center px-4 py-2"
+    class="flex justify-between md:justify-end bg-neutral-600 border-b border-neutral-400 items-center px-4vw py-2"
   >
-    <h1 class="block sm:hidden" aria-label="Privy Notes">
-      <nuxt-link to="/notes">
-        <PrivyIcon ref="svg" class="PrivyIcon w-4"
-      /></nuxt-link>
-    </h1>
-    <nav v-if="user" class="flex sm:hidden items-center">
+    <div class="flex items-center md:hidden">
+      <h1 aria-label="Privy Notes" class="mr-2">
+        <nuxt-link to="/notes">
+          <PrivyIcon ref="svg" class="PrivyIcon w-4"
+        /></nuxt-link>
+      </h1>
+      <Spinner :is-active="isFetchingNotes || !(notes && user)" />
+    </div>
+    <nav v-if="user" class="flex md:hidden items-center">
       <p @click="$emit('toggle-drawer')">
         <MenuIcon class="w-3 fill-current cursor-pointer" />
       </p>
     </nav>
-    <p class="hidden sm:block">logged in as {{ user ? user.email : '' }}</p>
+    <p class="hidden md:block">logged in as {{ user ? user.email : '' }}</p>
   </header>
 </template>
 
@@ -20,11 +23,13 @@
 import LogoAnimator from '@/mixins/logo-animator.js'
 import MenuIcon from '@/assets/svg/menu.svg'
 import PrivyIcon from '@/assets/svg/privy.svg'
+import Spinner from '@/components/_Spinner'
 
 export default {
   components: {
     MenuIcon,
-    PrivyIcon
+    PrivyIcon,
+    Spinner
   },
   mixins: [LogoAnimator],
   props: {
@@ -32,6 +37,16 @@ export default {
       type: Object,
       required: false,
       default: null
+    },
+    notes: {
+      type: Array,
+      required: false,
+      default: () => {}
+    },
+    isFetchingNotes: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
 }

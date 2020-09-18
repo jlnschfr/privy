@@ -9,11 +9,16 @@ module.exports = {
     fontFamily: {
       body: ['Nunito', 'sans-serif']
     },
+    screens: {
+      md: '1024px',
+      lg: '1280px'
+    },
     extend: {
       colors: {
         neutral: {
           600: '#FFFFFF',
           500: '#F5F5F5',
+          40090: '#D7D7D7E6',
           400: '#D7D7D7',
           300: '#B4B4B4',
           200: '#4A4A4A',
@@ -52,7 +57,8 @@ module.exports = {
         '2vw': '2vw',
         '3vw': '3vw',
         '4vw': '4vw',
-        '50': '50%'
+        '50': '50%',
+        app: 'calc(50% + 6rem + 2vw)'
       },
       minHeight: {
         detail: 'calc(100vh - 8vw - 57px)'
@@ -60,12 +66,9 @@ module.exports = {
       maxHeight: {
         drawerNav: 'calc(100vh - 24rem)'
       },
-      minWidth: {
-        snackbar: '18rem'
-      },
       maxWidth: {
         drawer: '18rem',
-        tags: '15rem;'
+        tags: '14rem;'
       },
       transitionProperty: {
         border: 'border'

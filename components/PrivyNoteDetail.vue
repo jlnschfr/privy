@@ -3,7 +3,7 @@
     class="max-w-2xl mx-auto shadow-xl min-h-detail flex flex-col justify-between bg-neutral-600"
   >
     <article>
-      <header class="flex items-center border-b border-neutral-400 p-4">
+      <header class="flex items-center border-b border-neutral-400 p-3 md:p-4">
         <PrivyDate :date="note.createdDate" />
         <TitleTextarea
           ref="title"
@@ -13,18 +13,18 @@
         <PrivyNoteInteraction :note="note" />
       </header>
 
-      <div class="p-4">
+      <div class="p-3 sm:p-4">
         <PrivyDraggableItems :items="items" @changed="items = $event" />
       </div>
     </article>
 
     <footer
-      class="flex justify-between items-end p-4 border-t border-neutral-400"
+      class="flex flex-col md:flex-row justify-between items-end border-t border-neutral-400 p-3 md:p-4"
     >
-      <aside class="max-w-tags">
+      <aside class="w-full flex-shrink max-w-tags md:mr-4">
         <Tags :tags="tags" @changed="tags = $event" />
       </aside>
-      <nav class="flex">
+      <nav class="flex flex-none mt-6 md:mt-0">
         <Button class="mr-4" @click="createRte">
           Add Text
         </Button>

@@ -3,7 +3,7 @@
     <transition name="mobile-slide-right">
       <aside
         v-if="isActive || !isMobile"
-        class="w-4/5 sm:max-w-drawer fixed top-0 right-0 sm:left-0 z-50 bg-neutral-100 h-full text-neutral-300 flex flex-col justify-between py-4"
+        class="w-4/5 md:max-w-drawer fixed top-0 right-0 md:left-0 z-50 bg-neutral-100 h-full text-neutral-300 flex flex-col justify-between py-4"
       >
         <div>
           <header class="px-4 text-center">
@@ -70,7 +70,7 @@
     <transition name="fade">
       <div
         v-if="isActive"
-        class="bg-neutral-300 w-screen h-screen fixed top-0 left-0 z-40"
+        class="bg-neutral-40090 w-screen h-screen fixed top-0 left-0 z-40"
         @click="$emit('toggle-drawer')"
       ></div>
     </transition>
@@ -111,6 +111,14 @@ export default {
   computed: {
     notes() {
       return this.$store.getters.getNotes()
+    }
+  },
+
+  watch: {
+    $route(to, from) {
+      if (this.isActive && this.isMobile) {
+        this.$emit('toggle-drawer')
+      }
     }
   },
 

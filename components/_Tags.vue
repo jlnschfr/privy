@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import VueTagsInput from '@johmun/vue-tags-input'
 import isEqual from 'lodash.isequal'
+import VueTagsInput from '@johmun/vue-tags-input'
 
 export default {
   components: {
@@ -41,8 +41,8 @@ export default {
 </script>
 
 <style>
-.vue-tags-input.vue-tags-input {
-  max-width: none;
+.vue-tags-input .ti-tags {
+  align-items: center;
 }
 
 .vue-tags-input .ti-new-tag-input-wrapper {
@@ -53,6 +53,10 @@ export default {
   flex: 0 0 auto !important;
   width: 100%;
   margin-top: 1rem;
+}
+
+.vue-tags-input .ti-new-tag-input {
+  width: 100%;
 }
 
 .vue-tags-input .ti-new-tag-input::placeholder {

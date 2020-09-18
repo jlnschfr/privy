@@ -5,7 +5,7 @@
     @click="open(note.id)"
   >
     <div
-      class="flex p-4"
+      class="flex p-3 sm:p-4"
       :class="{ 'items-center': !tasks.length, 'items-end': tasks.length }"
     >
       <PrivyDate :date="note.createdDate" />
