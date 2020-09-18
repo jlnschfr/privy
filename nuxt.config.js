@@ -34,7 +34,7 @@ export default {
    */
   css: [
     'assets/css/fonts.css',
-    'assets/css/test.css',
+    'assets/css/transitions.css',
     'assets/css/animations.css'
   ],
 
