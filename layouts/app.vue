@@ -73,3 +73,8 @@ export default {
   }
 }
 </script>
+
+<style>
+@import './../assets/css/transitions';
+@import './../assets/css/animations';
+</style>
