@@ -96,7 +96,6 @@ export default {
         const json = await response.json()
         const lat = json.latitude
         const lon = json.longitude
-        console.log(json)
         this.location = json.city
           ? `${json.city}, ${json.country_name}`
           : `${json.country_name}`

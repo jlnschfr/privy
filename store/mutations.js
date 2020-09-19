@@ -54,6 +54,12 @@ export default {
   setSnackbarIsActive(state, payload) {
     state.snackbarIsActive = payload
   },
+  setWeather(state, payload) {
+    state.weather = {
+      data: payload,
+      date: new Date()
+    }
+  },
   reset(state) {
     state.user = null
     state.isFetchingNotes = false

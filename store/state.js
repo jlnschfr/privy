@@ -6,5 +6,6 @@ export default () => ({
   isPersistent: false,
   currentTag: null,
   snackbar: null,
-  snackbarIsActive: false
+  snackbarIsActive: false,
+  weather: null
 })

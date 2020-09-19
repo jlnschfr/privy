@@ -130,5 +130,9 @@ export default {
         commit('setNotes', notes)
         commit('sortNotes')
       })
+  },
+
+  setWeather({ commit }) {
+    commit('setWeather')
   }
 }

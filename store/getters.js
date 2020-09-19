@@ -35,5 +35,10 @@ export default {
 
   getSnackbarIsActive: (state) => () => {
     return state.snackbarIsActive
+  },
+
+  getWeather: (state) => () => {
+    if (!state.weather) return {}
+    return state.weather
   }
 }
