@@ -8,7 +8,7 @@
         <div>
           <header class="px-4 text-center">
             <p class="flex justify-center">
-              <PrivyIcon ref="svg" class="w-5" />
+              <PrivyLogo width="5" />
             </p>
           </header>
           <nav class="px-6 mt-4 overflow-auto max-h-drawerNav">
@@ -80,10 +80,9 @@
 <script>
 import GridIcon from '@/assets/svg/grid.svg'
 import HashIcon from '@/assets/svg/hash.svg'
-import LogoAnimator from '@/mixins/logo-animator.js'
 import LogoutIcon from '@/assets/svg/logout.svg'
 import NotesHandler from '@/mixins/notes-handler.js'
-import PrivyIcon from '@/assets/svg/privy.svg'
+import PrivyLogo from '@/components/PrivyLogo'
 import SunIcon from '@/assets/svg/sun.svg'
 import TagHandler from '@/mixins/tag-handler.js'
 import TrashIcon from '@/assets/svg/trash.svg'
@@ -95,12 +94,12 @@ export default {
     GridIcon,
     HashIcon,
     LogoutIcon,
-    PrivyIcon,
+    PrivyLogo,
     SunIcon,
     TrashIcon,
     Weather
   },
-  mixins: [LogoAnimator, NotesHandler, TagHandler, ViewportHandler],
+  mixins: [NotesHandler, TagHandler, ViewportHandler],
   props: {
     isActive: {
       type: Boolean,

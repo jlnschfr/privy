@@ -1,7 +1,34 @@
+<template>
+  <nuxt-link to="/notes/">
+    <PrivyIcon ref="svg" :class="widthClass"
+  /></nuxt-link>
+</template>
+
+<script>
+import PrivyIcon from '@/assets/svg/privy.svg'
+
 export default {
+  components: {
+    PrivyIcon
+  },
+
+  props: {
+    width: {
+      type: Number,
+      required: false,
+      default: 4
+    }
+  },
+
   data() {
     return {
       paths: []
+    }
+  },
+
+  computed: {
+    widthClass() {
+      return `w-${this.width}`
     }
   },
 
@@ -37,3 +64,22 @@ export default {
     }
   }
 }
+</script>
+
+<style>
+.has-fill-animation {
+  animation: fill 0.75s ease forwards;
+}
+
+@keyframes fill {
+  0% {
+    fill: current;
+  }
+  50% {
+    fill: theme('colors.secondary.500');
+  }
+  100% {
+    fill: current;
+  }
+}
+</style>

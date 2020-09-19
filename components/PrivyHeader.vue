@@ -4,9 +4,7 @@
   >
     <div class="flex items-center md:hidden">
       <h1 aria-label="Privy Notes" class="mr-2">
-        <nuxt-link to="/notes/">
-          <PrivyIcon ref="svg" class="PrivyIcon w-4"
-        /></nuxt-link>
+        <PrivyLogo />
       </h1>
       <Spinner :is-active="isFetchingNotes || !(notes && user)" />
     </div>
@@ -20,18 +18,16 @@
 </template>
 
 <script>
-import LogoAnimator from '@/mixins/logo-animator.js'
 import MenuIcon from '@/assets/svg/menu.svg'
-import PrivyIcon from '@/assets/svg/privy.svg'
+import PrivyLogo from '@/components/PrivyLogo'
 import Spinner from '@/components/_Spinner'
 
 export default {
   components: {
     MenuIcon,
-    PrivyIcon,
+    PrivyLogo,
     Spinner
   },
-  mixins: [LogoAnimator],
   props: {
     user: {
       type: Object,
