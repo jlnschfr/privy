@@ -44,6 +44,12 @@ export default {
     }
   },
 
+  computed: {
+    currentRoute() {
+      return this.$route.name
+    }
+  },
+
   methods: {
     remove(note) {
       const alreadyTrashed = this.note.tags.find((el) => el.text === 'Trash')
@@ -55,7 +61,9 @@ export default {
         this.$store.dispatch('updateNote', this.note)
       }
 
-      this.$router.push(`/notes/`)
+      if (this.currentRoute === 'note') {
+        this.$router.push(`/notes/`)
+      }
 
       this.$store.dispatch('showSnackbar', {
         text: 'Item deleted',
