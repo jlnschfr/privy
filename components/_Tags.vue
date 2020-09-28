@@ -41,6 +41,10 @@ export default {
 </script>
 
 <style>
+.vue-tags-input.vue-tags-input {
+  max-width: none;
+}
+
 .vue-tags-input .ti-tags {
   align-items: center;
 }

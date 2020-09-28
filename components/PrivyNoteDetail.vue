@@ -19,12 +19,12 @@
     </article>
 
     <footer
-      class="flex flex-col md:flex-row justify-between items-end border-t border-neutral-400 p-3 md:p-4"
+      class="flex flex-col md:flex-row justify-between md:items-end border-t border-neutral-400 p-3 md:p-4"
     >
-      <aside class="w-full flex-shrink max-w-tags md:mr-4">
+      <aside class="w-full flex-shrink md:max-w-tags md:mr-4">
         <Tags :tags="tags" @changed="tags = $event" />
       </aside>
-      <nav class="flex flex-none mt-6 md:mt-0">
+      <nav class="flex flex-none md:justify-between mt-6 md:mt-0">
         <Button class="mr-4" @click="createRte">
           Add Text
         </Button>
