@@ -81,10 +81,8 @@
 import GridIcon from '@/assets/svg/grid.svg'
 import HashIcon from '@/assets/svg/hash.svg'
 import LogoutIcon from '@/assets/svg/logout.svg'
-import NotesHandler from '@/mixins/notes-handler.js'
 import PrivyLogo from '@/components/PrivyLogo'
 import SunIcon from '@/assets/svg/sun.svg'
-import TagHandler from '@/mixins/tag-handler.js'
 import TrashIcon from '@/assets/svg/trash.svg'
 import ViewportHandler from '@/mixins/viewport-handler.js'
 import Weather from '@/components/_Weather'
@@ -99,7 +97,7 @@ export default {
     TrashIcon,
     Weather
   },
-  mixins: [NotesHandler, TagHandler, ViewportHandler],
+  mixins: [ViewportHandler],
   props: {
     isActive: {
       type: Boolean,
@@ -108,8 +106,11 @@ export default {
   },
 
   computed: {
-    notes() {
-      return this.$store.getters.getNotes()
+    currentTag() {
+      return this.$store.getters.getCurrentTag()
+    },
+    reducedTags() {
+      return this.$store.getters.getReducedTags()
     }
   },
 
@@ -124,6 +125,9 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout')
+    },
+    getTagAmount(tag) {
+      return this.$store.getters.getTagAmount(tag)
     }
   }
 }

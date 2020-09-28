@@ -32,6 +32,7 @@ import PrivyDrawer from '@/components/PrivyDrawer'
 import PrivyAddButton from '@/components/PrivyAddButton'
 import PrivySnackbar from '@/components/PrivySnackbar'
 import Spinner from '@/components/_Spinner'
+import TagHandler from '@/mixins/tag-handler.js'
 
 export default {
   name: 'App',
@@ -42,7 +43,7 @@ export default {
     PrivySnackbar,
     Spinner
   },
-  mixins: [AuthHandler, ContentUpdater],
+  mixins: [AuthHandler, ContentUpdater, TagHandler],
 
   data() {
     return {

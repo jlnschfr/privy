@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import NotesHandler from '@/mixins/notes-handler.js'
-import TagHandler from '@/mixins/tag-handler.js'
 import PrivyNoteOverview from '@/components/PrivyNoteOverview'
 
 export default {
@@ -13,11 +11,14 @@ export default {
   components: {
     PrivyNoteOverview
   },
-  mixins: [NotesHandler, TagHandler],
 
   computed: {
-    notes() {
-      return this.$store.getters.getNotes()
+    currentTag() {
+      return this.$store.getters.getCurrentTag()
+    },
+
+    filteredNotes() {
+      return this.$store.getters.getFilteredNotes(this.currentTag)
     }
   }
 }

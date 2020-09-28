@@ -39,6 +39,7 @@
 <script>
 import PrivyDate from '@/components/PrivyDate'
 import PrivyNoteInteraction from '@/components/PrivyNoteInteraction'
+import { first } from '@/utils/array'
 
 export default {
   components: {
@@ -68,7 +69,15 @@ export default {
 
   methods: {
     open(id) {
-      this.$router.push(`/note/?id=${id}`)
+      let tag = ''
+
+      if (this.$route.query.tag) {
+        tag = this.$route.query.tag
+      } else if (first(this.note.tags)) {
+        tag = first(this.note.tags).text
+      }
+
+      this.$router.push(`/note/?id=${id}&tag=${tag}`)
     }
   }
 }

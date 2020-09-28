@@ -44,6 +44,7 @@ import PrivyDraggableItems from '@/components/PrivyDraggableItems'
 import PrivyNoteInteraction from '@/components/PrivyNoteInteraction'
 import Tags from '@/components/_Tags'
 import TitleTextarea from '@/components/_TitleTextarea'
+import { first } from '@/utils/array'
 
 export default {
   components: {
@@ -86,6 +87,7 @@ export default {
     }, 500),
     tags: debounce(function() {
       this.onChange()
+      this.updateQueryParam()
     }, 500),
     note: function() {
       if (this.note.title && this.title !== this.note.title) {
@@ -188,6 +190,22 @@ export default {
       } else {
         this.items.push(task)
       }
+    },
+
+    updateQueryParam() {
+      let queryTag = this.$route.query.tag || ''
+
+      if (!queryTag && first(this.tags)) {
+        queryTag = first(this.tags).text
+      } else if (queryTag && !this.tags.length) {
+        queryTag = ''
+      }
+
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, {
+          tag: queryTag
+        })
+      })
     }
   }
 }
