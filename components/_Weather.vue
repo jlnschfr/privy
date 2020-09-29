@@ -47,14 +47,12 @@ export default {
       temperature: '',
       location: '',
       description: '',
-      icon: '',
-      iconMap: {},
-      isNight: false
+      icon: ''
     }
   },
   mounted() {
-    this.interval = setInterval(this.getLocation.bind(this), 300000)
-    this.getLocation()
+    this.interval = setInterval(this.checkForData.bind(this), 300000)
+    this.checkForData()
   },
 
   destroyed() {
@@ -62,8 +60,21 @@ export default {
   },
 
   methods: {
-    generateIconMap() {
-      this.iconMap = {
+    checkForData() {
+      // get data from store
+      // check if data is not older then 0.5 hours
+      const useStoreData = false
+
+      if (useStoreData) {
+        // use data from store
+      } else {
+        // get new data and store it
+        this.getLocation()
+      }
+    },
+
+    generateIconMap(isNight) {
+      return {
         freezing_rain_heavy: 'SleetIcon',
         freezing_rain: 'SleetIcon',
         freezing_rain_light: 'SleetIcon',
@@ -86,9 +97,10 @@ export default {
         mostly_cloudy: 'CloudlyIcon',
         partly_cloudy: 'CloudlyIcon',
         mostly_clear: 'CloudlyIcon',
-        clear: this.isNight ? 'NightClearIcon' : 'DaySunnyIcon'
+        clear: isNight ? 'NightClearIcon' : 'DaySunnyIcon'
       }
     },
+
     async getLocation() {
       const url = new URL('https://geolocation-db.com/json/')
       const response = await fetch(url)
@@ -102,6 +114,7 @@ export default {
         this.getWeather(lat, lon)
       }
     },
+
     async getWeather(lat, lon) {
       const url = new URL('https://api.climacell.co/v3/weather/realtime')
       url.searchParams.set('unit_system', 'si')
@@ -112,11 +125,18 @@ export default {
       const response = await fetch(url)
       if (response.ok) {
         const json = await response.json()
-        this.isNight = new Date(json.sunset.value) < new Date()
-        this.generateIconMap()
-        this.icon = this.iconMap[json.weather_code.value]
-        this.temperature = json.temp.value
-        this.description = json.weather_code.value.replace('_', ' ')
+        const isNight = new Date(json.sunset.value) < new Date()
+        const iconMap = this.generateIconMap(isNight)
+
+        const data = {
+          icon: iconMap[json.weather_code.value],
+          temperature: json.temp.value,
+          description: json.weather_code.value.replace('_', ' ')
+        }
+
+        this.temperature = data.temperature
+        this.description = data.description
+        this.icon = data.icon
       }
     }
   }
