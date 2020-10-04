@@ -53,7 +53,7 @@ export default {
     }
   },
   methods: {
-    onChange: function(type) {
+    onChange(type) {
       if (type === 'checkbox') {
         this.state = !this.state
       }

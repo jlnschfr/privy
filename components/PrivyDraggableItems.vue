@@ -96,9 +96,8 @@ export default {
 
     onItemUpdate(payload) {
       const index = this.itms.findIndex((item) => item.uuid === payload.uuid)
-      const items = [...this.itms]
-      items[index].data = payload.data
-      this.itms = this.sortItems(items)
+      this.itms[index].data = payload.data
+      this.itms = this.sortItems(this.itms)
       this.$emit('changed', this.itms)
     },
 
