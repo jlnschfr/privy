@@ -82,5 +82,9 @@ module.exports = {
     margin: ['first', 'last'],
     border: ['focus']
   },
-  plugins: []
+  plugins: [],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true
+  }
 }
