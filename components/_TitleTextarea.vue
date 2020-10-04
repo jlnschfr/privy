@@ -1,6 +1,6 @@
 <template>
   <textarea
-    ref="title"
+    ref="textarea"
     class="text-2xl font-bold overflow-hidden resize-none h-5"
     :value="value"
     placeholder="Title"
@@ -10,8 +10,10 @@
 
 <script>
 import debounce from 'lodash.debounce'
+import TextareaHeightUpdater from '@/mixins/textarea-height-updater.js'
 
 export default {
+  mixins: [TextareaHeightUpdater],
   props: {
     value: {
       type: String,
@@ -19,30 +21,12 @@ export default {
       default: ''
     }
   },
-  mounted() {
-    this.resizeHandler = debounce(this.updateTitleHeight, 500)
-    window.addEventListener('resize', this.resizeHandler)
-    this.updateTitleHeight()
-  },
-
-  destroyed() {
-    window.removeEventListener('resize', this.resizeHandler)
-  },
 
   methods: {
-    onInput(event) {
+    onInput: debounce(function(event) {
       this.$emit('input', event.target.value)
-      this.updateTitleHeight()
-    },
-
-    updateTitleHeight(event) {
-      const textField = this.$refs.title
-      textField.removeAttribute('style')
-
-      if (textField.clientHeight < textField.scrollHeight) {
-        textField.style.height = textField.scrollHeight + 'px'
-      }
-    }
+      this.updateTextareaHeight()
+    }, 250)
   }
 }
 </script>

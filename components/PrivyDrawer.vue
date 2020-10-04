@@ -16,7 +16,7 @@
               <li>
                 <nuxt-link
                   to="/notes/"
-                  class="flex items-center outline-none"
+                  class="flex items-center"
                   :class="{ 'text-neutral-600': currentTag === '' }"
                 >
                   <GridIcon class="w-2 mr-1" /> Notes
@@ -25,7 +25,7 @@
               <li class="mt-2">
                 <nuxt-link
                   to="/notes/?tag=trash"
-                  class="flex items-center outline-none"
+                  class="flex items-center"
                   :class="{ 'text-neutral-600': currentTag === 'trash' }"
                 >
                   <TrashIcon class="w-2 mr-1" /> Trash
@@ -36,7 +36,7 @@
                 <div class="flex justify-between">
                   <nuxt-link
                     :to="`/notes/?tag=${tag}`"
-                    class="flex items-center outline-none"
+                    class="flex items-center"
                     :class="{ 'text-neutral-600': tag === currentTag }"
                   >
                     <HashIcon class="w-2 mr-1" /> {{ tag }}

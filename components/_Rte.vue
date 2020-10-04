@@ -1,5 +1,5 @@
 <template>
-  <editor-content :editor="editor" class="immune-for-enter" />
+  <editor-content :editor="editor" />
 </template>
 
 <script>

@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     'object-shorthand': 0,
     'no-unused-expressions': 0,
-    'no-console': 0
+    'no-console': 0,
+    'vue/no-v-html': 0
   }
 }

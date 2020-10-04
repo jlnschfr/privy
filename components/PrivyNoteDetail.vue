@@ -1,15 +1,11 @@
 <template>
   <section
-    class="max-w-2xl mx-auto shadow-xl min-h-detail flex flex-col justify-between bg-neutral-600"
+    class="max-w-3xl mx-auto shadow-xl min-h-detail flex flex-col justify-between bg-neutral-600"
   >
     <article>
       <header class="flex items-center border-b border-neutral-400 p-3 md:p-4">
         <PrivyDate :date="note.createdDate" />
-        <TitleTextarea
-          ref="title"
-          v-model="title"
-          class="flex-auto immune-for-enter mr-2"
-        />
+        <TitleTextarea ref="title" v-model="title" class="flex-auto mr-2" />
         <PrivyNoteInteraction :note="note" />
       </header>
 
@@ -25,8 +21,8 @@
         <Tags :tags="tags" @changed="tags = $event" />
       </aside>
       <nav class="flex flex-none md:justify-between mt-6 md:mt-0">
-        <Button class="mr-4" @click="createRte">
-          Add Text
+        <Button class="mr-4" @click="createMarkdown">
+          Add Markdown
         </Button>
         <Button @click="createTask">Add Task</Button>
       </nav>
@@ -151,9 +147,12 @@ export default {
     handleKeyUp(event) {
       const focusEl = document.activeElement
 
-      if (focusEl && !focusEl.closest('.immune-for-enter')) {
+      if (
+        focusEl === document.querySelector('body') ||
+        focusEl.classList.contains('immune-for-enter')
+      ) {
         if (event.keyCode === 13 && event.shiftKey) {
-          this.createRte()
+          this.createMarkdown()
         } else if (event.keyCode === 13) {
           const draggableItem = focusEl.closest('.draggable-item')
 
@@ -168,14 +167,14 @@ export default {
       }
     },
 
-    createRte() {
-      const rte = {
-        type: 'Rte',
+    createMarkdown() {
+      const markdown = {
+        type: 'Markdown',
         isNew: true,
         uuid: uuid()
       }
 
-      this.items.push(rte)
+      this.items.push(markdown)
     },
 
     createTask(index) {

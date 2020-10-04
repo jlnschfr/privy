@@ -6,7 +6,6 @@
       ghost-class="Ghost"
       animation="150"
       @start="onStart"
-      @end="isDragging = false"
       @change="onChange()"
     >
       <div
@@ -19,17 +18,17 @@
           :data-uuid="item.uuid"
           :data="item.data"
           :uuid="item.uuid"
-          :editable="!isDragging"
           class="draggable-item"
           @update="onItemUpdate"
         ></component>
         <button
-          class="Dragger absolute flex justify-center items-center w-3 inset-y-0 left-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-1/2"
+          tabindex="-1"
+          class="Dragger absolute flex justify-center items-center w-3 inset-y-0 left-0 opacity-100 md:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 transform -translate-x-1/2"
         >
           <DragIcon class="DragIcon fill-current" />
         </button>
         <button
-          class="Close absolute flex justify-center items-center w-3 inset-y-0 right-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          class="Close absolute flex justify-center items-center w-3 inset-y-0 right-0 opacity-100 md:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300"
           @click="onItemDelete(item.uuid)"
         >
           <CloseIcon class="CloseIcon fill-current w-2" />
@@ -44,6 +43,7 @@ import isEqual from 'lodash.isequal'
 import Draggable from 'vuedraggable'
 import CloseIcon from '@/assets/svg/cross.svg'
 import DragIcon from '@/assets/svg/drag.svg'
+import Markdown from '@/components/_Markdown'
 import Rte from '@/components/_Rte'
 import Task from '@/components/_Task'
 
@@ -52,6 +52,7 @@ export default {
     CloseIcon,
     Draggable,
     DragIcon,
+    Markdown,
     Rte,
     Task
   },
@@ -63,7 +64,6 @@ export default {
   },
   data() {
     return {
-      isDragging: false,
       itms: this.items
     }
   },
@@ -121,7 +121,6 @@ export default {
     },
 
     onStart() {
-      this.isDragging = true
       window.navigator.vibrate(10)
     },
 
@@ -136,16 +135,16 @@ export default {
         if (item) {
           const task = document
             .querySelector(`[data-uuid='${item.uuid}']`)
-            .querySelector('input:not(.hidden)')
+            .querySelector('.Task input:not(.hidden)')
 
-          const rte = document
+          const markdown = document
             .querySelector(`[data-uuid='${item.uuid}']`)
-            .querySelector('.ProseMirror')
+            .querySelector('.Markdown')
 
           if (task) {
             task.focus()
-          } else if (rte) {
-            rte.focus()
+          } else if (markdown) {
+            markdown.click()
           }
 
           item.isNew = false
