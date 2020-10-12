@@ -22,7 +22,8 @@ export default {
       const textField = this.$refs.textarea
 
       if (textField) {
-        textField.removeAttribute('style')
+        // Disabled because of layout jumps
+        // textField.removeAttribute('style')
 
         if (textField.clientHeight < textField.scrollHeight) {
           textField.style.height = textField.scrollHeight + 'px'

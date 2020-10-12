@@ -4,7 +4,7 @@
       v-if="editable"
       ref="textarea"
       :value="data"
-      class="w-full h-1 resize-none"
+      class="w-full h-1 resize-none overflow-hidden"
       @input="onInput"
       @blur="onBlur"
     ></textarea>
@@ -67,7 +67,7 @@ export default {
     onInput: debounce(function(event) {
       this.$emit('update', { uuid: this.uuid, data: event.target.value })
       this.updateTextareaHeight()
-    }, 250)
+    }, 25)
   }
 }
 </script>
@@ -78,17 +78,28 @@ export default {
   min-height: 1.5rem;
 }
 
-.Markdown > *:not(:first-child) {
-  margin-top: 1.25rem;
+.Markdown > *:not(:first-child),
+.Markdown.Markdown h1 + h2,
+.Markdown.Markdown h2 + h3,
+.Markdown.Markdown h3 + h4,
+.Markdown.Markdown h4 + h5,
+.Markdown.Markdown h5 + h6 {
+  margin-top: 1rem;
 }
 
-.Markdown > h1:not(:first-child),
-.Markdown > h2:not(:first-child),
+.Markdown > h1:not(:first-child) {
+  margin-top: 3rem;
+}
+
+.Markdown > h2:not(:first-child) {
+  margin-top: 2.5rem;
+}
+
 .Markdown > h3:not(:first-child),
 .Markdown > h4:not(:first-child),
 .Markdown > h5:not(:first-child),
 .Markdown > h6:not(:first-child) {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
 }
 
 .Markdown h1 {
