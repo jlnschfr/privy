@@ -79,7 +79,7 @@ export default {
   },
 
   getSnackbar: (state) => () => {
-    if (!state.snackbar) return null
+    if (!state.snackbar) return {}
     return state.snackbar
   },
 
@@ -90,5 +90,10 @@ export default {
   getWeather: (state) => () => {
     if (!state.weather) return {}
     return state.weather
+  },
+
+  getLocation: (state) => () => {
+    if (!state.location) return {}
+    return state.location
   }
 }

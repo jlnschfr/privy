@@ -60,6 +60,9 @@ export default {
       date: new Date()
     }
   },
+  setLocation(state, payload) {
+    state.location = payload
+  },
   reset(state) {
     state.user = null
     state.isFetchingNotes = false
@@ -68,5 +71,7 @@ export default {
     state.store = null
     state.snackbar = null
     state.snackbarIsActive = false
+    state.weather = null
+    state.location = null
   }
 }

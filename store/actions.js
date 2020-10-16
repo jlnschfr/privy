@@ -132,7 +132,11 @@ export default {
       })
   },
 
-  setWeather({ commit }) {
-    commit('setWeather')
+  setWeather({ commit }, payload) {
+    commit('setWeather', payload)
+  },
+
+  setLocation({ commit }, payload) {
+    commit('setLocation', payload)
   }
 }

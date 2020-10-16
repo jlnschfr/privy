@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="w-full">{{ location }}</div>
+  <div v-if="active">
+    <div class="w-full">{{ city }}</div>
     <div v-if="temperature !== ''" class="flex items-center mt-2">
       <component :is="icon" class="fill-current w-6" />
       <div>
@@ -45,14 +45,15 @@ export default {
   data() {
     return {
       temperature: '',
-      location: '',
+      city: '',
       description: '',
-      icon: ''
+      icon: '',
+      active: false
     }
   },
   mounted() {
-    this.interval = setInterval(this.checkForData.bind(this), 300000)
-    this.checkForData()
+    this.interval = setInterval(this.checkWeather.bind(this), 300000)
+    this.checkWeather()
   },
 
   destroyed() {
@@ -60,17 +61,98 @@ export default {
   },
 
   methods: {
-    checkForData() {
-      // get data from store
-      // check if data is not older then 0.5 hours
-      const useStoreData = false
+    async checkWeather() {
+      // check if stored weather is not older then 0.5 hours
+      const location = this.$store.getters.getLocation()
+      const weather = this.$store.getters.getWeather()
+      const offset = 1800000
 
-      if (useStoreData) {
-        // use data from store
+      if (
+        location &&
+        weather &&
+        weather.date?.getTime() + offset > new Date()
+      ) {
+        this.applyLocationAndWeather(location, weather.data)
       } else {
-        // get new data and store it
-        this.getLocation()
+        try {
+          const location = await this.getLocation()
+          const weather = await this.getWeather(location.lat, location.lon)
+
+          this.$store.dispatch('setLocation', location)
+          this.$store.dispatch('setWeather', weather)
+
+          this.applyLocationAndWeather(location, weather)
+        } catch (err) {
+          // console.log(err)
+        }
       }
+    },
+
+    getLocation() {
+      return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+          reject(new Error())
+        } else {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const lat = position.coords.latitude
+              const lon = position.coords.longitude
+              const city = await this.getCity(lat, lon)
+              resolve({ lat, lon, city })
+            },
+            () => {
+              reject(new Error())
+            }
+          )
+        }
+      })
+    },
+
+    getCity(lat, lon) {
+      // eslint-disable-next-line no-async-promise-executor
+      return new Promise(async (resolve, reject) => {
+        const url = new URL('https://nominatim.openstreetmap.org/reverse')
+        url.searchParams.set('format', 'json')
+        url.searchParams.set('lat', lat)
+        url.searchParams.set('lon', lon)
+        const response = await fetch(url)
+        if (response.ok) {
+          const json = await response.json()
+          resolve(json.address?.city_district)
+        } else {
+          reject(new Error())
+        }
+      })
+    },
+
+    getWeather(lat, lon) {
+      // eslint-disable-next-line no-async-promise-executor
+      return new Promise(async (resolve, reject) => {
+        const url = new URL('https://api.climacell.co/v3/weather/realtime')
+        url.searchParams.set('unit_system', 'si')
+        url.searchParams.set('apikey', 'Kp2il3y21251KTFaYzh82Dmq63h6YmTW')
+        url.searchParams.set('lat', lat)
+        url.searchParams.set('lon', lon)
+        url.searchParams.set('fields', 'temp,weather_code,sunset')
+        const response = await fetch(url)
+        if (response.ok) {
+          const json = await response.json()
+          resolve(json)
+        } else {
+          reject(new Error())
+        }
+      })
+    },
+
+    applyLocationAndWeather(location, weather) {
+      const isNight = new Date(weather.sunset.value) < new Date()
+      const iconMap = this.generateIconMap(isNight)
+
+      this.temperature = weather.temp.value
+      this.description = weather.weather_code.value.replace('_', ' ')
+      this.icon = iconMap[weather.weather_code.value]
+      this.city = location.city
+      this.active = true
     },
 
     generateIconMap(isNight) {
@@ -98,45 +180,6 @@ export default {
         partly_cloudy: 'CloudlyIcon',
         mostly_clear: 'CloudlyIcon',
         clear: isNight ? 'NightClearIcon' : 'DaySunnyIcon'
-      }
-    },
-
-    async getLocation() {
-      const url = new URL('https://geolocation-db.com/json/')
-      const response = await fetch(url)
-      if (response.ok) {
-        const json = await response.json()
-        const lat = json.latitude
-        const lon = json.longitude
-        this.location = json.city
-          ? `${json.city}, ${json.country_name}`
-          : `${json.country_name}`
-        this.getWeather(lat, lon)
-      }
-    },
-
-    async getWeather(lat, lon) {
-      const url = new URL('https://api.climacell.co/v3/weather/realtime')
-      url.searchParams.set('unit_system', 'si')
-      url.searchParams.set('apikey', 'Kp2il3y21251KTFaYzh82Dmq63h6YmTW')
-      url.searchParams.set('lat', lat)
-      url.searchParams.set('lon', lon)
-      url.searchParams.set('fields', 'temp,weather_code,sunset')
-      const response = await fetch(url)
-      if (response.ok) {
-        const json = await response.json()
-        const isNight = new Date(json.sunset.value) < new Date()
-        const iconMap = this.generateIconMap(isNight)
-
-        const data = {
-          icon: iconMap[json.weather_code.value],
-          temperature: json.temp.value,
-          description: json.weather_code.value.replace('_', ' ')
-        }
-
-        this.temperature = data.temperature
-        this.description = data.description
-        this.icon = data.icon
       }
     }
   }

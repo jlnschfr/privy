@@ -7,5 +7,6 @@ export default () => ({
   currentTag: null,
   snackbar: null,
   snackbarIsActive: false,
-  weather: null
+  weather: null,
+  location: null
 })
