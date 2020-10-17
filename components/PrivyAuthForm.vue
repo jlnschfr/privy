@@ -1,7 +1,7 @@
 <template>
   <form
     ref="form"
-    class="max-w-sm mx-auto px-3 md:px-6 py-8 shadow-xl bg-white absolute left-4vw right-4vw top-50 transform -translate-y-1/2"
+    class="max-w-md mx-auto px-3 md:px-6 py-8 shadow-xl bg-white absolute left-4vw right-4vw top-50 transform -translate-y-1/2"
     @submit.prevent="authenticate"
   >
     <header class="flex justify-center">

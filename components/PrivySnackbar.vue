@@ -1,11 +1,11 @@
 <template>
   <transition v-if="isActive" name="fade">
     <div
-      class="w-64 bg-neutral-200 fixed transform -translate-x-1/2 left-50 md:left-app bottom-2vw px-3 py-2 shadow-lg flex items-center justify-between"
+      class="w-68 bg-neutral-200 fixed transform -translate-x-1/2 left-50 md:left-app bottom-2vw px-3 py-2 shadow-lg flex items-center justify-between"
     >
-      <span class="text-neutral-600 mr-8">{{ text }}</span>
-      <button class="font-bold text-secondary-500" @click="undo">
-        Undo
+      <span class="text-neutral-600">{{ text }}</span>
+      <button class="font-bold text-secondary-500 ml-8" @click="undo">
+        {{ action }}
       </button>
     </div>
   </transition>
@@ -27,6 +27,9 @@ export default {
     },
     text() {
       return this.snackbar?.text
+    },
+    action() {
+      return this.snackbar?.action
     },
     isActive() {
       return this.$store.getters.getSnackbarIsActive()

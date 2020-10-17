@@ -14,7 +14,7 @@ export default {
     return new Promise((resolve, reject) => {
       auth
         .createUserWithEmailAndPassword(payload.email, payload.password)
-        .then((user) => {
+        .then(({ user }) => {
           dispatch('handleAuthChanged', user)
           resolve()
         })
@@ -28,9 +28,70 @@ export default {
     return new Promise((resolve, reject) => {
       auth
         .signInWithEmailAndPassword(payload.email, payload.password)
-        .then((user) => {
+        .then(({ user }) => {
           dispatch('handleAuthChanged', user)
           resolve()
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+
+  updateEmail({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      auth
+        .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
+        .then(({ user }) => {
+          user
+            .updateEmail(payload.newEmail)
+            .then(() => {
+              resolve()
+            })
+            .catch((error) => {
+              reject(error)
+            })
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+
+  updatePassword({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      auth
+        .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
+        .then(({ user }) => {
+          user
+            .updatePassword(payload.newPassword)
+            .then(() => {
+              resolve()
+            })
+            .catch((error) => {
+              reject(error)
+            })
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+
+  deleteAccount({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      auth
+        .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
+        .then(({ user }) => {
+          user
+            .delete()
+            .then(() => {
+              commit('reset')
+              resolve()
+            })
+            .catch((error) => {
+              reject(error)
+            })
         })
         .catch((error) => {
           reject(error)

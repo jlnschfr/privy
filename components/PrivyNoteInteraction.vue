@@ -67,6 +67,7 @@ export default {
 
       this.$store.dispatch('showSnackbar', {
         text: 'Item deleted',
+        action: 'undo',
         callback: () => {
           this.undoRemove(note, alreadyTrashed)
         }

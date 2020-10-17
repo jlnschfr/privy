@@ -8,12 +8,17 @@
       </h1>
       <Spinner :is-active="isFetchingNotes || !(notes && user)" />
     </div>
-    <nav v-if="user" class="flex md:hidden items-center">
-      <p @click="$emit('toggle-drawer')">
+    <nav v-if="user" class="flex items-center">
+      <p class="block md:hidden" @click="$emit('toggle-drawer')">
         <MenuIcon class="w-3 fill-current cursor-pointer" />
       </p>
+      <nuxt-link
+        to="/admin/"
+        class="flex ml-2 text-neutral-200 border-neutral-200 rounded-full border border-neutral-200 items-center justify-center h-4 w-4"
+      >
+        <User class="w-2" />
+      </nuxt-link>
     </nav>
-    <p class="hidden md:block">logged in as {{ user ? user.email : '' }}</p>
   </header>
 </template>
 
@@ -21,12 +26,14 @@
 import MenuIcon from '@/assets/svg/menu.svg'
 import PrivyLogo from '@/components/PrivyLogo'
 import Spinner from '@/components/_Spinner'
+import User from '@/assets/svg/user.svg'
 
 export default {
   components: {
     MenuIcon,
     PrivyLogo,
-    Spinner
+    Spinner,
+    User
   },
   props: {
     user: {
