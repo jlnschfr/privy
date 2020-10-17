@@ -9,33 +9,46 @@
     </header>
 
     <Input
+      v-model="email"
       placeholder="mail"
       type="email"
       class="mt-8"
       @focus="error = ''"
-      @input="email = $event"
     />
 
     <Input
+      v-model="password"
       placeholder="password"
       type="password"
       class="mt-4"
       @focus="error = ''"
-      @input="password = $event"
     />
 
     <Input
       v-if="!isLogin"
+      v-model="repeatedPassword"
       placeholder="repeat password"
       type="password"
       class="mt-4"
       @focus="error = ''"
-      @input="repeatedPassword = $event"
     />
 
-    <Button type="submit" class="w-full mt-6">{{
-      !isLogin ? 'Register' : 'Login'
-    }}</Button>
+    <Button
+      v-if="isLogin"
+      :disabled="!email || !password"
+      type="submit"
+      class="w-full mt-6"
+      >Login</Button
+    >
+
+    <Button
+      v-if="!isLogin"
+      :disabled="!email || !password || !repeatedPassword"
+      type="submit"
+      class="w-full mt-6"
+    >
+      Register</Button
+    >
 
     <p class="mt-6 text-center">
       <span
