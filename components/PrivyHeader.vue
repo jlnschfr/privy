@@ -1,6 +1,6 @@
 <template>
   <header
-    class="flex justify-between md:justify-end bg-neutral-600 border-b border-neutral-400 items-center px-4vw py-2"
+    class="flex justify-between md:justify-end bg-neutral-600 dark:bg-neutral-50 border-b border-neutral-400 dark:border-neutral-200 items-center px-4vw py-2"
   >
     <div class="flex items-center md:hidden">
       <h1 aria-label="Privy Notes" class="mr-2">
@@ -12,11 +12,8 @@
       <p class="block md:hidden" @click="$emit('toggle-drawer')">
         <MenuIcon class="w-3 fill-current cursor-pointer" />
       </p>
-      <nuxt-link
-        to="/admin/"
-        class="flex ml-2 text-neutral-200 border-neutral-200 rounded-full border border-neutral-200 items-center justify-center h-4 w-4"
-      >
-        <User class="w-2" />
+      <nuxt-link to="/admin/" class="flex ml-2 items-center justify-center">
+        <User class="w-2 mr-1" /> My Privy
       </nuxt-link>
     </nav>
   </header>

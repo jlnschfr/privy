@@ -1,7 +1,7 @@
 <template>
   <section>
     <transition name="mobile-slide-right">
-      <aside
+      <div
         v-if="isActive || !isMobile"
         class="w-4/5 md:max-w-drawer fixed top-0 right-0 md:left-0 z-50 bg-neutral-100 h-full text-neutral-300 flex flex-col justify-between py-4"
       >
@@ -51,8 +51,13 @@
           <ul class="w-full">
             <li><Weather /></li>
             <li class="mt-2">
-              <button class="flex items-center">
-                <SunIcon class="w-2 mr-1" /> Light Mode
+              <button class="flex items-center" @click="toggleDarkMode()">
+                <span v-if="isDarkMode" class="flex"
+                  ><SunIcon class="w-2 mr-1" /> Light Mode</span
+                >
+                <span v-if="!isDarkMode" class="flex"
+                  ><MoonIcon class="w-2 mr-1" /> Dark Mode</span
+                >
               </button>
             </li>
             <li class="mt-2">
@@ -65,12 +70,12 @@
             </li>
           </ul>
         </footer>
-      </aside>
+      </div>
     </transition>
     <transition name="fade">
       <div
         v-if="isActive"
-        class="bg-neutral-40090 w-screen h-screen fixed top-0 left-0 z-40"
+        class="bg-neutral-200 bg-opacity-75 w-screen h-screen fixed top-0 left-0 z-40"
         @click="$emit('toggle-drawer')"
       ></div>
     </transition>
@@ -81,6 +86,7 @@
 import GridIcon from '@/assets/svg/grid.svg'
 import HashIcon from '@/assets/svg/hash.svg'
 import LogoutIcon from '@/assets/svg/logout.svg'
+import MoonIcon from '@/assets/svg/moon.svg'
 import PrivyLogo from '@/components/PrivyLogo'
 import SunIcon from '@/assets/svg/sun.svg'
 import TrashIcon from '@/assets/svg/trash.svg'
@@ -92,6 +98,7 @@ export default {
     GridIcon,
     HashIcon,
     LogoutIcon,
+    MoonIcon,
     PrivyLogo,
     SunIcon,
     TrashIcon,
@@ -111,6 +118,9 @@ export default {
     },
     reducedTags() {
       return this.$store.getters.getReducedTags()
+    },
+    isDarkMode() {
+      return this.$colorMode.value !== 'light'
     }
   },
 
@@ -128,6 +138,9 @@ export default {
     },
     getTagAmount(tag) {
       return this.$store.getters.getTagAmount(tag)
+    },
+    toggleDarkMode() {
+      this.$colorMode.preference = this.isDarkMode ? 'light' : 'dark'
     }
   }
 }

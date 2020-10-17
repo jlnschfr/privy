@@ -1,5 +1,7 @@
 <template>
-  <div class="max-w-lg mx-auto px-3 md:px-6 py-8 shadow-xl bg-white">
+  <div
+    class="max-w-lg mx-auto px-3 md:px-6 py-8 shadow-xl bg-neutral-600 dark:bg-neutral-100"
+  >
     <header>
       <h2 class="text-2xl font-bold leading-none hyphens-auto">
         Admin Panel

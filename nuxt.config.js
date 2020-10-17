@@ -60,7 +60,8 @@ export default {
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/stylelint-module',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode'
   ],
 
   /*
@@ -75,5 +76,9 @@ export default {
 
   svgLoader: {
     svgoConfig: false
+  },
+
+  purgeCSS: {
+    whitelist: ['dark-mode']
   }
 }

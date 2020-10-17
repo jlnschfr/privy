@@ -42,28 +42,35 @@ export default {
 <style>
 .vue-tags-input.vue-tags-input {
   max-width: none;
+  background-color: transparent;
 }
 
 .vue-tags-input .ti-tags {
   align-items: center;
 }
 
-.vue-tags-input .ti-new-tag-input-wrapper {
+.vue-tags-input .ti-new-tag-input-wrapper.ti-new-tag-input-wrapper {
   font-size: inherit;
   display: block;
-  border-bottom: 1px solid theme('colors.neutral.200') !important;
+  border-bottom: 1px solid theme('colors.neutral.200');
   padding: 0.5rem 0 !important;
   flex: 0 0 auto !important;
   width: 100%;
   margin-top: 1rem;
 }
 
+.dark-mode .vue-tags-input .ti-new-tag-input-wrapper.ti-new-tag-input-wrapper {
+  border-bottom: 1px solid theme('colors.neutral.400');
+}
+
 .vue-tags-input .ti-new-tag-input {
   width: 100%;
+  background-color: transparent;
+  color: inherit;
 }
 
 .vue-tags-input .ti-new-tag-input::placeholder {
-  color: theme('colors.neutral.200');
+  color: inherit;
 }
 
 .vue-tags-input .ti-input {

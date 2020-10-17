@@ -4,7 +4,7 @@
       v-if="editable"
       ref="textarea"
       :value="data"
-      class="w-full h-1 resize-none overflow-hidden"
+      class="w-full h-1 resize-none overflow-hidden bg-transparent"
       @input="onInput"
       @blur="onBlur"
     ></textarea>

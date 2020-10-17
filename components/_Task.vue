@@ -9,7 +9,7 @@
     />
     <label :for="uuid" class="flex items-center pr-2">
       <span
-        class="inline-flex border border-neutral-200 w-3 h-3 items-center justify-center"
+        class="inline-flex border border-neutral-200 dark:border-neutral-400 w-3 h-3 items-center justify-center"
         ><CheckIcon v-if="state" class="w-2" />
       </span>
     </label>

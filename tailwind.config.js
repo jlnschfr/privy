@@ -6,6 +6,7 @@
  */
 module.exports = {
   theme: {
+    darkSelector: '.dark-mode',
     fontFamily: {
       body: ['Nunito', 'sans-serif']
     },
@@ -18,11 +19,11 @@ module.exports = {
         neutral: {
           600: '#FFFFFF',
           500: '#F5F5F5',
-          40090: '#D7D7D7E6',
           400: '#D7D7D7',
           300: '#B4B4B4',
           200: '#4A4A4A',
-          100: '#303030'
+          100: '#303030',
+          50: '#212121'
         },
         primary: {
           600: '#4977B8',
@@ -78,11 +79,30 @@ module.exports = {
     }
   },
   variants: {
+    backgroundColor: [
+      'dark',
+      'dark-hover',
+      'dark-group-hover',
+      'dark-even',
+      'dark-odd',
+      'hover',
+      'responsive'
+    ],
+    borderColor: [
+      'dark',
+      'dark-focus',
+      'dark-focus-within',
+      'hover',
+      'focus',
+      'focus-within',
+      'responsive'
+    ],
+    textColor: ['dark', 'dark-hover', 'dark-active', 'hover', 'responsive'],
+    placeholderColor: ['dark', 'hover', 'responsive'],
     opacity: ['group-hover', 'focus', 'responsive'],
-    margin: ['first', 'last'],
-    border: ['focus']
+    margin: ['first', 'last']
   },
-  plugins: [],
+  plugins: [require('tailwindcss-dark-mode')()],
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true
