@@ -9,7 +9,6 @@ export default {
   },
   setNotes(state, payload) {
     state.notes = payload
-    state.isFetchingNotes = false
   },
   addNote(state, payload) {
     state.notes.push(payload)
@@ -22,8 +21,8 @@ export default {
     const index = state.notes.findIndex((note) => note.id === payload.id)
     state.notes[index] = payload
   },
-  setIsFetchingNotes(state) {
-    state.isFetchingNotes = true
+  setIsSyncing(state, payload) {
+    state.isSyncing = payload
   },
   setCurrentTag(state, payload) {
     state.currentTag = payload
@@ -65,7 +64,7 @@ export default {
   },
   reset(state) {
     state.user = null
-    state.isFetchingNotes = false
+    state.isSyncing = false
     state.currentTag = null
     state.notes = null
     state.store = null

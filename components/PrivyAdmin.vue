@@ -208,7 +208,7 @@ export default {
     showSnackbar(text) {
       this.$store.dispatch('showSnackbar', {
         text: text,
-        action: 'OK',
+        action: 'ok',
         callback: () => {}
       })
     }

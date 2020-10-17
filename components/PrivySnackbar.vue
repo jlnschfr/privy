@@ -1,10 +1,10 @@
 <template>
   <transition v-if="isActive" name="fade">
     <div
-      class="w-68 bg-neutral-200 fixed transform -translate-x-1/2 left-50 md:left-app bottom-2vw px-3 py-2 shadow-lg flex items-center justify-between"
+      class="bg-neutral-200 fixed transform -translate-x-1/2 left-50 md:left-app bottom-2vw px-3 py-2 shadow-lg flex items-center justify-between"
     >
-      <span class="text-neutral-600">{{ text }}</span>
-      <button class="font-bold text-secondary-500 ml-8" @click="undo">
+      <p class="text-neutral-600">{{ text }}</p>
+      <button class="font-bold text-secondary-500 ml-6" @click="undo">
         {{ action }}
       </button>
     </div>

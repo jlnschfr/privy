@@ -40,19 +40,23 @@ export default {
 
   updateEmail({ commit }, payload) {
     return new Promise((resolve, reject) => {
+      commit('setIsSyncing', true)
       auth
         .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
         .then(({ user }) => {
           user
             .updateEmail(payload.newEmail)
             .then(() => {
+              commit('setIsSyncing', false)
               resolve()
             })
             .catch((error) => {
+              commit('setIsSyncing', false)
               reject(error)
             })
         })
         .catch((error) => {
+          commit('setIsSyncing', false)
           reject(error)
         })
     })
@@ -60,19 +64,23 @@ export default {
 
   updatePassword({ commit }, payload) {
     return new Promise((resolve, reject) => {
+      commit('setIsSyncing', true)
       auth
         .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
         .then(({ user }) => {
           user
             .updatePassword(payload.newPassword)
             .then(() => {
+              commit('setIsSyncing', false)
               resolve()
             })
             .catch((error) => {
+              commit('setIsSyncing', false)
               reject(error)
             })
         })
         .catch((error) => {
+          commit('setIsSyncing', false)
           reject(error)
         })
     })
@@ -80,6 +88,7 @@ export default {
 
   deleteAccount({ commit }, payload) {
     return new Promise((resolve, reject) => {
+      commit('setIsSyncing', true)
       auth
         .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
         .then(({ user }) => {
@@ -87,23 +96,31 @@ export default {
             .delete()
             .then(() => {
               commit('reset')
+              commit('setIsSyncing', false)
               resolve()
             })
             .catch((error) => {
+              commit('setIsSyncing', false)
               reject(error)
             })
         })
         .catch((error) => {
+          commit('setIsSyncing', false)
           reject(error)
         })
     })
   },
 
-  logout() {
+  logout({ commit }) {
+    commit('setIsSyncing', true)
     auth
       .signOut()
-      .then()
-      .catch()
+      .then(() => {
+        commit('setIsSyncing', false)
+      })
+      .catch(() => {
+        commit('setIsSyncing', false)
+      })
   },
 
   handleAuthChanged({ commit, dispatch }, user) {
@@ -135,6 +152,7 @@ export default {
 
   addNote({ state, commit }, payload) {
     return new Promise((resolve) => {
+      commit('setIsSyncing', true)
       commit('addNote', payload)
       commit('sortNotes')
       resolve(payload.id)
@@ -143,13 +161,18 @@ export default {
         .collection('notes')
         .doc(payload.id)
         .set(payload)
-        .then(() => {})
-        .catch(() => {})
+        .then(() => {
+          commit('setIsSyncing', false)
+        })
+        .catch(() => {
+          commit('setIsSyncing', false)
+        })
     })
   },
 
   updateNote({ state, commit }, payload) {
     return new Promise((resolve) => {
+      commit('setIsSyncing', true)
       commit('updateNote', payload)
       commit('sortNotes')
       resolve()
@@ -158,13 +181,18 @@ export default {
         .collection('notes')
         .doc(payload.id)
         .set(payload)
-        .then(() => {})
-        .catch(() => {})
+        .then(() => {
+          commit('setIsSyncing', false)
+        })
+        .catch(() => {
+          commit('setIsSyncing', false)
+        })
     })
   },
 
   deleteNote({ state, commit }, payload) {
     return new Promise((resolve) => {
+      commit('setIsSyncing', true)
       commit('deleteNote', payload)
       resolve()
 
@@ -172,13 +200,17 @@ export default {
         .collection('notes')
         .doc(payload.id)
         .delete()
-        .then(() => {})
-        .catch(() => {})
+        .then(() => {
+          commit('setIsSyncing', false)
+        })
+        .catch(() => {
+          commit('setIsSyncing', false)
+        })
     })
   },
 
   getNotes({ state, commit }) {
-    commit('setIsFetchingNotes')
+    commit('setIsSyncing', true)
 
     state.store
       .collection('notes')
@@ -190,6 +222,7 @@ export default {
         })
         commit('setNotes', notes)
         commit('sortNotes')
+        commit('setIsSyncing', false)
       })
   },
 

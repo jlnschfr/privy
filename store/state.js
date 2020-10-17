@@ -2,7 +2,7 @@ export default () => ({
   user: null,
   notes: null,
   store: null,
-  isFetchingNotes: false,
+  isSyncing: false,
   isPersistent: false,
   currentTag: null,
   snackbar: null,

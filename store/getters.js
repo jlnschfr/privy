@@ -43,8 +43,8 @@ export default {
     }
   },
 
-  getIsFetchingNotes: (state) => () => {
-    return state.isFetchingNotes
+  getIsSyncing: (state) => () => {
+    return state.isSyncing
   },
 
   getIsPersistent: (state) => () => {

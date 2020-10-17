@@ -5,7 +5,7 @@
     <PrivyHeader
       :user="user"
       :notes="notes"
-      :is-fetching-notes="isFetchingNotes"
+      :is-syncing="isSyncing"
       @toggle-drawer="showDrawer = !showDrawer"
     />
     <PrivyDrawer
@@ -14,7 +14,7 @@
     />
     <main class="p-4vw md:pl-app relative">
       <Spinner
-        :is-active="isFetchingNotes || !(notes && user)"
+        :is-active="isSyncing || !(notes && user)"
         class="hidden md:block fixed bottom-2vw"
       />
       <nuxt v-if="notes && user" />
@@ -53,8 +53,8 @@ export default {
   },
 
   computed: {
-    isFetchingNotes() {
-      return this.$store.getters.getIsFetchingNotes()
+    isSyncing() {
+      return this.$store.getters.getIsSyncing()
     },
     user() {
       return this.$store.getters.getUser()

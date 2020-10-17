@@ -6,7 +6,7 @@
       <h1 aria-label="Privy Notes" class="mr-2">
         <PrivyLogo />
       </h1>
-      <Spinner :is-active="isFetchingNotes || !(notes && user)" />
+      <Spinner :is-active="isSyncing || !(notes && user)" />
     </div>
     <nav v-if="user" class="flex items-center">
       <p class="block md:hidden" @click="$emit('toggle-drawer')">
@@ -43,7 +43,7 @@ export default {
       required: false,
       default: () => {}
     },
-    isFetchingNotes: {
+    isSyncing: {
       type: Boolean,
       required: false,
       default: false
