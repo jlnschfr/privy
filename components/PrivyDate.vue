@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-center border-r pr-2 mr-2 border-neutral-400 dark:border-neutral-200"
+    class="text-center border-r pr-2 mr-2 border-neutral-400 dark:border-neutral-200 transition duration-300"
   >
     <span class="block">{{ month }}</span>
     <span class="block text-xl font-bold">{{ day }}</span>

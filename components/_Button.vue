@@ -3,11 +3,11 @@
     :type="type"
     :disabled="disabled"
     :class="{
-      'opacity-50 cursor-not-allowed': disabled,
       'bg-primary-500 text-neutral-600 border-primary-500 dark:border-primary-500': primary,
-      'bg-secondary-500 text-neutral-600 border-secondary-500 dark:border-secondary-500': secondary
+      'bg-secondary-500 text-neutral-600 border-secondary-500 dark:border-secondary-500': secondary,
+      'text-opacity-50 dark:text-opacity-50 cursor-not-allowed': disabled
     }"
-    class="bg-transparent border-neutral-200 dark:border-neutral-400 border block px-2 md:px-4 py-0_5"
+    class="bg-transparent text-neutral-200 dark:text-neutral-600 border-neutral-200 dark:border-neutral-400 border block px-2 md:px-4 py-0_5 transition duration-300"
     @click="$emit('click')"
   >
     <slot />

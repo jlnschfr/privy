@@ -97,6 +97,7 @@ module.exports = {
       'focus-within',
       'responsive'
     ],
+    textOpacity: ['dark', 'dark-hover', 'dark-active', 'hover', 'responsive'],
     textColor: ['dark', 'dark-hover', 'dark-active', 'hover', 'responsive'],
     placeholderColor: ['dark', 'hover', 'responsive'],
     opacity: ['group-hover', 'focus', 'responsive'],

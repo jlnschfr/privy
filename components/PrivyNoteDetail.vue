@@ -1,10 +1,10 @@
 <template>
   <section
-    class="max-w-3xl mx-auto shadow-xl min-h-detail flex flex-col justify-between bg-neutral-600 dark:bg-neutral-100"
+    class="max-w-3xl mx-auto shadow-xl min-h-detail flex flex-col justify-between bg-neutral-600 dark:bg-neutral-100 transition duration-300"
   >
     <article>
       <header
-        class="flex items-center border-b border-neutral-400 dark:border-neutral-200 p-3 md:p-4"
+        class="flex items-center border-b border-neutral-400 dark:border-neutral-200 p-3 md:p-4 transition duration-300"
       >
         <PrivyDate :date="note.createdDate" />
         <TitleTextarea ref="title" v-model="title" class="flex-auto mr-2" />
@@ -17,7 +17,7 @@
     </article>
 
     <footer
-      class="flex flex-col md:flex-row justify-between md:items-end border-t border-neutral-400 dark:border-neutral-200 p-3 md:p-4"
+      class="flex flex-col md:flex-row justify-between md:items-end border-t border-neutral-400 dark:border-neutral-200 p-3 md:p-4 transition duration-300"
     >
       <aside class="w-full flex-shrink md:max-w-tags md:mr-4">
         <Tags :tags="tags" @changed="tags = $event" />

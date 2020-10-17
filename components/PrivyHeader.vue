@@ -1,6 +1,6 @@
 <template>
   <header
-    class="flex justify-between md:justify-end bg-neutral-600 dark:bg-neutral-50 border-b border-neutral-400 dark:border-neutral-200 items-center px-4vw py-2"
+    class="flex justify-between md:justify-end bg-neutral-600 dark:bg-neutral-50 border-b border-neutral-400 dark:border-neutral-200 items-center px-4vw py-2 transition duration-300"
   >
     <div class="flex items-center md:hidden">
       <h1 aria-label="Privy Notes" class="mr-2">

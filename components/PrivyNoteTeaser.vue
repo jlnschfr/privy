@@ -1,6 +1,6 @@
 <template>
   <article
-    class="PrivyNoteTeaser cursor-pointer shadow-lg bg-neutral-600 dark:bg-neutral-100"
+    class="PrivyNoteTeaser cursor-pointer shadow-lg bg-neutral-600 dark:bg-neutral-100 transition duration-300"
     tabindex="0"
     @keyup.enter="open(note.id)"
     @click="open(note.id)"

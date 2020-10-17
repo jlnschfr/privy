@@ -1,9 +1,9 @@
 <template>
   <div
-    class="max-w-lg mx-auto px-3 md:px-6 py-8 shadow-xl bg-neutral-600 dark:bg-neutral-100"
+    class="max-w-lg mx-auto px-3 md:px-6 py-8 shadow-xl bg-neutral-600 dark:bg-neutral-100 transition duration-300"
   >
     <header>
-      <h2 class="text-2xl font-bold leading-none hyphens-auto">
+      <h2 class="text-2xl text-center font-bold leading-none hyphens-auto">
         Admin Panel
       </h2>
     </header>

@@ -118,7 +118,7 @@ export default {
         const response = await fetch(url)
         if (response.ok) {
           const json = await response.json()
-          resolve(json.address?.city_district)
+          resolve(`${json.address?.city}, ${json.address?.country}`)
         } else {
           reject(new Error())
         }
