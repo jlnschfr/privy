@@ -9,12 +9,12 @@
       <Spinner :is-active="isSyncing || !(notes && user)" />
     </div>
     <nav v-if="user" class="flex items-center">
-      <p class="block md:hidden" @click="$emit('toggle-drawer')">
+      <nuxt-link to="/admin/" class="flex items-center justify-center">
+        My Privy
+      </nuxt-link>
+      <p class="block md:hidden ml-2" @click="$emit('toggle-drawer')">
         <MenuIcon class="w-3 fill-current cursor-pointer" />
       </p>
-      <nuxt-link to="/admin/" class="flex ml-2 items-center justify-center">
-        <User class="w-2 mr-1" /> My Privy
-      </nuxt-link>
     </nav>
   </header>
 </template>
@@ -23,14 +23,12 @@
 import MenuIcon from '@/assets/svg/menu.svg'
 import PrivyLogo from '@/components/PrivyLogo'
 import Spinner from '@/components/_Spinner'
-import User from '@/assets/svg/user.svg'
 
 export default {
   components: {
     MenuIcon,
     PrivyLogo,
-    Spinner,
-    User
+    Spinner
   },
   props: {
     user: {
