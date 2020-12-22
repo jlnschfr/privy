@@ -69,6 +69,9 @@ module.exports = {
       maxHeight: {
         drawerNav: 'calc(100vh - 24rem)'
       },
+      minWidth: {
+        snackbar: '13.5rem'
+      },
       maxWidth: {
         drawer: '18rem',
         tags: '14rem;'
