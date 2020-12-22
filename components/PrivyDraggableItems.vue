@@ -161,7 +161,11 @@ export default {
   width: 0.75rem;
 }
 
-.Ghost {
+.light-mode .Ghost {
   background-color: theme('colors.neutral.500');
+}
+
+.dark-mode .Ghost {
+  background-color: theme('colors.neutral.200');
 }
 </style>
