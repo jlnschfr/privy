@@ -28,7 +28,7 @@
           <DragIcon class="DragIcon fill-current" />
         </button>
         <button
-          class="Close absolute flex justify-center items-center w-3 inset-y-0 right-0 opacity-100 md:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300"
+          class="Close absolute flex justify-center items-center w-3 inset-y-0 right-0 opacity-100 md:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 transform translate-x-1/2"
           @click="onItemDelete(item.uuid)"
         >
           <CloseIcon class="CloseIcon fill-current w-2" />
