@@ -196,7 +196,10 @@ export default {
     updateQueryParam() {
       let queryTag = this.$route.query.tag || ''
 
-      if (!queryTag && first(this.tags)) {
+      if (
+        (!queryTag && first(this.tags)) ||
+        (queryTag && !this.tags.find((tag) => tag.text === queryTag))
+      ) {
         queryTag = first(this.tags).text
       } else if (queryTag && !this.tags.length) {
         queryTag = ''
