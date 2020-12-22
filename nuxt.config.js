@@ -24,7 +24,10 @@ export default {
         content: 'Great notes for great people'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    bodyAttrs: {
+      class: 'bg-neutral-500 dark:bg-neutral-50'
+    }
   },
 
   loading: false,
