@@ -24,9 +24,9 @@
               </li>
               <li class="mt-2">
                 <nuxt-link
-                  to="/notes/?tag=trash"
+                  to="/notes/?tag=Trash"
                   class="flex items-center"
-                  :class="{ 'text-neutral-600': currentTag === 'trash' }"
+                  :class="{ 'text-neutral-600': currentTag === 'Trash' }"
                 >
                   <TrashIcon class="w-2 mr-1" /> Trash
                 </nuxt-link>

@@ -28,7 +28,7 @@ export default {
   },
 
   getFilteredNotes: (state, getters) => (filter) => {
-    if (filter === 'trash') {
+    if (filter === 'Trash') {
       return getters.getNotesTrashed()
     } else if (filter) {
       return getters
