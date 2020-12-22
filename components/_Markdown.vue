@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import DOMPurify from 'dompurify'
 import marked from 'marked'
 import debounce from 'lodash.debounce'
 import TextareaHeightUpdater from '@/mixins/textarea-height-updater.js'
@@ -46,7 +47,9 @@ export default {
 
   computed: {
     compiledMarkdown() {
-      return marked(this.data, { sanitize: true })
+      const convertedHTML = marked(this.data)
+      const purifiedHTML = DOMPurify.sanitize(convertedHTML)
+      return purifiedHTML
     }
   },
 
