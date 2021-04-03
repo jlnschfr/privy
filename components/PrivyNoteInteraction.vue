@@ -57,8 +57,8 @@ export default {
       if (alreadyTrashed) {
         this.$store.dispatch('deleteNote', note)
       } else {
-        this.note.tags.push({ text: 'Trash' })
-        this.$store.dispatch('updateNote', this.note)
+        note.tags.push({ text: 'Trash' })
+        this.$store.dispatch('updateNote', note)
       }
 
       if (this.currentRoute === 'note') {

@@ -91,7 +91,7 @@ export default {
     getLocation() {
       return new Promise((resolve, reject) => {
         if (!navigator.geolocation) {
-          reject(new Error())
+          reject(new Error("Browser doesn't support Geolocation API"))
         } else {
           navigator.geolocation.getCurrentPosition(
             async (position) => {
@@ -101,7 +101,7 @@ export default {
               resolve({ lat, lon, city })
             },
             () => {
-              reject(new Error())
+              reject(new Error("Browser doesn't support Geolocation API"))
             }
           )
         }
@@ -120,7 +120,7 @@ export default {
           const json = await response.json()
           resolve(`${json.address?.city}, ${json.address?.country}`)
         } else {
-          reject(new Error())
+          reject(new Error("Can't fetch Location Data"))
         }
       })
     },
@@ -139,7 +139,7 @@ export default {
           const json = await response.json()
           resolve(json)
         } else {
-          reject(new Error())
+          reject(new Error("Can't fetch Weather Data"))
         }
       })
     },

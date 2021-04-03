@@ -6,11 +6,11 @@
 import PrivyNoteDetail from '@/components/PrivyNoteDetail'
 
 export default {
-  layout: 'app',
-  transition: 'slide',
   components: {
     PrivyNoteDetail
   },
+  layout: 'app',
+  transition: 'slide',
 
   computed: {
     id() {

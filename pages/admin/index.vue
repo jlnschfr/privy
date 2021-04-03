@@ -6,10 +6,10 @@
 import PrivyAdmin from '@/components/PrivyAdmin'
 
 export default {
-  layout: 'app',
-  transition: 'slide',
   components: {
     PrivyAdmin
-  }
+  },
+  layout: 'app',
+  transition: 'slide'
 }
 </script>

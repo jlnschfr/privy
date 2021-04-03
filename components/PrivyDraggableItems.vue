@@ -91,6 +91,8 @@ export default {
         } else if (!a.data?.state && b.data?.state) {
           return -1
         }
+
+        return 0
       })
     },
 

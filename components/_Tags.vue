@@ -86,8 +86,4 @@ export default {
   background-color: theme('colors.primary.500');
   transition: background-color 300ms;
 }
-
-/* .vue-tags-input .ti-tag:hover {
-  background-color: theme('colors.porange.medium');
-} */
 </style>

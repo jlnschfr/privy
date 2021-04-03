@@ -6,11 +6,11 @@
 import PrivyNoteOverview from '@/components/PrivyNoteOverview'
 
 export default {
-  layout: 'app',
-  transition: 'slide',
   components: {
     PrivyNoteOverview
   },
+  layout: 'app',
+  transition: 'slide',
 
   computed: {
     currentTag() {
