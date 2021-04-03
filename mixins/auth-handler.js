@@ -4,14 +4,14 @@ export default {
   data() {
     return {
       unsubscribe: null,
-      currentRoute: this.$router.currentRoute.name
+      currentRoute: this.$router.currentRoute.name,
     }
   },
 
   watch: {
     $route(to, from) {
       this.currentRoute = to.name
-    }
+    },
   },
 
   created() {
@@ -41,6 +41,6 @@ export default {
           this.$router.push('/')
         }
       })
-    }
-  }
+    },
+  },
 }

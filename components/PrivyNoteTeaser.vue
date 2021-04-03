@@ -45,14 +45,14 @@ import { first } from '@/utils/array'
 export default {
   components: {
     PrivyDate,
-    PrivyNoteInteraction
+    PrivyNoteInteraction,
   },
 
   props: {
     note: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
@@ -65,7 +65,7 @@ export default {
       return this.tasks.filter((item) => {
         return item.data && item.data.state
       })
-    }
+    },
   },
 
   methods: {
@@ -79,8 +79,8 @@ export default {
       }
 
       this.$router.push(`/note/?id=${id}&tag=${tag}`)
-    }
-  }
+    },
+  },
 }
 </script>
 

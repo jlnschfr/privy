@@ -3,8 +3,8 @@ export default {
   target: 'static',
   vue: {
     config: {
-      runtimeCompiler: true
-    }
+      runtimeCompiler: true,
+    },
   },
 
   /*
@@ -13,7 +13,7 @@ export default {
   head: {
     title: 'Privy Notes',
     htmlAttrs: {
-      lang: 'de'
+      lang: 'de',
     },
     meta: [
       { charset: 'utf-8' },
@@ -21,13 +21,13 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Great notes for great people'
-      }
+        content: 'Great notes for great people',
+      },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     bodyAttrs: {
-      class: 'bg-neutral-500 dark:bg-neutral-50'
-    }
+      class: 'bg-neutral-500 dark:bg-neutral-50',
+    },
   },
 
   loading: false,
@@ -43,7 +43,7 @@ export default {
    */
   plugins: [
     { src: '~/plugins/firebase' },
-    { src: '~/plugins/idle-vue.js', mode: 'client' }
+    { src: '~/plugins/idle-vue.js', mode: 'client' },
   ],
   /*
    ** Nuxt.js modules
@@ -51,20 +51,20 @@ export default {
   modules: ['nuxt-svg-loader', '@nuxtjs/pwa'],
 
   router: {
-    trailingSlash: true
+    trailingSlash: true,
   },
 
   pwa: {
     meta: {
-      theme_color: '#285799'
-    }
+      theme_color: '#285799',
+    },
   },
 
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/stylelint-module',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
   ],
 
   /*
@@ -74,14 +74,14 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {},
   },
 
   svgLoader: {
-    svgoConfig: false
+    svgoConfig: false,
   },
 
   purgeCSS: {
-    whitelist: ['dark-mode']
-  }
+    whitelist: ['dark-mode'],
+  },
 }

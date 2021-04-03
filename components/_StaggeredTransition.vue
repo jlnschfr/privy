@@ -15,8 +15,8 @@ export default {
     beforeEnter: (el) => {
       el.style.transitionDelay =
         el.dataset.index < 6 ? `${el.dataset.index * 25}ms` : `${6 * 25}ms`
-    }
-  }
+    },
+  },
 }
 </script>
 

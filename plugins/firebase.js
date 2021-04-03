@@ -10,7 +10,7 @@ const config = {
   projectId: 'privy-notes',
   storageBucket: 'privy-notes.appspot.com',
   messagingSenderId: '946240655964',
-  appId: '1:946240655964:web:925b39c629ef4db14ecc99'
+  appId: '1:946240655964:web:925b39c629ef4db14ecc99',
 }
 
 if (!firebase.apps.length) {

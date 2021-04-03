@@ -17,15 +17,15 @@ import PlusIcon from '@/assets/svg/plus.svg'
 
 export default {
   components: {
-    PlusIcon
+    PlusIcon,
   },
 
   props: {
     isActive: {
       type: Boolean,
       required: false,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 }
 </script>

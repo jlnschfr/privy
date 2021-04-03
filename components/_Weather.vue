@@ -40,7 +40,7 @@ export default {
     SleetIcon,
     SnowIcon,
     SprinkleIcon,
-    ThunderstormIcon
+    ThunderstormIcon,
   },
   data() {
     return {
@@ -48,7 +48,7 @@ export default {
       city: '',
       description: '',
       icon: '',
-      active: false
+      active: false,
     }
   },
   mounted() {
@@ -179,9 +179,9 @@ export default {
         mostly_cloudy: 'CloudlyIcon',
         partly_cloudy: 'CloudlyIcon',
         mostly_clear: 'CloudlyIcon',
-        clear: isNight ? 'NightClearIcon' : 'DaySunnyIcon'
+        clear: isNight ? 'NightClearIcon' : 'DaySunnyIcon',
       }
-    }
-  }
+    },
+  },
 }
 </script>

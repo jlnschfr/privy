@@ -11,6 +11,6 @@ import AuthHandler from '@/mixins/auth-handler.js'
 
 export default {
   name: 'Blank',
-  mixins: [AuthHandler]
+  mixins: [AuthHandler],
 }
 </script>

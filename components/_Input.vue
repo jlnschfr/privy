@@ -16,18 +16,18 @@ export default {
     type: {
       type: String,
       required: false,
-      default: 'text'
+      default: 'text',
     },
     value: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     placeholder: {
       type: String,
       required: false,
-      default: 'Placeholder'
-    }
-  }
+      default: 'Placeholder',
+    },
+  },
 }
 </script>

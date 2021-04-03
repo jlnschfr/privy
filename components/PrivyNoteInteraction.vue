@@ -3,7 +3,7 @@
     <IconButton
       class="mr-2"
       :class="{
-        'text-secondary-500': note.isFav
+        'text-secondary-500': note.isFav,
       }"
       @click="toggleFav(note)"
       @click.native.stop=""
@@ -11,7 +11,7 @@
       <FavIcon
         class="w-2"
         :class="{
-          'fill-current': note.isFav
+          'fill-current': note.isFav,
         }"
       />
     </IconButton>
@@ -34,20 +34,20 @@ export default {
   components: {
     FavIcon,
     IconButton,
-    TrashIcon
+    TrashIcon,
   },
 
   props: {
     note: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
     currentRoute() {
       return this.$route.name
-    }
+    },
   },
 
   methods: {
@@ -70,7 +70,7 @@ export default {
         action: 'undo',
         callback: () => {
           this.undoRemove(note, alreadyTrashed)
-        }
+        },
       })
     },
 
@@ -87,12 +87,12 @@ export default {
     toggleFav(note) {
       const data = {
         ...note,
-        isFav: !this.note.isFav
+        isFav: !this.note.isFav,
       }
 
       data.createdDate = new Date().toISOString()
       this.$store.dispatch('updateNote', data)
-    }
-  }
+    },
+  },
 }
 </script>

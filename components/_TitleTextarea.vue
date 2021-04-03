@@ -18,15 +18,15 @@ export default {
     value: {
       type: String,
       required: false,
-      default: ''
-    }
+      default: '',
+    },
   },
 
   methods: {
-    onInput: debounce(function(event) {
+    onInput: debounce(function (event) {
       this.$emit('input', event.target.value)
       this.updateTextareaHeight()
-    }, 250)
-  }
+    }, 250),
+  },
 }
 </script>

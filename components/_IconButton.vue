@@ -14,8 +14,8 @@ export default {
     type: {
       type: String,
       default: 'button',
-      required: false
-    }
-  }
+      required: false,
+    },
+  },
 }
 </script>

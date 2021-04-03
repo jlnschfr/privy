@@ -9,33 +9,33 @@ import PrivyIcon from '@/assets/svg/privy.svg'
 
 export default {
   components: {
-    PrivyIcon
+    PrivyIcon,
   },
 
   props: {
     width: {
       type: String,
       required: false,
-      default: '4'
-    }
+      default: '4',
+    },
   },
 
   data() {
     return {
-      paths: []
+      paths: [],
     }
   },
 
   computed: {
     widthClass() {
       return `w-${this.width}`
-    }
+    },
   },
 
   watch: {
     $route() {
       this.animatePaths()
-    }
+    },
   },
 
   mounted() {
@@ -61,8 +61,8 @@ export default {
           }, 100 * index)
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

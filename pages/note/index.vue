@@ -7,7 +7,7 @@ import PrivyNoteDetail from '@/components/PrivyNoteDetail'
 
 export default {
   components: {
-    PrivyNoteDetail
+    PrivyNoteDetail,
   },
   layout: 'app',
   transition: 'slide',
@@ -18,7 +18,7 @@ export default {
     },
     note() {
       return this.$store.getters.getNote(this.id)
-    }
-  }
+    },
+  },
 }
 </script>

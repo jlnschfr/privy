@@ -9,7 +9,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "stylelint": "stylelint **/*.css **/*.vue",
-    "eslint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "eslint": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "husky": {
     "hooks": {
@@ -44,8 +44,8 @@
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-tailwind": "^0.2.1",
-    "husky": "^4.3.8",
-    "prettier": "^1.16.4",
+    "husky": "^6.0.0",
+    "prettier": "^2.2.1",
     "stylelint": "^13.12.0",
     "stylelint-config-prettier": "^8.0.0",
     "tailwindcss-dark-mode": "^1.1.7"

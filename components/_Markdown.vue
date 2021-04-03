@@ -30,18 +30,18 @@ export default {
   props: {
     uuid: {
       type: String,
-      required: true
+      required: true,
     },
     data: {
       type: String,
       required: false,
-      default: ''
-    }
+      default: '',
+    },
   },
 
   data() {
     return {
-      editable: false
+      editable: false,
     }
   },
 
@@ -50,7 +50,7 @@ export default {
       const convertedHTML = marked(this.data)
       const purifiedHTML = DOMPurify.sanitize(convertedHTML)
       return purifiedHTML
-    }
+    },
   },
 
   methods: {
@@ -67,11 +67,11 @@ export default {
       this.editable = false
     },
 
-    onInput: debounce(function(event) {
+    onInput: debounce(function (event) {
       this.$emit('update', { uuid: this.uuid, data: event.target.value })
       this.updateTextareaHeight()
-    }, 25)
-  }
+    }, 25),
+  },
 }
 </script>
 

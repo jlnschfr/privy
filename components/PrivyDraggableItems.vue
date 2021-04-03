@@ -54,26 +54,26 @@ export default {
     DragIcon,
     Markdown,
     Rte,
-    Task
+    Task,
   },
   props: {
     items: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      itms: this.items
+      itms: this.items,
     }
   },
   watch: {
-    items: function() {
+    items: function () {
       if (!isEqual(this.itms, this.items)) {
         this.itms = this.items
       }
       this.focusLastAddedItem()
-    }
+    },
   },
 
   methods: {
@@ -114,7 +114,7 @@ export default {
         action: 'undo',
         callback: () => {
           this.undoRemove(items)
-        }
+        },
       })
     },
 
@@ -153,8 +153,8 @@ export default {
           this.onItemUpdate(item)
         }
       }, 150)
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -56,7 +56,7 @@ export default {
   setWeather(state, payload) {
     state.weather = {
       data: payload,
-      date: new Date()
+      date: new Date(),
     }
   },
   setLocation(state, payload) {
@@ -72,5 +72,5 @@ export default {
     state.snackbarIsActive = false
     state.weather = null
     state.location = null
-  }
+  },
 }

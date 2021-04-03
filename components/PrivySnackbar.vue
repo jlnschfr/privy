@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      timeout: null
+      timeout: null,
     }
   },
   computed: {
@@ -33,11 +33,11 @@ export default {
     },
     isActive() {
       return this.$store.getters.getSnackbarIsActive()
-    }
+    },
   },
 
   watch: {
-    isActive: function() {
+    isActive: function () {
       if (this.isActive) {
         if (this.timeout) {
           clearTimeout(this.timeout)
@@ -48,13 +48,13 @@ export default {
       } else if (this.timeout) {
         clearTimeout(this.timeout)
       }
-    }
+    },
   },
   methods: {
     undo() {
       this.callback()
       this.$store.dispatch('hideSnackbar')
-    }
-  }
+    },
+  },
 }
 </script>

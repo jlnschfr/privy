@@ -30,26 +30,26 @@ import Input from '@/components/_Input'
 export default {
   components: {
     CheckIcon,
-    Input
+    Input,
   },
 
   props: {
     uuid: {
       type: String,
-      required: true
+      required: true,
     },
     data: {
       type: Object,
       required: false,
       default: () => {
         return { state: false, text: '' }
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       text: this.data.text,
-      state: this.data.state
+      state: this.data.state,
     }
   },
   methods: {
@@ -59,9 +59,9 @@ export default {
       }
       this.$emit('update', {
         uuid: this.uuid,
-        data: { text: this.text, state: this.state }
+        data: { text: this.text, state: this.state },
       })
-    }
-  }
+    },
+  },
 }
 </script>

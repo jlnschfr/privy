@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       isMobile: null,
-      resizeHandler: null
+      resizeHandler: null,
     }
   },
 
@@ -21,6 +21,6 @@ export default {
   methods: {
     handleResize() {
       this.isMobile = !window.matchMedia('(min-width: 1024px)').matches
-    }
-  }
+    },
+  },
 }

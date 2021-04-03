@@ -41,14 +41,14 @@ export default {
     PrivyDrawer,
     PrivyAddButton,
     PrivySnackbar,
-    Spinner
+    Spinner,
   },
   mixins: [AuthHandler, ContentUpdater, TagHandler],
 
   data() {
     return {
       showDrawer: false,
-      currentRoute: this.$router.currentRoute.name
+      currentRoute: this.$router.currentRoute.name,
     }
   },
 
@@ -64,14 +64,14 @@ export default {
     },
     showButton() {
       return this.currentRoute === 'notes'
-    }
+    },
   },
 
   watch: {
     $route(to, from) {
       this.currentRoute = to.name
-    }
-  }
+    },
+  },
 }
 </script>
 

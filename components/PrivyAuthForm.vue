@@ -73,7 +73,7 @@ export default {
   components: {
     Button,
     Input,
-    PrivyIcon
+    PrivyIcon,
   },
 
   data() {
@@ -82,7 +82,7 @@ export default {
       email: '',
       password: '',
       repeatedPassword: '',
-      error: ''
+      error: '',
     }
   },
   methods: {
@@ -106,7 +106,7 @@ export default {
       this.$store
         .dispatch(method, {
           email: this.email,
-          password: this.password
+          password: this.password,
         })
         .then(() => {
           this.$refs.form.reset()
@@ -114,7 +114,7 @@ export default {
         .catch((e) => {
           this.error = e.message
         })
-    }
-  }
+    },
+  },
 }
 </script>

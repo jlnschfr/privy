@@ -20,14 +20,14 @@ import StaggeredTransition from '@/components/_StaggeredTransition'
 export default {
   components: {
     PrivyNoteTeaser,
-    StaggeredTransition
+    StaggeredTransition,
   },
 
   props: {
     notes: {
       type: Array,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>

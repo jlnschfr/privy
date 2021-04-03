@@ -7,7 +7,7 @@ import PrivyNoteOverview from '@/components/PrivyNoteOverview'
 
 export default {
   components: {
-    PrivyNoteOverview
+    PrivyNoteOverview,
   },
   layout: 'app',
   transition: 'slide',
@@ -19,7 +19,7 @@ export default {
 
     filteredNotes() {
       return this.$store.getters.getFilteredNotes(this.currentTag)
-    }
-  }
+    },
+  },
 }
 </script>

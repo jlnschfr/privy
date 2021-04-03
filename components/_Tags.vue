@@ -12,30 +12,30 @@ import VueTagsInput from '@johmun/vue-tags-input'
 
 export default {
   components: {
-    VueTagsInput
+    VueTagsInput,
   },
   props: {
     tags: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       tgs: this.tags,
-      tag: ''
+      tag: '',
     }
   },
   watch: {
-    tags: function() {
+    tags: function () {
       if (!isEqual(this.tgs, this.tags)) {
         this.tgs = this.tags
       }
     },
-    tgs: function() {
+    tgs: function () {
       this.$emit('changed', this.tgs)
-    }
-  }
+    },
+  },
 }
 </script>
 

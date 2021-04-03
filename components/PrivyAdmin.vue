@@ -107,7 +107,7 @@ import Input from '@/components/_Input'
 export default {
   components: {
     Button,
-    Input
+    Input,
   },
 
   data() {
@@ -120,7 +120,7 @@ export default {
       emailError: '',
       passwordError: '',
       confirmDeleteWithMail: '',
-      error: ''
+      error: '',
     }
   },
 
@@ -141,7 +141,7 @@ export default {
           this.password === this.newRepeatedPassword) ||
         Boolean(this.passwordError)
       )
-    }
+    },
   },
 
   mounted() {
@@ -153,7 +153,7 @@ export default {
     updateEmail() {
       this.dispatchToStore('updateEmail', {
         newEmail: this.email,
-        password: this.password
+        password: this.password,
       })
         .then(() => {
           this.showSnackbar('Email has been changed')
@@ -168,7 +168,7 @@ export default {
       if (this.newPassword === this.newRepeatedPassword) {
         this.dispatchToStore('updatePassword', {
           newPassword: this.newPassword,
-          password: this.password
+          password: this.password,
         })
           .then(() => {
             this.showSnackbar('Password has been changed')
@@ -209,9 +209,9 @@ export default {
       this.$store.dispatch('showSnackbar', {
         text: text,
         action: 'ok',
-        callback: () => {}
+        callback: () => {},
       })
-    }
-  }
+    },
+  },
 }
 </script>

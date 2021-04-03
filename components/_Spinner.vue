@@ -9,15 +9,15 @@ import SpinnerIcon from '@/assets/svg/spinner.svg'
 
 export default {
   components: {
-    SpinnerIcon
+    SpinnerIcon,
   },
 
   props: {
     isActive: {
       type: Boolean,
       required: false,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 }
 </script>

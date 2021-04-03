@@ -28,24 +28,24 @@ export default {
   components: {
     MenuIcon,
     PrivyLogo,
-    Spinner
+    Spinner,
   },
   props: {
     user: {
       type: Object,
       required: false,
-      default: null
+      default: null,
     },
     notes: {
       type: Array,
       required: false,
-      default: () => {}
+      default: () => {},
     },
     isSyncing: {
       type: Boolean,
       required: false,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 }
 </script>

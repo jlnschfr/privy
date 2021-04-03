@@ -8,5 +8,5 @@ export default () => ({
   snackbar: null,
   snackbarIsActive: false,
   weather: null,
-  location: null
+  location: null,
 })

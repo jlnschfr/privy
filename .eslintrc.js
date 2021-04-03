@@ -2,17 +2,17 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   extends: [
     '@nuxtjs',
     'prettier',
     'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
-    'plugin:tailwind/recommended'
+    'plugin:tailwind/recommended',
   ],
   plugins: ['prettier'],
   // add your custom rules here
@@ -20,6 +20,6 @@ module.exports = {
     'object-shorthand': 0,
     'no-unused-expressions': 0,
     'no-console': 0,
-    'vue/no-v-html': 0
-  }
+    'vue/no-v-html': 0,
+  },
 }

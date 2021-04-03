@@ -7,9 +7,9 @@ import PrivyAdmin from '@/components/PrivyAdmin'
 
 export default {
   components: {
-    PrivyAdmin
+    PrivyAdmin,
   },
   layout: 'app',
-  transition: 'slide'
+  transition: 'slide',
 }
 </script>

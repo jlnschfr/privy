@@ -232,5 +232,5 @@ export default {
 
   setLocation({ commit }, payload) {
     commit('setLocation', payload)
-  }
+  },
 }

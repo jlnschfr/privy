@@ -2,7 +2,7 @@ export default {
   data() {
     return {
       frequentUpdates: false,
-      isIdle: false
+      isIdle: false,
     }
   },
 
@@ -45,6 +45,6 @@ export default {
       if (this.frequentUpdates) {
         clearInterval(this.frequentUpdates)
       }
-    }
-  }
+    },
+  },
 }

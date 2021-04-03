@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce'
 export default {
   data() {
     return {
-      resizeHandler: null
+      resizeHandler: null,
     }
   },
 
@@ -29,6 +29,6 @@ export default {
           textField.style.height = textField.scrollHeight + 'px'
         }
       }
-    }
-  }
+    },
+  },
 }

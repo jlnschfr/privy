@@ -8,37 +8,37 @@ import { History } from 'tiptap-extensions'
 
 export default {
   components: {
-    EditorContent
+    EditorContent,
   },
   props: {
     uuid: {
       type: String,
-      required: true
+      required: true,
     },
     data: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     editable: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data() {
     return {
-      editor: null
+      editor: null,
     }
   },
 
   watch: {
-    editable: function(val) {
+    editable: function (val) {
       this.editor.setOptions({
-        editable: val
+        editable: val,
       })
-    }
+    },
   },
 
   mounted() {
@@ -47,13 +47,13 @@ export default {
       content: this.data,
       onUpdate: (el) => {
         this.$emit('update', { uuid: this.uuid, data: el.getHTML() })
-      }
+      },
     })
   },
 
   beforeDestroy() {
     this.editor.destroy()
-  }
+  },
 }
 </script>
 

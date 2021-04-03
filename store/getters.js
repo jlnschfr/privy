@@ -95,5 +95,5 @@ export default {
   getLocation: (state) => () => {
     if (!state.location) return {}
     return state.location
-  }
+  },
 }

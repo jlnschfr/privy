@@ -16,8 +16,8 @@ export default {
     date: {
       type: String,
       required: false,
-      default: ''
-    }
+      default: '',
+    },
   },
 
   computed: {
@@ -29,7 +29,7 @@ export default {
     },
     year() {
       return createDateString(this.date, { year: 'numeric' })
-    }
-  }
+    },
+  },
 }
 </script>

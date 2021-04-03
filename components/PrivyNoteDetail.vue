@@ -23,9 +23,7 @@
         <Tags :tags="tags" @changed="tags = $event" />
       </aside>
       <nav class="flex flex-none md:justify-between mt-6 md:mt-0">
-        <Button class="mr-4" @click="createMarkdown">
-          Add Markdown
-        </Button>
+        <Button class="mr-4" @click="createMarkdown"> Add Markdown </Button>
         <Button @click="createTask">Add Task</Button>
       </nav>
     </footer>
@@ -51,20 +49,20 @@ export default {
     PrivyDraggableItems,
     PrivyNoteInteraction,
     Tags,
-    TitleTextarea
+    TitleTextarea,
   },
 
   props: {
     id: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     note: {
       type: Object,
       required: false,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
 
   data() {
@@ -72,22 +70,22 @@ export default {
       title: this.note.title || '',
       items: this.note.items || [],
       isFav: this.note.isFav || false,
-      tags: this.note.tags || []
+      tags: this.note.tags || [],
     }
   },
 
   watch: {
-    title: debounce(function() {
+    title: debounce(function () {
       this.onChange()
     }, 500),
-    items: debounce(function() {
+    items: debounce(function () {
       this.onChange()
     }, 500),
-    tags: debounce(function() {
+    tags: debounce(function () {
       this.onChange()
       this.updateQueryParam()
     }, 500),
-    note: function() {
+    note: function () {
       if (this.note.title && this.title !== this.note.title) {
         this.title = this.note.title
       }
@@ -100,7 +98,7 @@ export default {
       if (this.note.tags && !isEqual(this.tags, this.note.tags)) {
         this.tags = this.note.tags
       }
-    }
+    },
   },
 
   mounted() {
@@ -142,7 +140,7 @@ export default {
         title: this.title || 'untitled',
         isFav: this.isFav,
         items: this.items,
-        tags: this.tags
+        tags: this.tags,
       }
     },
 
@@ -173,7 +171,7 @@ export default {
       const markdown = {
         type: 'Markdown',
         isNew: true,
-        uuid: uuid()
+        uuid: uuid(),
       }
 
       this.items.push(markdown)
@@ -183,7 +181,7 @@ export default {
       const task = {
         type: 'Task',
         isNew: true,
-        uuid: uuid()
+        uuid: uuid(),
       }
 
       if (!isNaN(index)) {
@@ -207,10 +205,10 @@ export default {
 
       this.$router.push({
         query: Object.assign({}, this.$route.query, {
-          tag: queryTag
-        })
+          tag: queryTag,
+        }),
       })
-    }
-  }
+    },
+  },
 }
 </script>

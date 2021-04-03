@@ -102,14 +102,14 @@ export default {
     PrivyLogo,
     SunIcon,
     TrashIcon,
-    Weather
+    Weather,
   },
   mixins: [ViewportHandler],
   props: {
     isActive: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
@@ -121,7 +121,7 @@ export default {
     },
     isDarkMode() {
       return this.$colorMode.value !== 'light'
-    }
+    },
   },
 
   watch: {
@@ -129,7 +129,7 @@ export default {
       if (this.isActive && this.isMobile) {
         this.$emit('toggle-drawer')
       }
-    }
+    },
   },
 
   methods: {
@@ -141,7 +141,7 @@ export default {
     },
     toggleDarkMode() {
       this.$colorMode.preference = this.isDarkMode ? 'light' : 'dark'
-    }
-  }
+    },
+  },
 }
 </script>
