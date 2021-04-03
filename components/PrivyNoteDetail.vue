@@ -33,7 +33,7 @@
 <script>
 import debounce from 'lodash.debounce'
 import isEqual from 'lodash.isequal'
-import uuid from 'uuid'
+import { v4 as uuid } from 'uuid'
 import Button from '@/components/_Button'
 import PrivyDate from '@/components/PrivyDate'
 import PrivyDraggableItems from '@/components/PrivyDraggableItems'
