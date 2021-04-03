@@ -43,9 +43,8 @@ import isEqual from 'lodash.isequal'
 import Draggable from 'vuedraggable'
 import CloseIcon from '@/assets/svg/cross.svg'
 import DragIcon from '@/assets/svg/drag.svg'
-import Markdown from '@/components/_Markdown'
-import Rte from '@/components/_Rte'
-import Task from '@/components/_Task'
+import Markdown from '@/partials/Markdown'
+import Task from '@/partials/Task'
 
 export default {
   components: {
@@ -53,7 +52,6 @@ export default {
     Draggable,
     DragIcon,
     Markdown,
-    Rte,
     Task,
   },
   props: {
