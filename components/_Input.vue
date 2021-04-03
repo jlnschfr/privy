@@ -1,16 +1,33 @@
 <template>
-  <input
-    class="bg-transparent placeholder-neutral-200 dark:placeholder-neutral-400 border-b border-neutral-200 dark:border-neutral-400 block w-full appearance-none leading-normal py-1 transition duration-300"
-    :type="type"
-    :placeholder="placeholder"
-    :value="value"
-    autocomplete="off"
-    @input="$emit('input', $event.target.value)"
-    @focus="$emit('focus')"
-  />
+  <div class="w-full">
+    <label
+      v-if="label"
+      :for="id"
+      :class="{
+        'opacity-0 translate-y-1/2': !value,
+      }"
+      class="transform block transition-all text-sm text-neutral-200 dark:text-neutral-300"
+      >{{ placeholder }}</label
+    >
+    <input
+      :id="id"
+      class="text-decoration-inherit bg-transparent placeholder-neutral-200 dark:placeholder-neutral-400 w-full block appearance-none leading-normal py-1 transition duration-300"
+      :class="{
+        'border-b border-neutral-200 dark:border-neutral-400': border,
+      }"
+      :type="type"
+      :placeholder="placeholder"
+      :value="value"
+      autocomplete="off"
+      @input="$emit('input', $event.target.value)"
+      @focus="$emit('focus')"
+    />
+  </div>
 </template>
 
 <script>
+import { v4 as uuid } from 'uuid'
+
 export default {
   props: {
     type: {
@@ -28,6 +45,27 @@ export default {
       required: false,
       default: 'Placeholder',
     },
+    border: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    label: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+  },
+  computed: {
+    id() {
+      return uuid()
+    },
   },
 }
 </script>
+
+<style scoped>
+.text-decoration-inherit {
+  text-decoration: inherit;
+}
+</style>

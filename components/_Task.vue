@@ -15,7 +15,8 @@
     </label>
     <Input
       v-model="text"
-      class="border-none pr-2 immune-for-enter"
+      :label="false"
+      :border="false"
       :class="{ 'line-through': state }"
       type="text"
       @input="onChange('text')"
