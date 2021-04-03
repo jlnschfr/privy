@@ -17,7 +17,7 @@ export default {
     async getGiphy(lat, lon) {
       const url = new URL('https://api.giphy.com/v1/gifs/random')
       url.searchParams.set('api_key', 'l02EriFfWYg8R3ROtWLKmWtEBfIZG9cU')
-      url.searchParams.set('tag', 'scrambled eggs')
+      url.searchParams.set('tag', 'dancing scrambled eggs')
       const response = await fetch(url)
       if (response.ok) {
         const json = await response.json()
