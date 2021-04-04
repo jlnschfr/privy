@@ -17,7 +17,6 @@
     }
   },
   "dependencies": {
-    "@johmun/vue-tags-input": "^2.1.0",
     "dompurify": "^2.2.7",
     "firebase": "^8.3.2",
     "idle-vue": "^2.0.5",

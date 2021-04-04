@@ -1,18 +1,38 @@
 <template>
-  <vue-tags-input
-    v-model="tag"
-    :tags="tgs"
-    @tags-changed="(newTags) => (tgs = newTags)"
-  />
+  <div>
+    <ul class="flex flex-wrap">
+      <li
+        v-for="(tag, key) in tags"
+        :key="key"
+        class="px-2 py-0_5 mr-1 mt-1 bg-primary-500 text-neutral-600 rounded-full flex items-center justify-center"
+      >
+        {{ tag.text }}
+        <button
+          class="ml-1 inline privy-focus-white"
+          @click="removeTag(tag.text)"
+        >
+          <CloseIcon class="fill-current w-2" />
+        </button>
+      </li>
+    </ul>
+    <Input
+      v-model="value"
+      class="mt-1"
+      placeholder="Your Tag"
+      type="text"
+      @enter="addTag"
+    />
+  </div>
 </template>
 
 <script>
-import isEqual from 'lodash.isequal'
-import VueTagsInput from '@johmun/vue-tags-input'
+import CloseIcon from '@/assets/svg/cross.svg'
+import Input from '@/components/_Input'
 
 export default {
   components: {
-    VueTagsInput,
+    CloseIcon,
+    Input,
   },
   props: {
     tags: {
@@ -22,68 +42,25 @@ export default {
   },
   data() {
     return {
-      tgs: this.tags,
-      tag: '',
+      value: '',
     }
   },
-  watch: {
-    tags: function () {
-      if (!isEqual(this.tgs, this.tags)) {
-        this.tgs = this.tags
+  methods: {
+    addTag(text) {
+      if (text && !this.tags.find((tag) => tag.text === text)) {
+        this.$emit('changed', [...this.tags, { text }])
+        this.value = ''
       }
     },
-    tgs: function () {
-      this.$emit('changed', this.tgs)
+    removeTag(text) {
+      const index = this.tags.findIndex((tag) => tag.text === text)
+
+      if (index >= 0) {
+        const tags = [...this.tags]
+        tags.splice(index, 1)
+        this.$emit('changed', tags)
+      }
     },
   },
 }
 </script>
-
-<style>
-.vue-tags-input.vue-tags-input {
-  max-width: none;
-  background-color: transparent;
-}
-
-.vue-tags-input .ti-tags {
-  align-items: center;
-}
-
-.vue-tags-input .ti-new-tag-input-wrapper.ti-new-tag-input-wrapper {
-  font-size: inherit;
-  display: block;
-  border-bottom: 1px solid theme('colors.neutral.200');
-  padding: 0.5rem 0 !important;
-  flex: 0 0 auto !important;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.dark-mode .vue-tags-input .ti-new-tag-input-wrapper.ti-new-tag-input-wrapper {
-  border-bottom: 1px solid theme('colors.neutral.400');
-}
-
-.vue-tags-input .ti-new-tag-input {
-  width: 100%;
-  background-color: transparent;
-  color: inherit;
-}
-
-.vue-tags-input .ti-new-tag-input::placeholder {
-  color: inherit;
-}
-
-.vue-tags-input .ti-input {
-  border: none;
-  padding: 0;
-}
-
-.vue-tags-input .ti-tag {
-  margin: 0.5rem 0.5rem 0 0;
-  font-size: inherit;
-  border-radius: 9999px;
-  padding: 0.5rem 1rem;
-  background-color: theme('colors.primary.500');
-  transition: background-color 300ms;
-}
-</style>

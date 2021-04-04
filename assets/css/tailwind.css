@@ -7,6 +7,10 @@
     @apply focus:outline-none focus:ring-2 focus:ring-primary-500 transition duration-300;
   }
 
+  .privy-focus-white {
+    @apply focus:outline-none focus:ring-1 focus:ring-neutral-500 transition duration-300;
+  }
+
   .privy-focus-offset {
     @apply privy-focus focus:ring-offset-1 focus:ring-offset-primary-500;
   }

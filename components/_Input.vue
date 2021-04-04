@@ -7,19 +7,21 @@
         'opacity-0 translate-y-1/2': !value,
       }"
       class="transform block transition-all text-sm text-neutral-200 dark:text-neutral-300"
-      >{{ placeholder }}</label
     >
+      {{ placeholder }}
+    </label>
     <input
       :id="id"
+      :value="value"
       class="text-decoration-inherit bg-transparent placeholder-neutral-200 dark:placeholder-neutral-400 w-full block appearance-none leading-normal py-1 privy-focus"
       :class="{
         'border-b border-neutral-200 dark:border-neutral-400': border,
       }"
       :type="type"
       :placeholder="placeholder"
-      :value="value"
       autocomplete="off"
       @input="$emit('input', $event.target.value)"
+      @keydown.enter="$emit('enter', $event.target.value)"
       @focus="$emit('focus')"
     />
   </div>
@@ -55,6 +57,11 @@ export default {
       required: false,
       default: true,
     },
+  },
+  data() {
+    return {
+      inputValue: this.value,
+    }
   },
   computed: {
     id() {
