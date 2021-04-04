@@ -23,15 +23,15 @@
         ></component>
         <button
           tabindex="-1"
-          class="Dragger absolute flex justify-center items-center w-3 inset-y-0 left-0 opacity-100 md:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 transform -translate-x-1/2"
+          class="Dragger absolute flex justify-center items-center w-3 inset-y-0 left-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-1/2"
         >
           <DragIcon class="DragIcon fill-current" />
         </button>
         <button
-          class="Close absolute flex justify-center items-center w-3 inset-y-0 right-0 opacity-100 md:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 transform translate-x-1/2"
+          class="absolute flex justify-center w-3 h-3 inset-y-1/2 right-0 opacity-100 md:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 transform translate-x-1/2 -translate-y-1/2 privy-focus"
           @click="onItemDelete(item.uuid)"
         >
-          <CloseIcon class="CloseIcon fill-current w-2" />
+          <CloseIcon class="fill-current w-2" />
         </button>
       </div>
     </Draggable>

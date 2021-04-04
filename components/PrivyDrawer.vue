@@ -12,12 +12,15 @@
             </p>
           </header>
           <nav class="px-6 mt-4 overflow-auto max-h-drawerNav">
-            <ul class="w-full">
+            <ul class="w-full py-1">
               <li>
                 <nuxt-link
                   to="/notes/"
-                  class="flex items-center"
-                  :class="{ 'text-neutral-600': currentTag === '' }"
+                  class="flex items-center hover:text-neutral-400 privy-focus"
+                  :class="{
+                    'text-neutral-600 hover:text-neutral-600':
+                      currentTag === '',
+                  }"
                 >
                   <GridIcon class="w-2 mr-1" /> Notes
                 </nuxt-link>
@@ -25,8 +28,11 @@
               <li class="mt-2">
                 <nuxt-link
                   to="/notes/?tag=Trash"
-                  class="flex items-center"
-                  :class="{ 'text-neutral-600': currentTag === 'Trash' }"
+                  class="flex items-center hover:text-neutral-400 privy-focus"
+                  :class="{
+                    'text-neutral-600 hover:text-neutral-600':
+                      currentTag === 'Trash',
+                  }"
                 >
                   <TrashIcon class="w-2 mr-1" /> Trash
                 </nuxt-link>
@@ -36,8 +42,11 @@
                 <div class="flex justify-between">
                   <nuxt-link
                     :to="`/notes/?tag=${tag}`"
-                    class="flex items-center"
-                    :class="{ 'text-neutral-600': tag === currentTag }"
+                    class="flex items-center hover:text-neutral-400 privy-focus"
+                    :class="{
+                      'text-neutral-600 hover:text-neutral-600':
+                        tag === currentTag,
+                    }"
                   >
                     <HashIcon class="w-2 mr-1" /> {{ tag }}
                   </nuxt-link>
@@ -51,7 +60,10 @@
           <ul class="w-full">
             <li><Weather /></li>
             <li class="mt-2">
-              <button class="flex items-center" @click="toggleDarkMode()">
+              <button
+                class="flex items-center hover:text-neutral-400 privy-focus"
+                @click="toggleDarkMode()"
+              >
                 <span v-if="isDarkMode" class="flex"
                   ><SunIcon class="w-2 mr-1" /> Light Mode</span
                 >
@@ -62,7 +74,7 @@
             </li>
             <li class="mt-2">
               <button
-                class="flex items-center"
+                class="flex items-center hover:text-neutral-400 privy-focus"
                 @click="$store.dispatch('logout')"
               >
                 <LogoutIcon class="w-2 mr-1" /> Logout

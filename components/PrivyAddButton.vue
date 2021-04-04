@@ -4,7 +4,7 @@
       <nuxt-link
         tabindex="0"
         to="/note/"
-        class="bg-secondary-500 shadow-lg text-white rounded-full h-16 w-16 flex items-center justify-center"
+        class="bg-secondary-500 hover:bg-secondary-600 shadow-lg text-white rounded-full h-16 w-16 flex items-center justify-center privy-focus-offset"
       >
         <PlusIcon class="fill-current w-4" />
       </nuxt-link>

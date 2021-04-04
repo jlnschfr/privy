@@ -30,8 +30,7 @@ export default {
             if (
               !this.isIdle ||
               document.activeElement.tagName.toUpperCase() === 'INPUT' ||
-              document.activeElement.tagName.toUpperCase() === 'TEXTAREA' ||
-              document.activeElement.closest('.ProseMirror')
+              document.activeElement.tagName.toUpperCase() === 'TEXTAREA'
             ) {
               return
             }

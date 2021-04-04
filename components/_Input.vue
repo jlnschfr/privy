@@ -11,7 +11,7 @@
     >
     <input
       :id="id"
-      class="text-decoration-inherit bg-transparent placeholder-neutral-200 dark:placeholder-neutral-400 w-full block appearance-none leading-normal py-1 transition duration-300"
+      class="text-decoration-inherit bg-transparent placeholder-neutral-200 dark:placeholder-neutral-400 w-full block appearance-none leading-normal py-1 privy-focus"
       :class="{
         'border-b border-neutral-200 dark:border-neutral-400': border,
       }"

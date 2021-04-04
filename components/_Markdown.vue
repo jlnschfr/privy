@@ -4,14 +4,14 @@
       v-if="editable"
       ref="textarea"
       :value="data"
-      class="w-full h-1 resize-none overflow-hidden bg-transparent"
+      class="w-full h-1 resize-none overflow-hidden bg-transparent privy-focus"
       @input="onInput"
       @blur="onBlur"
     ></textarea>
     <div
       v-if="!editable"
       tabindex="0"
-      class="Markdown focus:shadow-outline"
+      class="Markdown privy-focus"
       @click="onClickOrEnter"
       @keyup.enter="onClickOrEnter"
       v-html="compiledMarkdown"

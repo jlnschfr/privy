@@ -1,12 +1,11 @@
 <template>
   <div class="flex items-center">
     <IconButton
-      class="mr-2"
+      class="mr-2 hover:bg-neutral-500 dark-hover:bg-neutral-200"
       :class="{
         'text-secondary-500': note.isFav,
       }"
       @click="toggleFav(note)"
-      @click.native.stop=""
     >
       <FavIcon
         class="w-2"
@@ -16,9 +15,8 @@
       />
     </IconButton>
     <IconButton
-      class="bg-primary-500 text-neutral-600"
+      class="bg-primary-500 hover:bg-primary-600 text-neutral-600"
       @click="remove(note)"
-      @click.native.stop=""
     >
       <TrashIcon class="w-2 fill"
     /></IconButton>

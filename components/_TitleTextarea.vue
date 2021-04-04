@@ -1,7 +1,7 @@
 <template>
   <textarea
     ref="textarea"
-    class="text-2xl bg-transparent font-bold overflow-hidden resize-none h-5"
+    class="text-2xl bg-transparent font-bold overflow-hidden resize-none h-5 privy-focus"
     :value="value"
     placeholder="Title"
     @input="onInput($event)"
