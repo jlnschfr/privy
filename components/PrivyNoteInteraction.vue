@@ -27,7 +27,7 @@
 
 <script>
 import FavIcon from '@/assets/svg/heart.svg'
-import IconButton from '@/partials/IconButton'
+import IconButton from '@/components/_IconButton'
 import TrashIcon from '@/assets/svg/trash.svg'
 
 export default {

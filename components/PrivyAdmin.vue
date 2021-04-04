@@ -101,8 +101,8 @@
 </template>
 
 <script>
-import Button from '@/partials/Button'
-import Input from '@/partials/Input'
+import Button from '@/components/_Button'
+import Input from '@/components/_Input'
 
 export default {
   components: {

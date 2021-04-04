@@ -14,7 +14,7 @@
 
 <script>
 import Checkbox from '@/components/_Checkbox'
-import Input from '@/partials/Input'
+import Input from '@/components/_Input'
 
 export default {
   components: {
