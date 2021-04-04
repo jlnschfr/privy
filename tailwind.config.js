@@ -5,6 +5,11 @@
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
 module.exports = {
+  purge: {
+    options: {
+      safelist: ['opacity-0', 'translate-y-1/2'],
+    },
+  },
   theme: {
     darkSelector: '.dark-mode',
     fontFamily: {

@@ -2,12 +2,12 @@
   <div class="Task flex items-center">
     <Checkbox :state="state" @input="onChange('checkbox')" />
     <Input
-      v-model="text"
       :label="false"
       :border="false"
       :class="{ 'line-through': state }"
+      :value="text"
       type="text"
-      @input="onChange('text')"
+      @input="onChange('text', $event)"
     />
   </div>
 </template>
@@ -21,7 +21,6 @@ export default {
     Checkbox,
     Input,
   },
-
   props: {
     uuid: {
       type: String,
@@ -42,13 +41,13 @@ export default {
     }
   },
   methods: {
-    onChange(type) {
+    onChange(type, data) {
       if (type === 'checkbox') {
         this.state = !this.state
       }
       this.$emit('update', {
         uuid: this.uuid,
-        data: { text: this.text, state: this.state },
+        data: { text: data, state: this.state },
       })
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <img class="Giphy" :src="src" />
+  <img loading="lazy" class="Giphy" :src="src" />
 </template>
 
 <script>
@@ -36,5 +36,10 @@ export default {
   object-fit: cover;
   height: 220px;
   width: 100%;
+  transition: opacity 500ms;
+}
+
+.Giphy[src=''] {
+  opacity: 0;
 }
 </style>
