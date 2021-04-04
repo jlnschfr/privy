@@ -44,10 +44,12 @@ export default {
     onChange(type, data) {
       if (type === 'checkbox') {
         this.state = !this.state
+      } else if (type === 'text') {
+        this.text = data
       }
       this.$emit('update', {
         uuid: this.uuid,
-        data: { text: data, state: this.state },
+        data: { text: this.text, state: this.state },
       })
     },
   },
