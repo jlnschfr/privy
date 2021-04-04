@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Checkbox from '@/partials/Checkbox'
+import Checkbox from '@/components/_Checkbox'
 import Input from '@/partials/Input'
 
 export default {
