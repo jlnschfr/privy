@@ -54,7 +54,7 @@
       <span
         v-text="!isLogin ? 'Already got an account?' : 'Dont have an account?'"
       ></span>
-      <button type="button" @click="isLogin = !isLogin">
+      <button type="button" class="privy-focus" @click="isLogin = !isLogin">
         {{ isLogin ? 'Register now' : 'Login' }}
       </button>
     </p>

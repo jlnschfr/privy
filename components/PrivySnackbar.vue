@@ -4,7 +4,11 @@
       class="bg-neutral-200 fixed transform -translate-x-1/2 left-50 md:left-app bottom-2vw px-3 py-2 shadow-lg flex items-center justify-between min-w-snackbar"
     >
       <p class="text-neutral-600 flex-auto">{{ text }}</p>
-      <button class="font-bold text-secondary-500 ml-5" @click="undo">
+      <button
+        ref="button"
+        class="font-bold text-secondary-500 ml-5 privy-focus"
+        @click="undo"
+      >
         {{ action }}
       </button>
     </div>
@@ -16,6 +20,7 @@ export default {
   data() {
     return {
       timeout: null,
+      activeElement: null,
     }
   },
   computed: {
@@ -42,6 +47,10 @@ export default {
         if (this.timeout) {
           clearTimeout(this.timeout)
         }
+        this.$nextTick(() => {
+          this.activeElement = document.activeElement
+          this.$refs.button.focus()
+        })
         this.timeout = setTimeout(() => {
           this.$store.dispatch('hideSnackbar')
         }, 8000)
@@ -54,6 +63,10 @@ export default {
     undo() {
       this.callback()
       this.$store.dispatch('hideSnackbar')
+      if (this.activeElement) {
+        this.activeElement.focus()
+        this.activeElement = null
+      }
     },
   },
 }
