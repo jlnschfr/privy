@@ -105,11 +105,11 @@ export default {
     if (!this.title) {
       this.$refs.title.$el.focus()
     }
-    window.addEventListener('keyup', this.handleKeyUp)
+    window.addEventListener('keydown', this.handleKeyUp)
   },
 
   beforeDestroy() {
-    window.removeEventListener('keyup', this.handleKeyUp)
+    window.removeEventListener('keydown', this.handleKeyUp)
   },
 
   methods: {
@@ -149,7 +149,7 @@ export default {
 
       if (
         focusEl === document.querySelector('body') ||
-        focusEl.classList.contains('immune-for-enter')
+        focusEl.closest('.new-task-on-enter')
       ) {
         if (event.keyCode === 13 && event.shiftKey) {
           this.createMarkdown()

@@ -135,7 +135,7 @@ export default {
         if (item) {
           const task = document
             .querySelector(`[data-uuid='${item.uuid}']`)
-            .querySelector('.Task input:not(.hidden)')
+            .querySelector('.Task input[type=text]')
 
           const markdown = document
             .querySelector(`[data-uuid='${item.uuid}']`)

@@ -6,6 +6,7 @@
       :border="false"
       :class="{ 'line-through': state }"
       :value="text"
+      class="new-task-on-enter"
       type="text"
       @input="onChange('text', $event)"
     />
