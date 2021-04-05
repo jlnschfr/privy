@@ -16,6 +16,7 @@
       :class="{
         'border-b border-neutral-200 dark:border-neutral-400': border,
       }"
+      :value="value"
       :type="type"
       :placeholder="placeholder"
       autocomplete="off"
