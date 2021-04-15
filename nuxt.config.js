@@ -24,7 +24,11 @@ export default {
         content: 'Great notes for great people',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preconnect', href: 'https://www.googleapis.com' },
+      { rel: 'preconnect', href: 'https://firestore.googleapis.com' },
+    ],
     bodyAttrs: {
       class: 'bg-neutral-500 dark:bg-neutral-50',
     },

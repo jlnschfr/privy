@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link to="/notes/" class="privy-focus">
+  <nuxt-link to="/notes/" class="privy-focus" aria-label="Privy Notes">
     <PrivyIcon ref="svg" :class="widthClass"
   /></nuxt-link>
 </template>

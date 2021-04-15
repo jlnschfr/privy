@@ -1,6 +1,7 @@
 <template>
   <div class="flex items-center">
     <IconButton
+      label="add note to favorites"
       class="mr-2 hover:bg-neutral-500 dark-hover:bg-neutral-200"
       :class="{
         'text-secondary-500': note.isFav,
@@ -8,6 +9,7 @@
       @click="toggleFav(note)"
     >
       <FavIcon
+        aria-hidden="true"
         class="w-2"
         :class="{
           'fill-current': note.isFav,
@@ -15,10 +17,11 @@
       />
     </IconButton>
     <IconButton
+      label="delete note"
       class="bg-primary-500 hover:bg-primary-600 text-neutral-600"
       @click="remove(note)"
     >
-      <TrashIcon class="w-2 fill"
+      <TrashIcon aria-hidden="true" class="w-2 fill"
     /></IconButton>
   </div>
 </template>
