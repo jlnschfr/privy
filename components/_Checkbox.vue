@@ -19,12 +19,11 @@
 </template>
 
 <script>
-import CheckIcon from '@/assets/svg/check.svg'
 import { v4 as uuid } from 'uuid'
 
 export default {
   components: {
-    CheckIcon,
+    CheckIcon: () => import('@/assets/svg/check.svg'),
   },
   props: {
     state: {

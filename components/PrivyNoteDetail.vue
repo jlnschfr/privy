@@ -34,22 +34,16 @@
 import debounce from 'lodash.debounce'
 import isEqual from 'lodash.isequal'
 import { v4 as uuid } from 'uuid'
-import Button from '@/components/_Button'
-import PrivyDate from '@/components/PrivyDate'
-import PrivyDraggableItems from '@/components/PrivyDraggableItems'
-import PrivyNoteInteraction from '@/components/PrivyNoteInteraction'
-import Tags from '@/components/_Tags'
-import TitleTextarea from '@/components/_TitleTextarea'
 import { first } from '@/utils/array'
 
 export default {
   components: {
-    Button,
-    PrivyDate,
-    PrivyDraggableItems,
-    PrivyNoteInteraction,
-    Tags,
-    TitleTextarea,
+    Button: () => import('@/components/_Button'),
+    PrivyDate: () => import('@/components/PrivyDate'),
+    PrivyDraggableItems: () => import('@/components/PrivyDraggableItems'),
+    PrivyNoteInteraction: () => import('@/components/PrivyNoteInteraction'),
+    Tags: () => import('@/components/_Tags'),
+    TitleTextarea: () => import('@/components/_TitleTextarea'),
   },
 
   props: {

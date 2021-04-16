@@ -26,13 +26,10 @@
 </template>
 
 <script>
-import CloseIcon from '@/assets/svg/cross.svg'
-import Input from '@/components/_Input'
-
 export default {
   components: {
-    CloseIcon,
-    Input,
+    CloseIcon: () => import('@/assets/svg/cross.svg'),
+    Input: () => import('@/components/_Input'),
   },
   props: {
     tags: {

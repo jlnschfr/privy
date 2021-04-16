@@ -14,13 +14,10 @@
 </template>
 
 <script>
-import Checkbox from '@/components/_Checkbox'
-import Input from '@/components/_Input'
-
 export default {
   components: {
-    Checkbox,
-    Input,
+    Checkbox: () => import('@/components/_Checkbox'),
+    Input: () => import('@/components/_Input'),
   },
   props: {
     uuid: {

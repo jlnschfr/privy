@@ -14,11 +14,9 @@
 </template>
 
 <script>
-import PlusIcon from '@/assets/svg/plus.svg'
-
 export default {
   components: {
-    PlusIcon,
+    PlusIcon: () => import('@/assets/svg/plus.svg'),
   },
 
   props: {

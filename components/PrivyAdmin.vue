@@ -101,13 +101,10 @@
 </template>
 
 <script>
-import Button from '@/components/_Button'
-import Input from '@/components/_Input'
-
 export default {
   components: {
-    Button,
-    Input,
+    Button: () => import('@/components/_Button'),
+    Input: () => import('@/components/_Input'),
   },
 
   data() {

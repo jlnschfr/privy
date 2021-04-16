@@ -39,20 +39,16 @@
 </template>
 
 <script>
-import isEqual from 'lodash.isequal'
 import Draggable from 'vuedraggable'
-import CloseIcon from '@/assets/svg/cross.svg'
-import DragIcon from '@/assets/svg/drag.svg'
-import Markdown from '@/components/_Markdown'
-import Task from '@/components/_Task'
+import isEqual from 'lodash.isequal'
 
 export default {
   components: {
-    CloseIcon,
+    CloseIcon: () => import('@/assets/svg/cross.svg'),
+    DragIcon: () => import('@/assets/svg/drag.svg'),
+    Markdown: () => import('@/components/_Markdown'),
+    Task: () => import('@/components/_Task'),
     Draggable,
-    DragIcon,
-    Markdown,
-    Task,
   },
   props: {
     items: {

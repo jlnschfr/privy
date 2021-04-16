@@ -14,13 +14,10 @@
 </template>
 
 <script>
-import PrivyNoteTeaser from '@/components/PrivyNoteTeaser'
-import StaggeredTransition from '@/components/_StaggeredTransition'
-
 export default {
   components: {
-    PrivyNoteTeaser,
-    StaggeredTransition,
+    PrivyNoteTeaser: () => import('@/components/PrivyNoteTeaser'),
+    StaggeredTransition: () => import('@/components/_StaggeredTransition'),
   },
 
   props: {

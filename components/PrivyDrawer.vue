@@ -95,26 +95,18 @@
 </template>
 
 <script>
-import GridIcon from '@/assets/svg/grid.svg'
-import HashIcon from '@/assets/svg/hash.svg'
-import LogoutIcon from '@/assets/svg/logout.svg'
-import MoonIcon from '@/assets/svg/moon.svg'
-import PrivyLogo from '@/components/PrivyLogo'
-import SunIcon from '@/assets/svg/sun.svg'
-import TrashIcon from '@/assets/svg/trash.svg'
 import ViewportHandler from '@/mixins/viewport-handler.js'
-import Weather from '@/components/_Weather'
 
 export default {
   components: {
-    GridIcon,
-    HashIcon,
-    LogoutIcon,
-    MoonIcon,
-    PrivyLogo,
-    SunIcon,
-    TrashIcon,
-    Weather,
+    GridIcon: () => import('@/assets/svg/grid.svg'),
+    HashIcon: () => import('@/assets/svg/hash.svg'),
+    LogoutIcon: () => import('@/assets/svg/logout.svg'),
+    MoonIcon: () => import('@/assets/svg/moon.svg'),
+    SunIcon: () => import('@/assets/svg/sun.svg'),
+    TrashIcon: () => import('@/assets/svg/trash.svg'),
+    PrivyLogo: () => import('@/components/PrivyLogo'),
+    Weather: () => import('@/components/_Weather'),
   },
   mixins: [ViewportHandler],
   props: {

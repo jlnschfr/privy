@@ -3,11 +3,9 @@
 </template>
 
 <script>
-import PrivyNoteDetail from '@/components/PrivyNoteDetail'
-
 export default {
   components: {
-    PrivyNoteDetail,
+    PrivyNoteDetail: () => import('@/components/PrivyNoteDetail'),
   },
   layout: 'app',
   transition: 'slide',

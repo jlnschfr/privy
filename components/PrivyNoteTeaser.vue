@@ -38,14 +38,12 @@
 </template>
 
 <script>
-import PrivyDate from '@/components/PrivyDate'
-import PrivyNoteInteraction from '@/components/PrivyNoteInteraction'
 import { first } from '@/utils/array'
 
 export default {
   components: {
-    PrivyDate,
-    PrivyNoteInteraction,
+    PrivyDate: () => import('@/components/PrivyDate'),
+    PrivyNoteInteraction: () => import('@/components/PrivyNoteInteraction'),
   },
 
   props: {

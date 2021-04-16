@@ -23,15 +23,11 @@
 </template>
 
 <script>
-import MenuIcon from '@/assets/svg/menu.svg'
-import PrivyLogo from '@/components/PrivyLogo'
-import Spinner from '@/components/_Spinner'
-
 export default {
   components: {
-    MenuIcon,
-    PrivyLogo,
-    Spinner,
+    MenuIcon: () => import('@/assets/svg/menu.svg'),
+    PrivyLogo: () => import('@/components/PrivyLogo'),
+    Spinner: () => import('@/components/_Spinner'),
   },
   props: {
     user: {

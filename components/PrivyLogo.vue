@@ -5,11 +5,9 @@
 </template>
 
 <script>
-import PrivyIcon from '@/assets/svg/privy.svg'
-
 export default {
   components: {
-    PrivyIcon,
+    PrivyIcon: () => import('@/assets/svg/privy.svg'),
   },
 
   props: {

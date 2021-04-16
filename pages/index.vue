@@ -3,13 +3,10 @@
 </template>
 
 <script>
-import PrivyAuthForm from '@/components/PrivyAuthForm'
-
 export default {
   components: {
-    PrivyAuthForm,
+    PrivyAuthForm: () => import('@/components/PrivyAuthForm'),
   },
   layout: 'blank',
-  transition: 'slide',
 }
 </script>

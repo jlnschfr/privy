@@ -3,11 +3,9 @@
 </template>
 
 <script>
-import PrivyAdmin from '@/components/PrivyAdmin'
-
 export default {
   components: {
-    PrivyAdmin,
+    PrivyAdmin: () => import('@/components/PrivyAdmin'),
   },
   layout: 'app',
   transition: 'slide',

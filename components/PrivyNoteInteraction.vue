@@ -27,15 +27,11 @@
 </template>
 
 <script>
-import FavIcon from '@/assets/svg/heart.svg'
-import IconButton from '@/components/_IconButton'
-import TrashIcon from '@/assets/svg/trash.svg'
-
 export default {
   components: {
-    FavIcon,
-    IconButton,
-    TrashIcon,
+    FavIcon: () => import('@/assets/svg/heart.svg'),
+    IconButton: () => import('@/components/_IconButton'),
+    TrashIcon: () => import('@/assets/svg/trash.svg'),
   },
 
   props: {

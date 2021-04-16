@@ -12,35 +12,22 @@
 </template>
 
 <script>
-import CloudlyGustsIcon from '@/assets/svg/weather/wi-cloudy-gusts.svg'
-import CloudlyIcon from '@/assets/svg/weather/wi-cloudy.svg'
-import DaySunnyOvercastIcon from '@/assets/svg/weather/wi-day-sunny-overcast.svg'
-import DaySunnyIcon from '@/assets/svg/weather/wi-day-sunny.svg'
-import FogIcon from '@/assets/svg/weather/wi-fog.svg'
-import HailIcon from '@/assets/svg/weather/wi-hail.svg'
-import NightClearIcon from '@/assets/svg/weather/wi-night-clear.svg'
-import NightCloudyIcon from '@/assets/svg/weather/wi-night-cloudy.svg'
-import RainIcon from '@/assets/svg/weather/wi-rain.svg'
-import SleetIcon from '@/assets/svg/weather/wi-sleet.svg'
-import SnowIcon from '@/assets/svg/weather/wi-snow.svg'
-import SprinkleIcon from '@/assets/svg/weather/wi-sprinkle.svg'
-import ThunderstormIcon from '@/assets/svg/weather/wi-thunderstorm.svg'
-
 export default {
   components: {
-    CloudlyGustsIcon,
-    CloudlyIcon,
-    DaySunnyOvercastIcon,
-    DaySunnyIcon,
-    FogIcon,
-    HailIcon,
-    NightClearIcon,
-    NightCloudyIcon,
-    RainIcon,
-    SleetIcon,
-    SnowIcon,
-    SprinkleIcon,
-    ThunderstormIcon,
+    CloudlyGustsIcon: () => import('@/assets/svg/weather/wi-cloudy-gusts.svg'),
+    CloudlyIcon: () => import('@/assets/svg/weather/wi-cloudy.svg'),
+    DaySunnyOvercastIcon: () =>
+      import('@/assets/svg/weather/wi-day-sunny-overcast.svg'),
+    DaySunnyIcon: () => import('@/assets/svg/weather/wi-day-sunny.svg'),
+    FogIcon: () => import('@/assets/svg/weather/wi-fog.svg'),
+    HailIcon: () => import('@/assets/svg/weather/wi-hail.svg'),
+    NightClearIcon: () => import('@/assets/svg/weather/wi-night-clear.svg'),
+    NightCloudyIcon: () => import('@/assets/svg/weather/wi-night-cloudy.svg'),
+    RainIcon: () => import('@/assets/svg/weather/wi-rain.svg'),
+    SleetIcon: () => import('@/assets/svg/weather/wi-sleet.svg'),
+    SnowIcon: () => import('@/assets/svg/weather/wi-snow.svg'),
+    SprinkleIcon: () => import('@/assets/svg/weather/wi-sprinkle.svg'),
+    ThunderstormIcon: () => import('@/assets/svg/weather/wi-thunderstorm.svg'),
   },
   data() {
     return {

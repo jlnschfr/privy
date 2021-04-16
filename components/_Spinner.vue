@@ -5,11 +5,9 @@
 </template>
 
 <script>
-import SpinnerIcon from '@/assets/svg/spinner.svg'
-
 export default {
   components: {
-    SpinnerIcon,
+    SpinnerIcon: () => import('@/assets/svg/spinner.svg'),
   },
 
   props: {
