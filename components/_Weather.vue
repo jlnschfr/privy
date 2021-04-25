@@ -105,7 +105,7 @@ export default {
         const response = await fetch(url)
         if (response.ok) {
           const json = await response.json()
-          resolve(`${json.address?.city}, ${json.address?.country}`)
+          resolve(`${json.address?.suburb}, ${json.address?.country}`)
         } else {
           reject(new Error("Can't fetch Location Data"))
         }

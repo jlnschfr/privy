@@ -96,7 +96,7 @@ export default {
   },
 
   mounted() {
-    if (!this.title) {
+    if (!this.title && this.$refs.title) {
       this.$refs.title.$el.focus()
     }
     window.addEventListener('keydown', this.handleKeyUp)
