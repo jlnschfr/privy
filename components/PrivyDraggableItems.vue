@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import Draggable from 'vuedraggable'
 import isEqual from 'lodash.isequal'
 
 export default {
@@ -48,7 +47,7 @@ export default {
     DragIcon: () => import('@/assets/svg/drag.svg'),
     Markdown: () => import('@/components/_Markdown'),
     Task: () => import('@/components/_Task'),
-    Draggable,
+    Draggable: () => import('vuedraggable'),
   },
   props: {
     items: {
