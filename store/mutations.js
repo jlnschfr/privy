@@ -1,5 +1,3 @@
-import { firestore } from '@/plugins/firebase.js'
-
 export default {
   setIsPersistent(state, payload) {
     state.isPersistent = payload
@@ -45,7 +43,7 @@ export default {
     })
   },
   setStore(state, payload) {
-    state.store = firestore.collection('user').doc(payload)
+    state.store = this.$fire.firestore.collection('user').doc(payload)
   },
   setSnackbar(state, payload) {
     state.snackbar = payload

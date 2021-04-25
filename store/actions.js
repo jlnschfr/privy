@@ -1,18 +1,18 @@
-import { auth, firestore } from '@/plugins/firebase.js'
-
 export default {
   enablePersistence({ commit }) {
     return new Promise((resolve) => {
-      firestore.enablePersistence({ synchronizeTabs: true }).then(() => {
-        commit('setIsPersistent', true)
-        resolve()
-      })
+      this.$fire.firestore
+        .enablePersistence({ synchronizeTabs: true })
+        .then(() => {
+          commit('setIsPersistent', true)
+          resolve()
+        })
     })
   },
 
   createUserWithEmailAndPassword({ dispatch }, payload) {
     return new Promise((resolve, reject) => {
-      auth
+      this.$fire.auth
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then(({ user }) => {
           dispatch('handleAuthChanged', user)
@@ -26,7 +26,7 @@ export default {
 
   loginWithEmailAndPassword({ dispatch }, payload) {
     return new Promise((resolve, reject) => {
-      auth
+      this.$fire.auth
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(({ user }) => {
           dispatch('handleAuthChanged', user)
@@ -41,8 +41,11 @@ export default {
   updateEmail({ commit }, payload) {
     return new Promise((resolve, reject) => {
       commit('setIsSyncing', true)
-      auth
-        .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
+      this.$fire.auth
+        .signInWithEmailAndPassword(
+          this.$fire.auth.currentUser.email,
+          payload.password
+        )
         .then(({ user }) => {
           user
             .updateEmail(payload.newEmail)
@@ -65,8 +68,11 @@ export default {
   updatePassword({ commit }, payload) {
     return new Promise((resolve, reject) => {
       commit('setIsSyncing', true)
-      auth
-        .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
+      this.$fire.auth
+        .signInWithEmailAndPassword(
+          this.$fire.auth.currentUser.email,
+          payload.password
+        )
         .then(({ user }) => {
           user
             .updatePassword(payload.newPassword)
@@ -89,8 +95,11 @@ export default {
   deleteAccount({ commit }, payload) {
     return new Promise((resolve, reject) => {
       commit('setIsSyncing', true)
-      auth
-        .signInWithEmailAndPassword(auth.currentUser.email, payload.password)
+      this.$fire.auth
+        .signInWithEmailAndPassword(
+          this.$fire.auth.currentUser.email,
+          payload.password
+        )
         .then(({ user }) => {
           user
             .delete()
@@ -113,7 +122,7 @@ export default {
 
   logout({ commit }) {
     commit('setIsSyncing', true)
-    auth
+    this.$fire.auth
       .signOut()
       .then(() => {
         commit('setIsSyncing', false)

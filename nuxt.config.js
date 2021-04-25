@@ -45,17 +45,29 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    { src: '~/plugins/firebase' },
-    { src: '~/plugins/idle-vue.js', mode: 'client' },
-  ],
+  plugins: [{ src: '~/plugins/idle-vue.js', mode: 'client' }],
   /*
    ** Nuxt.js modules
    */
-  modules: ['nuxt-svg-loader', '@nuxtjs/pwa'],
+  modules: ['nuxt-svg-loader', '@nuxtjs/pwa', '@nuxtjs/firebase'],
 
   router: {
     trailingSlash: true,
+  },
+
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyBlY2FIq7DVRyNpJM3AIPT6-9rxefvNO40',
+      authDomain: 'privy-notes.firebaseapp.com',
+      projectId: 'privy-notes',
+      storageBucket: 'privy-notes.appspot.com',
+      messagingSenderId: '946240655964',
+      appId: '1:946240655964:web:925b39c629ef4db14ecc99',
+    },
+    services: {
+      auth: true,
+      firestore: true,
+    },
   },
 
   pwa: {
