@@ -1,5 +1,3 @@
-import { auth } from '@/plugins/firebase.js'
-
 export default {
   data() {
     return {
@@ -30,7 +28,7 @@ export default {
 
   methods: {
     bindAuthChanged() {
-      this.unsubscribe = auth.onAuthStateChanged((user) => {
+      this.unsubscribe = this.$fire.auth.onAuthStateChanged((user) => {
         this.$store.dispatch('handleAuthChanged', user)
 
         if (this.$store.getters.getUser()) {
