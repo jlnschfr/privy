@@ -8,6 +8,7 @@
       >
         {{ tag.text }}
         <button
+          aria-label="remove tag"
           class="ml-1 inline privy-focus-white"
           @click="removeTag(tag.text)"
         >

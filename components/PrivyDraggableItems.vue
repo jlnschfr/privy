@@ -22,12 +22,14 @@
           @update="onItemUpdate"
         ></component>
         <button
+          aria-label="drag and move item"
           tabindex="-1"
           class="Dragger absolute flex justify-center items-center w-3 inset-y-0 left-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-1/2"
         >
           <DragIcon class="DragIcon fill-current" />
         </button>
         <button
+          aria-label="remove item"
           class="absolute flex justify-center w-3 h-3 inset-y-1/2 right-0 opacity-100 md:opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 transform translate-x-1/2 -translate-y-1/2 privy-focus"
           @click="onItemDelete(item.uuid)"
         >

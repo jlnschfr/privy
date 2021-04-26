@@ -9,7 +9,7 @@
       @keyup.enter="$emit('input', $event.target.value)"
       @focus="$emit('focus')"
     />
-    <label :for="id" class="flex items-center pr-2">
+    <label aria-label="checkbox" :for="id" class="flex items-center pr-2">
       <span
         class="inline-flex border border-neutral-200 dark:border-neutral-400 w-3 h-3 items-center justify-center"
         ><CheckIcon v-if="state" class="w-2" />
