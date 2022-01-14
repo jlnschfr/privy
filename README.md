@@ -1,17 +1,16 @@
 # Privy Notes
 
-I love making notes. That's why I build a web based markdown editor to play around with different technologies.
+I love making notes. That's why I've build a web based markdown editor to play around with different technologies.
 
-Privy Notes is a feature rich notes app build with Nuxt.js
+Privy Notes is a feature rich notes app build with Nuxt.js and Firebase.
 
 ## Features
-* Notes (Markdown)
-* Tasks
-* Ordering by Drag'n Drop
-* Organizing notes in categories
-* Dark/Light Mode
-* Weather based on user location
-* Undo
+* notes (consists of markdown or tasks)
+* ordering via drag and drop
+* organizing notes in categories
+* dark/light mode
+* weather based on user location
+* undo via snackbar
 * PWA offline features
 
 ## Tech Stack
@@ -43,4 +42,4 @@ $ npm run stylelint
 
 ## Deployment
 
-Find a deployed version from [Privy on Netlify](https://privy-notes.netlify.app)
+Find here a deployed version: [Privy on Netlify](https://privy-notes.netlify.app)
