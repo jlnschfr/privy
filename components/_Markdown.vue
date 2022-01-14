@@ -21,7 +21,7 @@
 
 <script>
 import DOMPurify from 'dompurify'
-import marked from 'marked'
+import { marked } from 'marked'
 import debounce from 'lodash.debounce'
 import TextareaHeightUpdater from '@/mixins/textarea-height-updater.js'
 
