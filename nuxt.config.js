@@ -57,12 +57,12 @@ export default {
 
   firebase: {
     config: {
-      apiKey: 'AIzaSyBlY2FIq7DVRyNpJM3AIPT6-9rxefvNO40',
-      authDomain: 'privy-notes.firebaseapp.com',
-      projectId: 'privy-notes',
-      storageBucket: 'privy-notes.appspot.com',
-      messagingSenderId: '946240655964',
-      appId: '1:946240655964:web:925b39c629ef4db14ecc99',
+      apiKey: process.env.FB_API_KEY,
+      authDomain: process.env.FB_AUTH_DOMAIN,
+      projectId: process.env.FB_PROJECT_ID,
+      storageBucket: process.env.FB_STORAGE_BUCKET,
+      messagingSenderId: process.env.FB_MESSAGING_SENDER_ID,
+      appId: process.env.FB_APP_ID
     },
     services: {
       auth: true,
